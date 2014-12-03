@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  LivePlaylist
-//
-//  Created by Jari Aarniala on 3.12.2014.
-//  Copyright (c) 2014 Jari Aarniala. All rights reserved.
-//
-
 import UIKit
 
 @UIApplicationMain
