@@ -12,6 +12,7 @@
 		19B6B5911A2F9B4000DEA4B2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19B6B5901A2F9B4000DEA4B2 /* Images.xcassets */; };
 		19B6B5941A2F9B4000DEA4B2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19B6B5921A2F9B4000DEA4B2 /* LaunchScreen.xib */; };
 		19B6B5A01A2F9B4000DEA4B2 /* LivePlaylistTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B6B59F1A2F9B4000DEA4B2 /* LivePlaylistTests.swift */; };
+		19E4F7AF1A3281F3002DE579 /* Dummy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 19E4F7AE1A3281F3002DE579 /* Dummy.cpp */; };
 		FBF9C5BBA25C71DCB41D167B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5333478E210EFBCA732D90B8 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +37,7 @@
 		19B6B59E1A2F9B4000DEA4B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19B6B59F1A2F9B4000DEA4B2 /* LivePlaylistTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePlaylistTests.swift; sourceTree = "<group>"; };
 		19E4F7AB1A327F66002DE579 /* LivePlaylist-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LivePlaylist-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		19E4F7AE1A3281F3002DE579 /* Dummy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dummy.cpp; sourceTree = "<group>"; };
 		5333478E210EFBCA732D90B8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		816F1F95B46B4B13AB7B7E9A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		F2D4CB0834A218F9593069CB /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				19B6B5901A2F9B4000DEA4B2 /* Images.xcassets */,
 				19B6B5921A2F9B4000DEA4B2 /* LaunchScreen.xib */,
 				19B6B5871A2F9B4000DEA4B2 /* Supporting Files */,
+				19E4F7AE1A3281F3002DE579 /* Dummy.cpp */,
 			);
 			path = LivePlaylist;
 			sourceTree = "<group>";
@@ -271,6 +274,7 @@
 			files = (
 				19B6B58C1A2F9B4000DEA4B2 /* ViewController.swift in Sources */,
 				19B6B58A1A2F9B4000DEA4B2 /* AppDelegate.swift in Sources */,
+				19E4F7AF1A3281F3002DE579 /* Dummy.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
