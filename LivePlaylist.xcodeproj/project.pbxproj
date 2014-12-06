@@ -35,6 +35,7 @@
 		19B6B5991A2F9B4000DEA4B2 /* LivePlaylistTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LivePlaylistTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B6B59E1A2F9B4000DEA4B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19B6B59F1A2F9B4000DEA4B2 /* LivePlaylistTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePlaylistTests.swift; sourceTree = "<group>"; };
+		19E4F7AB1A327F66002DE579 /* LivePlaylist-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LivePlaylist-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		5333478E210EFBCA732D90B8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		816F1F95B46B4B13AB7B7E9A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		F2D4CB0834A218F9593069CB /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -91,6 +92,7 @@
 		19B6B5861A2F9B4000DEA4B2 /* LivePlaylist */ = {
 			isa = PBXGroup;
 			children = (
+				19E4F7AB1A327F66002DE579 /* LivePlaylist-Bridging-Header.h */,
 				19B6B5891A2F9B4000DEA4B2 /* AppDelegate.swift */,
 				19B6B58B1A2F9B4000DEA4B2 /* ViewController.swift */,
 				19B6B5901A2F9B4000DEA4B2 /* Images.xcassets */,
@@ -388,7 +390,7 @@
 				INFOPLIST_FILE = LivePlaylist/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "LivePlaylist-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -401,7 +403,7 @@
 				INFOPLIST_FILE = LivePlaylist/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "LivePlaylist-Bridging-Header.h";
 			};
 			name = Release;
 		};
