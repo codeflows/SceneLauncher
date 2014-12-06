@@ -1,6 +1,6 @@
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, OSCServerDelegate {
     let label = UILabel()
     
     override func viewDidLoad() {
@@ -11,6 +11,21 @@ class ViewController: UIViewController {
         label.backgroundColor = UIColor.redColor()
         view.addSubview(label)
         view.backgroundColor = UIColor.greenColor()
+        
+        // TODO temporary
+        let server = OSCServer()
+        server.delegate = self
+        server.listen(8000)
+        
+        NSLog("Boom, sending message to self")
+        let client = OSCClient()
+        let message = OSCMessage(address: "/play/1", arguments: [])
+        client.sendMessage(message, to: "udp://localhost:8000")
+        NSLog("Done sending")
+    }
+    
+    func handleMessage(message: OSCMessage) {
+        NSLog("Received message \(message)!")
     }
     
     override func viewDidLayoutSubviews() {
