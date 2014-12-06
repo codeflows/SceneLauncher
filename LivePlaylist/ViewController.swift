@@ -17,10 +17,10 @@ class ViewController: UIViewController, OSCServerDelegate {
         server.delegate = self
         server.listen(8000)
         
-        NSLog("Boom, sending message to self")
+        NSLog("Boom, sending message to Reaper")
         let client = OSCClient()
-        let message = OSCMessage(address: "/play/1", arguments: [])
-        client.sendMessage(message, to: "udp://localhost:8000")
+        let message = OSCMessage(address: "/play", arguments: [])
+        client.sendMessage(message, to: "udp://localhost:9000")
         NSLog("Done sending")
     }
     
