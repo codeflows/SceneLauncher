@@ -8,7 +8,7 @@ class PlaylistDataSource: NSObject, UICollectionViewDataSource {
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return 500
     }
 
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {

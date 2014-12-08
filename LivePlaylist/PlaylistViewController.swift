@@ -5,6 +5,7 @@ let CellId = "PlaylistCell"
 class PlaylistViewController: UICollectionViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     //let client = OSCClient()
+    let dataSource = PlaylistDataSource()
     
     // MARK: UIViewController
     
@@ -31,8 +32,8 @@ class PlaylistViewController: UICollectionViewController, UICollectionViewDelega
     
     override init() {
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
-        collectionView!.dataSource = PlaylistDataSource()
         collectionView!.registerClass(PlaylistCell.self, forCellWithReuseIdentifier: CellId)
+        collectionView!.dataSource = dataSource
     }
     
     required init(coder: NSCoder) {
