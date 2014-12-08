@@ -19,7 +19,7 @@ class PlaylistViewController: UICollectionViewController, UICollectionViewDelega
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         NSLog("Boom! Sending message to Reaper")
         let message = OSCMessage(address: "/play", arguments: [])
-        client.sendMessage(message, to: "udp://localhost:9000")
+        client.sendMessage(message!, to: "udp://localhost:9000")
     }
     
     // MARK: UICollectionViewDelegateFlowLayout
