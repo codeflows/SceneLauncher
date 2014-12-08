@@ -30,8 +30,7 @@ class PlaylistViewController: UICollectionViewController, UICollectionViewDelega
     // MARK: Init & dealloc
     
     override init() {
-        let layout = UICollectionViewFlowLayout()
-        super.init(collectionViewLayout: layout)
+        super.init(collectionViewLayout: UICollectionViewFlowLayout())
         collectionView!.dataSource = PlaylistDataSource()
         collectionView!.registerClass(PlaylistCell.self, forCellWithReuseIdentifier: CellId)
     }
