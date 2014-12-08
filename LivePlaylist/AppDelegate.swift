@@ -3,10 +3,9 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     let window = UIWindow(frame: UIScreen.mainScreen().bounds)
-    let mainViewController = ViewController()
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        window.rootViewController = mainViewController
+        window.rootViewController = PlaylistViewController()
         window.backgroundColor = UIColor.whiteColor()
         window.makeKeyAndVisible()
         return true

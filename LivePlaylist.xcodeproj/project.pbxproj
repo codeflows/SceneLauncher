@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		19A5C7821A3598A100DF5D6B /* PlaylistDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A5C7811A3598A100DF5D6B /* PlaylistDataSource.swift */; };
+		19A5C7851A359A7600DF5D6B /* PlaylistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A5C7841A359A7600DF5D6B /* PlaylistCell.swift */; };
 		19B6B58A1A2F9B4000DEA4B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B6B5891A2F9B4000DEA4B2 /* AppDelegate.swift */; };
-		19B6B58C1A2F9B4000DEA4B2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B6B58B1A2F9B4000DEA4B2 /* ViewController.swift */; };
+		19B6B58C1A2F9B4000DEA4B2 /* PlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B6B58B1A2F9B4000DEA4B2 /* PlaylistViewController.swift */; };
 		19B6B5911A2F9B4000DEA4B2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19B6B5901A2F9B4000DEA4B2 /* Images.xcassets */; };
 		19B6B5941A2F9B4000DEA4B2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19B6B5921A2F9B4000DEA4B2 /* LaunchScreen.xib */; };
 		19B6B5A01A2F9B4000DEA4B2 /* LivePlaylistTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B6B59F1A2F9B4000DEA4B2 /* LivePlaylistTests.swift */; };
@@ -27,10 +29,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		19A5C7811A3598A100DF5D6B /* PlaylistDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistDataSource.swift; sourceTree = "<group>"; };
+		19A5C7841A359A7600DF5D6B /* PlaylistCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistCell.swift; sourceTree = "<group>"; };
 		19B6B5841A2F9B4000DEA4B2 /* LivePlaylist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LivePlaylist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B6B5881A2F9B4000DEA4B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19B6B5891A2F9B4000DEA4B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		19B6B58B1A2F9B4000DEA4B2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		19B6B58B1A2F9B4000DEA4B2 /* PlaylistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistViewController.swift; sourceTree = "<group>"; };
 		19B6B5901A2F9B4000DEA4B2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		19B6B5931A2F9B4000DEA4B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		19B6B5991A2F9B4000DEA4B2 /* LivePlaylistTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LivePlaylistTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,10 +75,22 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		19A5C7831A359A2D00DF5D6B /* Playlist view */ = {
+			isa = PBXGroup;
+			children = (
+				19B6B58B1A2F9B4000DEA4B2 /* PlaylistViewController.swift */,
+				19A5C7811A3598A100DF5D6B /* PlaylistDataSource.swift */,
+				19A5C7841A359A7600DF5D6B /* PlaylistCell.swift */,
+			);
+			name = "Playlist view";
+			path = LivePlaylist;
+			sourceTree = "<group>";
+		};
 		19B6B57B1A2F9B4000DEA4B2 = {
 			isa = PBXGroup;
 			children = (
-				19B6B5861A2F9B4000DEA4B2 /* LivePlaylist */,
+				19A5C7831A359A2D00DF5D6B /* Playlist view */,
+				19B6B5861A2F9B4000DEA4B2 /* Common */,
 				19B6B59C1A2F9B4000DEA4B2 /* LivePlaylistTests */,
 				19B6B5851A2F9B4000DEA4B2 /* Products */,
 				0411C01C11CB84E34C890832 /* Pods */,
@@ -91,17 +107,17 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		19B6B5861A2F9B4000DEA4B2 /* LivePlaylist */ = {
+		19B6B5861A2F9B4000DEA4B2 /* Common */ = {
 			isa = PBXGroup;
 			children = (
 				19E4F7AB1A327F66002DE579 /* LivePlaylist-Bridging-Header.h */,
 				19B6B5891A2F9B4000DEA4B2 /* AppDelegate.swift */,
-				19B6B58B1A2F9B4000DEA4B2 /* ViewController.swift */,
 				19B6B5901A2F9B4000DEA4B2 /* Images.xcassets */,
 				19B6B5921A2F9B4000DEA4B2 /* LaunchScreen.xib */,
 				19B6B5871A2F9B4000DEA4B2 /* Supporting Files */,
 				19E4F7AE1A3281F3002DE579 /* Dummy.cpp */,
 			);
+			name = Common;
 			path = LivePlaylist;
 			sourceTree = "<group>";
 		};
@@ -272,8 +288,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				19B6B58C1A2F9B4000DEA4B2 /* ViewController.swift in Sources */,
+				19A5C7821A3598A100DF5D6B /* PlaylistDataSource.swift in Sources */,
+				19B6B58C1A2F9B4000DEA4B2 /* PlaylistViewController.swift in Sources */,
 				19B6B58A1A2F9B4000DEA4B2 /* AppDelegate.swift in Sources */,
+				19A5C7851A359A7600DF5D6B /* PlaylistCell.swift in Sources */,
 				19E4F7AF1A3281F3002DE579 /* Dummy.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
