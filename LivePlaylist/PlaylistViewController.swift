@@ -2,20 +2,10 @@ import UIKit
 
 let CellId = "PlaylistCell"
 
-class PlaylistViewController: UICollectionViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, OSCServerDelegate {
+class PlaylistViewController: UICollectionViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     let dataSource = PlaylistDataSource()
-    let client = OSCClient()
-    let server = OSCServer()
    
-    // MARK: OSCServerDelegate
-    
-    func handleMessage(incomingMessage: OSCMessage!) {
-        if let message = incomingMessage {
-            NSLog("Received OSCMessage %@ %@", message.address, message.arguments)
-        }
-    }
-    
     // MARK: UIViewController
     
     override func viewDidLoad() {
@@ -26,9 +16,6 @@ class PlaylistViewController: UICollectionViewController, UICollectionViewDelega
     // MARK: UICollectionViewDelegate
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        NSLog("Boom! Sending message to Live")
-        let message = OSCMessage(address: "/live/play", arguments: [])
-        client.sendMessage(message!, to: "udp://localhost:9000")
     }
     
     // MARK: UICollectionViewDelegateFlowLayout
@@ -43,17 +30,10 @@ class PlaylistViewController: UICollectionViewController, UICollectionViewDelega
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
         collectionView!.registerClass(PlaylistCell.self, forCellWithReuseIdentifier: CellId)
         collectionView!.dataSource = dataSource
-
-        server.delegate = self
-        server.listen(9001)
         
         let trackService = AbletonTrackService()
         let tracks = trackService.listTracks()
         NSLog("Tracks are \(tracks)")
-        
-        NSLog("Querying for scenes")
-        let message = OSCMessage(address: "/live/name/scene", arguments: [])
-        client.sendMessage(message!, to: "udp://localhost:9000")
 
     }
     
