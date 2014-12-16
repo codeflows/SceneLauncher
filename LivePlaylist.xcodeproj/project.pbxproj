@@ -101,10 +101,10 @@
 		19B6B59E1A2F9B4000DEA4B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19B6B59F1A2F9B4000DEA4B2 /* LivePlaylistTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePlaylistTests.swift; sourceTree = "<group>"; };
 		19CCC78B1A40300D002FDCE2 /* LlamaKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LlamaKit.xcodeproj; path = External/ReactiveCocoa/Carthage.checkout/LlamaKit/LlamaKit.xcodeproj; sourceTree = "<group>"; };
-		19E4F7AB1A327F66002DE579 /* LivePlaylist-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LivePlaylist-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		19E4F7AB1A327F66002DE579 /* LivePlaylist-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "LivePlaylist-Bridging-Header.h"; path = "LivePlaylist/LivePlaylist-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		19E4F7AE1A3281F3002DE579 /* Dummy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dummy.cpp; sourceTree = "<group>"; };
-		19FB71D31A3F78C300D77F1E /* TrackService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackService.swift; sourceTree = "<group>"; };
-		19FB71D51A3F7A9A00D77F1E /* AbletonTrackService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbletonTrackService.swift; sourceTree = "<group>"; };
+		19FB71D31A3F78C300D77F1E /* TrackService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackService.swift; path = LivePlaylist/TrackService.swift; sourceTree = "<group>"; };
+		19FB71D51A3F7A9A00D77F1E /* AbletonTrackService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AbletonTrackService.swift; path = LivePlaylist/AbletonTrackService.swift; sourceTree = "<group>"; };
 		5333478E210EFBCA732D90B8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		816F1F95B46B4B13AB7B7E9A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		F2D4CB0834A218F9593069CB /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -581,7 +581,7 @@
 				INFOPLIST_FILE = LivePlaylist/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "LivePlaylist-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "LivePlaylist/LivePlaylist-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -594,7 +594,7 @@
 				INFOPLIST_FILE = LivePlaylist/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "LivePlaylist-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "LivePlaylist/LivePlaylist-Bridging-Header.h";
 			};
 			name = Release;
 		};
