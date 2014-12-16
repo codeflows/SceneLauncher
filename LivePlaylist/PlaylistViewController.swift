@@ -47,6 +47,10 @@ class PlaylistViewController: UICollectionViewController, UICollectionViewDelega
         server.delegate = self
         server.listen(9001)
         
+        let trackService = AbletonTrackService()
+        let tracks = trackService.listTracks()
+        NSLog("Tracks are \(tracks)")
+        
         NSLog("Querying for scenes")
         let message = OSCMessage(address: "/live/name/scene", arguments: [])
         client.sendMessage(message!, to: "udp://localhost:9000")
