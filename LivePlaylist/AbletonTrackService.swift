@@ -25,7 +25,7 @@ class AbletonTrackService : NSObject, TrackService {
     osc.sendMessage(OSCMessage(address: "/live/name/scene", arguments: [0]))
     osc.incomingMessagesSignal
       .filter { $0.address == "/live/name/scene" }
-      .take(1).observe { x in NSLog("1st scene name \(x.arguments[1])") }
+      .take(1).observe { NSLog("Scene #\($0.arguments[0]): \($0.arguments[1])") }
   }
 }
 
