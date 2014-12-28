@@ -38,3 +38,9 @@ class AbletonTrackService : NSObject, TrackService, OSCServerDelegate {
     }
   }
 }
+
+extension OSCMessage: Printable {
+  public override var description: String {
+    return "\(self.address) \(self.arguments)"
+  }
+}
