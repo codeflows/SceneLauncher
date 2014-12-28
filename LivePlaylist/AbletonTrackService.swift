@@ -30,10 +30,8 @@ class AbletonTrackService : NSObject, TrackService, OSCServerDelegate {
     
     incomingMessagesSignal
       .take(1)
-      .observe { message in
-        NSLog("Address \(message.address)")
-        callback([message.address])
-      }
+      .map { [$0.address] }
+      .observe(callback)
   }
   
   func handleMessage(incomingMessage: OSCMessage!) {
