@@ -1,3 +1,3 @@
 protocol TrackService {
-    func listTracks() -> [String]
+  func listTracks() -> [String]
 }
