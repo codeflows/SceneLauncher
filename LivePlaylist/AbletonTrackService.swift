@@ -3,11 +3,16 @@ import ReactiveCocoa
 class AbletonTrackService : NSObject, TrackService, OSCServerDelegate {
   let client = OSCClient()
   let server = OSCServer()
+  let (incomingMessagesSignal, incomingMessagesSink) = HotSignal<OSCMessage>.pipe()
   
   override init() {
     super.init()
     server.delegate = self
     server.listen(9001)
+    
+    incomingMessagesSignal.observe { message in
+      NSLog("Signal received OSCMessage %@ %@", message.address, message.arguments)
+    }
   }
   
   func listTracks() -> [String] {
@@ -29,7 +34,7 @@ class AbletonTrackService : NSObject, TrackService, OSCServerDelegate {
   
   func handleMessage(incomingMessage: OSCMessage!) {
     if let message = incomingMessage {
-      NSLog("Received OSCMessage %@ %@", message.address, message.arguments)
+      incomingMessagesSink.put(message)
     }
   }
 }
