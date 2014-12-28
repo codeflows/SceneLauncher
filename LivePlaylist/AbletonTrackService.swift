@@ -22,7 +22,7 @@ class AbletonTrackService : NSObject, TrackService {
       callback(["There are \(number) of scenes"])
     }
 
-    osc.sendMessage(OSCMessage(address: "/live/name/scene", arguments: [0]))
+    osc.sendMessage(OSCMessage(address: "/live/name/scene", arguments: []))
     osc.incomingMessagesSignal
       .filter { $0.address == "/live/name/scene" }
       .take(1).observe { NSLog("Scene #\($0.arguments[0]): \($0.arguments[1])") }
