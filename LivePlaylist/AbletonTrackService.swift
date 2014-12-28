@@ -21,7 +21,7 @@ class AbletonTrackService : NSObject, TrackService, OSCServerDelegate {
     // - send /live/name/scene
     // - receive series of /live/name/scene (int scene, string name)
     
-    let message = OSCMessage(address: "/live/play", arguments: [])
+    let message = OSCMessage(address: "/live/scenes", arguments: [])
     client.sendMessage(message!, to: "udp://localhost:9000")
     
     return ["Boom", "Boom", "Boom"]
