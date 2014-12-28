@@ -5,7 +5,8 @@ let CellId = "PlaylistCell"
 class PlaylistViewController: UICollectionViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     let dataSource = PlaylistDataSource()
-   
+    let trackService : TrackService
+  
     // MARK: UIViewController
     
     override func viewDidLoad() {
@@ -16,6 +17,8 @@ class PlaylistViewController: UICollectionViewController, UICollectionViewDelega
     // MARK: UICollectionViewDelegate
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+      let tracks = trackService.listTracks()
+      NSLog("Querying for tracks \(tracks)")
     }
     
     // MARK: UICollectionViewDelegateFlowLayout
@@ -27,14 +30,10 @@ class PlaylistViewController: UICollectionViewController, UICollectionViewDelega
     // MARK: Init & dealloc
     
     override init() {
+        trackService = AbletonTrackService()
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
         collectionView!.registerClass(PlaylistCell.self, forCellWithReuseIdentifier: CellId)
         collectionView!.dataSource = dataSource
-        
-        let trackService = AbletonTrackService()
-        let tracks = trackService.listTracks()
-        NSLog("Tracks are \(tracks)")
-
     }
     
     required init(coder: NSCoder) {
