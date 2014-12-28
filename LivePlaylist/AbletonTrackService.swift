@@ -4,15 +4,17 @@ class AbletonTrackService : NSObject, TrackService, OSCServerDelegate {
   let client = OSCClient()
   let server = OSCServer()
   let (incomingMessagesSignal, incomingMessagesSink) = HotSignal<OSCMessage>.pipe()
+  var addresses : HotSignal<String>
   
   override init() {
+    addresses = incomingMessagesSignal.map { message in message.address }
+
     super.init()
     server.delegate = self
     server.listen(9001)
     
     incomingMessagesSignal.observe { message in NSLog("All messages: \(message)") }
     
-    let addresses = incomingMessagesSignal.map { message in message.address }
     addresses.observe { address in NSLog("Address \(address)") }
   }
   
