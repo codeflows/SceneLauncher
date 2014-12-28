@@ -12,8 +12,8 @@ class AbletonTrackService : NSObject, TrackService, OSCServerDelegate {
     
     //incomingMessagesSignal.observe { message in NSLog("All messages: \(message)") }
     
-    let meterMessages = incomingMessagesSignal.filter { message in message.address == "/live/return/meter" }
-    meterMessages.observe { message in NSLog("Meter message: \(message)") }
+    let addresses = incomingMessagesSignal.map { message in message.address }
+    addresses.observe { address in NSLog("Address \(address)") }
   }
   
   func listTracks() -> [String] {
@@ -29,10 +29,6 @@ class AbletonTrackService : NSObject, TrackService, OSCServerDelegate {
     
     let message = OSCMessage(address: "/live/scenes", arguments: [])
     client.sendMessage(message!, to: "udp://localhost:9000")
-    
-    /*incomingMessagesSignal.take(1).observe { message in
-      NSLog("Scene reply: \(message)")
-    }*/
     
     return ["Boom", "Boom", "Boom"]
   }
