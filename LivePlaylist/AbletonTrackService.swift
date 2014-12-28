@@ -12,6 +12,7 @@ class AbletonTrackService : NSObject, TrackService {
     osc.sendMessage(message)
     
     // TODO make this time out after an approriate amount of time
+    // TODO LiveOsc(?) fails if Scene name contains Unicode characters and returns /remix/error
     let numberOfScenes =
       osc.incomingMessagesSignal
         .filter { $0.address == "/live/scenes" }
