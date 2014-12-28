@@ -15,9 +15,11 @@ class AbletonTrackService : NSObject, TrackService {
     let message = OSCMessage(address: "/live/scenes", arguments: [])
     osc.sendMessage(message)
     
+    // TODO make this time out after an approriate amount of time
     osc.incomingMessagesSignal
+      .filter { $0.address == "/live/scenes" }
       .take(1)
-      .map { [$0.address] }
+      .map { ["You will receive \($0.arguments[0]) scenes"] }
       .observe(callback)
   }
 }
