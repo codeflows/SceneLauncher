@@ -10,7 +10,7 @@ class AbletonTrackService : NSObject, TrackService, OSCServerDelegate {
     server.delegate = self
     server.listen(9001)
     
-    //incomingMessagesSignal.observe { message in NSLog("All messages: \(message)") }
+    incomingMessagesSignal.observe { message in NSLog("All messages: \(message)") }
     
     let addresses = incomingMessagesSignal.map { message in message.address }
     addresses.observe { address in NSLog("Address \(address)") }
