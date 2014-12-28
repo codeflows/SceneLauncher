@@ -6,19 +6,15 @@ class AbletonTrackService : NSObject, TrackService, OSCServerDelegate {
   let (incomingMessagesSignal, incomingMessagesSink) = HotSignal<OSCMessage>.pipe()
   
   override init() {
-    var addresses : HotSignal<String>
-    addresses = incomingMessagesSignal.map { message in message.address }
 
     super.init()
     server.delegate = self
     server.listen(9001)
     
     incomingMessagesSignal.observe { message in NSLog("All messages: \(message)") }
-    
-    addresses.observe { address in NSLog("Address \(address)") }
   }
   
-  func listTracks() -> [String] {
+  func listTracks(callback: ([String]) -> ()) {
     // Pseudo-implementation:
     //
     // To get number of scenes (maybe needed so that we know all scenes have arrived)
@@ -32,7 +28,12 @@ class AbletonTrackService : NSObject, TrackService, OSCServerDelegate {
     let message = OSCMessage(address: "/live/scenes", arguments: [])
     client.sendMessage(message!, to: "udp://localhost:9000")
     
-    return ["Boom", "Boom", "Boom"]
+    incomingMessagesSignal
+      .take(1)
+      .observe { message in
+        NSLog("Address \(message.address)")
+        callback([message.address])
+      }
   }
   
   func handleMessage(incomingMessage: OSCMessage!) {

@@ -17,8 +17,10 @@ class PlaylistViewController: UICollectionViewController, UICollectionViewDelega
   // MARK: UICollectionViewDelegate
   
   override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-    let tracks = trackService.listTracks()
-    NSLog("Querying for tracks \(tracks)")
+    NSLog("Querying for tracks")
+    trackService.listTracks { tracks in
+      NSLog("Tracks are \(tracks)")
+    }
   }
   
   // MARK: UICollectionViewDelegateFlowLayout
