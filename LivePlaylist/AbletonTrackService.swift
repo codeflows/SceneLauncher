@@ -25,7 +25,7 @@ class AbletonTrackService : NSObject, TrackService, OSCServerDelegate {
     let message = OSCMessage(address: "/live/scenes", arguments: [])
     client.sendMessage(message!, to: "udp://localhost:9000")
     
-    incomingMessagesSignal.observe { message in
+    incomingMessagesSignal.take(1).observe { message in
       NSLog("Scene reply: \(message)")
     }
     
