@@ -14,13 +14,24 @@ class AbletonTrackService : NSObject, TrackService {
         .filter { $0.address == "/live/scenes" }
         .take(1)
         .map { $0.arguments[0] as Int }
+        // Recursive signal deadlocks, so delay the value (https://github.com/ReactiveCocoa/ReactiveCocoa/issues/1670)
+       
 
     let sceneNames : HotSignal<String> = numberOfScenes.mergeMap { n in
       NSLog("Will map \(n) tracks to their names")
-      return HotSignal.never()
+
+      // Start listening to replies before sending the request
+      let sceneNameReplies =
+        self.osc.incomingMessagesSignal
+          .filter { $0.address == "/live/name/scene" }
+          .map { $0.arguments[1] as String }
+
+      self.osc.sendMessage(OSCMessage(address: "/live/name/scene", arguments: []))
+
+      return sceneNameReplies
     }
     
-    sceneNames.observe { NSLog("Names are \($0)") }
+    sceneNames.observe { NSLog("Got name \($0)") }
     
     /*let x : HotSignal<OSCMessage> = numberOfScenes.mergeMap { n in
       NSLog("BOOM! Getting names for \(n) scenes")
