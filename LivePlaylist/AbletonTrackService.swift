@@ -27,6 +27,7 @@ class AbletonTrackService : NSObject, TrackService {
         self.osc.incomingMessagesSignal
           .filter { $0.address == "/live/name/scene" }
           .map { $0.arguments[1] as String }
+          .take(n)
 
       self.osc.sendMessage(OSCMessage(address: "/live/name/scene", arguments: []))
       
