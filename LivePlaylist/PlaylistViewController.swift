@@ -16,7 +16,8 @@ class PlaylistViewController: UICollectionViewController, UICollectionViewDelega
   // MARK: UICollectionViewDelegate
   
   override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-    println("TODO play track")
+    let track = dataSource.tracks[indexPath.indexAtPosition(1)]
+    println("TODO play track \(track)")
   }
   
   // MARK: UICollectionViewDelegateFlowLayout
