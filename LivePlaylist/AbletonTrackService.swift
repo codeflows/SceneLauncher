@@ -2,7 +2,8 @@ import ReactiveCocoa
 
 class AbletonTrackService : NSObject, TrackService {
   let osc = OSCService()
-  
+
+  // TODO return a signal instead of using a callback
   func listTracks(callback: ([String]) -> ()) {
     // TODO also start listening for response prior to sending request?
     let message = OSCMessage(address: "/live/scenes", arguments: [])
@@ -19,15 +20,16 @@ class AbletonTrackService : NSObject, TrackService {
         // Recursive signal deadlocks, so delay the value (https://github.com/ReactiveCocoa/ReactiveCocoa/issues/1670)
         .delay(0, onScheduler: QueueScheduler())
       
-    let sceneNames : HotSignal<String> = numberOfScenes.mergeMap { n in
+    let sceneNames : HotSignal<[String]> = numberOfScenes.mergeMap { n in
       NSLog("Will map \(n) tracks to their names")
 
-      // TODO Start listening to replies before sending the request
       let sceneNameReplies =
         self.osc.incomingMessagesSignal
           .filter { $0.address == "/live/name/scene" }
-          .map { $0.arguments[1] as String }
           .take(n)
+          .map { [$0.arguments[1] as String] }
+          .scan(initial: [], +)
+          // TODO sort by scene number
 
       self.osc.sendMessage(OSCMessage(address: "/live/name/scene", arguments: []))
       
