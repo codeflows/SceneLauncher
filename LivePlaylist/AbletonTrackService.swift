@@ -24,21 +24,19 @@ class AbletonTrackService : NSObject, TrackService {
         .filter { $0.address == "/live/scenes" }
         .take(1)
         .map { $0.arguments[0] as Int }
-        // Recursive signal deadlocks, so delay the value (https://github.com/ReactiveCocoa/ReactiveCocoa/issues/1670)
-        .delay(0, onScheduler: QueueScheduler())
+
+    // Recursive signal deadlocks, so delay the value (https://github.com/ReactiveCocoa/ReactiveCocoa/issues/1670)
+    let asyncNumberOfScenes = numberOfScenes.delay(0, onScheduler: QueueScheduler())
       
-    let sceneNames : HotSignal<[Scene]> = numberOfScenes.mergeMap { n in
-      NSLog("Will map \(n) tracks to their names")
-
-
+    let sceneNames : HotSignal<[Scene]> = asyncNumberOfScenes.mergeMap { expectedNumberOfScenes in
       let scenesSignal : HotSignal<[Scene]> =
         self.osc.incomingMessagesSignal
           .filter { $0.address == "/live/name/scene" }
-          .take(n)
+          .take(expectedNumberOfScenes)
           .map { Scene(order: $0.arguments[0] as Int, name: $0.arguments[1] as String) }
           .scan(initial: []) { $0 + [$1] }
-          // FIXME ugly: scan returns intermittent results, only choose the last one
-          .filter { $0.count == n }
+          // FIXME ugly: scan returns intermittent results, only choose the last one (use ColdSignal?)
+          .filter { $0.count == expectedNumberOfScenes }
           .take(1)
           
       let sortedScenesSignal = scenesSignal.map { scenes in
