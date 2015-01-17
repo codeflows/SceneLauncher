@@ -1,4 +1,3 @@
-// TODO jari: why do I need this import? why is it not needed in the example?
 import UIKit
 
 class PlaylistCell: UICollectionViewCell {

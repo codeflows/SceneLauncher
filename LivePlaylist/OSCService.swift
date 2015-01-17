@@ -24,7 +24,7 @@ class OSCService : NSObject, OSCServerDelegate {
   
   func handleMessage(incomingMessage: OSCMessage!) {
     if let message = incomingMessage {
-      NSLog("Received message #\(message.address): \(message.arguments)")
+      println("[OSCService] Received message #\(message.address): \(message.arguments)")
       incomingMessagesSink.put(message)
     }
   }
