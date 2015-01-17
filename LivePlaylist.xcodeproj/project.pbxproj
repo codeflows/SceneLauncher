@@ -16,6 +16,7 @@
 		19B6B5911A2F9B4000DEA4B2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19B6B5901A2F9B4000DEA4B2 /* Images.xcassets */; };
 		19B6B5941A2F9B4000DEA4B2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19B6B5921A2F9B4000DEA4B2 /* LaunchScreen.xib */; };
 		19B6B5A01A2F9B4000DEA4B2 /* LivePlaylistTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B6B59F1A2F9B4000DEA4B2 /* LivePlaylistTests.swift */; };
+		19DA8FCA1A6ACD960033A1C5 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DA8FC91A6ACD960033A1C5 /* Track.swift */; };
 		19E4F7AF1A3281F3002DE579 /* Dummy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 19E4F7AE1A3281F3002DE579 /* Dummy.cpp */; };
 		19FB71D41A3F78C300D77F1E /* TrackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB71D31A3F78C300D77F1E /* TrackService.swift */; };
 		19FB71D61A3F7A9A00D77F1E /* AbletonTrackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB71D51A3F7A9A00D77F1E /* AbletonTrackService.swift */; };
@@ -46,6 +47,7 @@
 		19B6B5991A2F9B4000DEA4B2 /* LivePlaylistTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LivePlaylistTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B6B59E1A2F9B4000DEA4B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19B6B59F1A2F9B4000DEA4B2 /* LivePlaylistTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePlaylistTests.swift; sourceTree = "<group>"; };
+		19DA8FC91A6ACD960033A1C5 /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		19E4F7AB1A327F66002DE579 /* LivePlaylist-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "LivePlaylist-Bridging-Header.h"; path = "LivePlaylist/LivePlaylist-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		19E4F7AE1A3281F3002DE579 /* Dummy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dummy.cpp; sourceTree = "<group>"; };
 		19FB71D31A3F78C300D77F1E /* TrackService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackService.swift; path = LivePlaylist/TrackService.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 			children = (
 				19FB71D31A3F78C300D77F1E /* TrackService.swift */,
 				19FB71D51A3F7A9A00D77F1E /* AbletonTrackService.swift */,
+				19DA8FC91A6ACD960033A1C5 /* Track.swift */,
 			);
 			name = "Track service";
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				19B6B58C1A2F9B4000DEA4B2 /* PlaylistViewController.swift in Sources */,
 				19B6B58A1A2F9B4000DEA4B2 /* AppDelegate.swift in Sources */,
 				19FB71D61A3F7A9A00D77F1E /* AbletonTrackService.swift in Sources */,
+				19DA8FCA1A6ACD960033A1C5 /* Track.swift in Sources */,
 				19FB71D41A3F78C300D77F1E /* TrackService.swift in Sources */,
 				19A5C7851A359A7600DF5D6B /* PlaylistCell.swift in Sources */,
 				19E4F7AF1A3281F3002DE579 /* Dummy.cpp in Sources */,

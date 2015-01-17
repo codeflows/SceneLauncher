@@ -1,3 +1,3 @@
 protocol TrackService {
-  func listTracks(callback: ([String]) -> ())
+  func listTracks(callback: ([Track]) -> ())
 }
