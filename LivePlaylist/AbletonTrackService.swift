@@ -1,8 +1,12 @@
 import ReactiveCocoa
 
 class AbletonTrackService : NSObject, TrackService {
-  let osc = OSCService()
-
+  let osc : OSCService
+  
+  init(osc: OSCService) {
+    self.osc = osc
+  }
+  
   func listTracks(callback: ([Track]) -> ()) {
     // TODO also start listening for response prior to sending request?
     let message = OSCMessage(address: "/live/scenes", arguments: [])
