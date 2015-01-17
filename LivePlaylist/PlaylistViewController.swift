@@ -18,7 +18,7 @@ class PlaylistViewController: UICollectionViewController, UICollectionViewDelega
   
   override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
     let track = dataSource.tracks[indexPath.indexAtPosition(1)]
-    println("TODO play track \(track)")
+    osc.sendMessage(OSCMessage(address: "/live/play/scene", arguments: [track.order]))
   }
   
   // MARK: UICollectionViewDelegateFlowLayout
