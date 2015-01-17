@@ -30,6 +30,7 @@ class AbletonTrackService : NSObject, TrackService {
           .map { [$0.arguments[1] as String] }
           .scan(initial: [], +)
           // TODO sort by scene number
+          // TODO how to get only final result?
 
       self.osc.sendMessage(OSCMessage(address: "/live/name/scene", arguments: []))
       
