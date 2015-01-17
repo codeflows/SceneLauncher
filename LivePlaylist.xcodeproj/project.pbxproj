@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		193EEB611A5035610035C59F /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 193EEB601A5035610035C59F /* ReactiveCocoa.framework */; };
+		193EEB641A50368E0035C59F /* OSCService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193EEB631A50368E0035C59F /* OSCService.swift */; };
 		19A5C7821A3598A100DF5D6B /* PlaylistDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A5C7811A3598A100DF5D6B /* PlaylistDataSource.swift */; };
 		19A5C7851A359A7600DF5D6B /* PlaylistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A5C7841A359A7600DF5D6B /* PlaylistCell.swift */; };
 		19B6B58A1A2F9B4000DEA4B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B6B5891A2F9B4000DEA4B2 /* AppDelegate.swift */; };
@@ -14,7 +16,10 @@
 		19B6B5911A2F9B4000DEA4B2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19B6B5901A2F9B4000DEA4B2 /* Images.xcassets */; };
 		19B6B5941A2F9B4000DEA4B2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19B6B5921A2F9B4000DEA4B2 /* LaunchScreen.xib */; };
 		19B6B5A01A2F9B4000DEA4B2 /* LivePlaylistTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B6B59F1A2F9B4000DEA4B2 /* LivePlaylistTests.swift */; };
+		19DA8FCA1A6ACD960033A1C5 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DA8FC91A6ACD960033A1C5 /* Track.swift */; };
 		19E4F7AF1A3281F3002DE579 /* Dummy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 19E4F7AE1A3281F3002DE579 /* Dummy.cpp */; };
+		19FB71D41A3F78C300D77F1E /* TrackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB71D31A3F78C300D77F1E /* TrackService.swift */; };
+		19FB71D61A3F7A9A00D77F1E /* AbletonTrackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB71D51A3F7A9A00D77F1E /* AbletonTrackService.swift */; };
 		FBF9C5BBA25C71DCB41D167B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5333478E210EFBCA732D90B8 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +34,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		193EEB601A5035610035C59F /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = "../../Library/Developer/Xcode/DerivedData/LivePlaylist-dkpkzsoimcjfvbaggyoaisyytmbf/Build/Products/Debug/ReactiveCocoa.framework"; sourceTree = "<group>"; };
+		193EEB631A50368E0035C59F /* OSCService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OSCService.swift; path = LivePlaylist/OSCService.swift; sourceTree = "<group>"; };
 		19A5C7811A3598A100DF5D6B /* PlaylistDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistDataSource.swift; sourceTree = "<group>"; };
 		19A5C7841A359A7600DF5D6B /* PlaylistCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistCell.swift; sourceTree = "<group>"; };
 		19B6B5841A2F9B4000DEA4B2 /* LivePlaylist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LivePlaylist.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -40,8 +47,11 @@
 		19B6B5991A2F9B4000DEA4B2 /* LivePlaylistTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LivePlaylistTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B6B59E1A2F9B4000DEA4B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19B6B59F1A2F9B4000DEA4B2 /* LivePlaylistTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePlaylistTests.swift; sourceTree = "<group>"; };
-		19E4F7AB1A327F66002DE579 /* LivePlaylist-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LivePlaylist-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		19DA8FC91A6ACD960033A1C5 /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
+		19E4F7AB1A327F66002DE579 /* LivePlaylist-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "LivePlaylist-Bridging-Header.h"; path = "LivePlaylist/LivePlaylist-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		19E4F7AE1A3281F3002DE579 /* Dummy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dummy.cpp; sourceTree = "<group>"; };
+		19FB71D31A3F78C300D77F1E /* TrackService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackService.swift; path = LivePlaylist/TrackService.swift; sourceTree = "<group>"; };
+		19FB71D51A3F7A9A00D77F1E /* AbletonTrackService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AbletonTrackService.swift; path = LivePlaylist/AbletonTrackService.swift; sourceTree = "<group>"; };
 		5333478E210EFBCA732D90B8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		816F1F95B46B4B13AB7B7E9A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		F2D4CB0834A218F9593069CB /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -52,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				193EEB611A5035610035C59F /* ReactiveCocoa.framework in Frameworks */,
 				FBF9C5BBA25C71DCB41D167B /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -75,6 +86,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		193EEB621A5036690035C59F /* OSC Service */ = {
+			isa = PBXGroup;
+			children = (
+				193EEB631A50368E0035C59F /* OSCService.swift */,
+			);
+			name = "OSC Service";
+			sourceTree = "<group>";
+		};
 		19A5C7831A359A2D00DF5D6B /* Playlist view */ = {
 			isa = PBXGroup;
 			children = (
@@ -89,6 +108,8 @@
 		19B6B57B1A2F9B4000DEA4B2 = {
 			isa = PBXGroup;
 			children = (
+				193EEB621A5036690035C59F /* OSC Service */,
+				19FB71D21A3F789400D77F1E /* Track service */,
 				19A5C7831A359A2D00DF5D6B /* Playlist view */,
 				19B6B5861A2F9B4000DEA4B2 /* Common */,
 				19B6B59C1A2F9B4000DEA4B2 /* LivePlaylistTests */,
@@ -146,9 +167,20 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		19FB71D21A3F789400D77F1E /* Track service */ = {
+			isa = PBXGroup;
+			children = (
+				19FB71D31A3F78C300D77F1E /* TrackService.swift */,
+				19FB71D51A3F7A9A00D77F1E /* AbletonTrackService.swift */,
+				19DA8FC91A6ACD960033A1C5 /* Track.swift */,
+			);
+			name = "Track service";
+			sourceTree = "<group>";
+		};
 		679A4B2320A4163901D06C8B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				193EEB601A5035610035C59F /* ReactiveCocoa.framework */,
 				5333478E210EFBCA732D90B8 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -289,8 +321,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				19A5C7821A3598A100DF5D6B /* PlaylistDataSource.swift in Sources */,
+				193EEB641A50368E0035C59F /* OSCService.swift in Sources */,
 				19B6B58C1A2F9B4000DEA4B2 /* PlaylistViewController.swift in Sources */,
 				19B6B58A1A2F9B4000DEA4B2 /* AppDelegate.swift in Sources */,
+				19FB71D61A3F7A9A00D77F1E /* AbletonTrackService.swift in Sources */,
+				19DA8FCA1A6ACD960033A1C5 /* Track.swift in Sources */,
+				19FB71D41A3F78C300D77F1E /* TrackService.swift in Sources */,
 				19A5C7851A359A7600DF5D6B /* PlaylistCell.swift in Sources */,
 				19E4F7AF1A3281F3002DE579 /* Dummy.cpp in Sources */,
 			);
@@ -409,10 +445,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/LivePlaylist-dkpkzsoimcjfvbaggyoaisyytmbf/Build/Products/Debug",
+				);
 				INFOPLIST_FILE = LivePlaylist/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "LivePlaylist-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "LivePlaylist/LivePlaylist-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -422,10 +463,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/LivePlaylist-dkpkzsoimcjfvbaggyoaisyytmbf/Build/Products/Debug",
+				);
 				INFOPLIST_FILE = LivePlaylist/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "LivePlaylist-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "LivePlaylist/LivePlaylist-Bridging-Header.h";
 			};
 			name = Release;
 		};
