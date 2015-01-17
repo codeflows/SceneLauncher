@@ -23,14 +23,17 @@ class AbletonTrackService : NSObject, TrackService {
     let sceneNames : HotSignal<[String]> = numberOfScenes.mergeMap { n in
       NSLog("Will map \(n) tracks to their names")
 
-      let sceneNameReplies =
+
+      // TODO scenes might not arrive in correct order
+      let sceneNameReplies : HotSignal<[String]> =
         self.osc.incomingMessagesSignal
           .filter { $0.address == "/live/name/scene" }
           .take(n)
           .map { [$0.arguments[1] as String] }
           .scan(initial: [], +)
-          // TODO sort by scene number
-          // TODO how to get only final result?
+          // FIXME ugly: scan returns intermittent results, only choose the last one
+          .filter { $0.count == n }
+          .take(1)
 
       self.osc.sendMessage(OSCMessage(address: "/live/name/scene", arguments: []))
       
@@ -39,7 +42,7 @@ class AbletonTrackService : NSObject, TrackService {
       return sceneNameReplies
     }
     
-    // TODO no replies received here!
+    // TODO fix mergemapping, no replies received here!
     sceneNames.observe { NSLog("Got name \($0)") }
   }
 }
