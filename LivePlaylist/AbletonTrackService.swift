@@ -37,8 +37,8 @@ class AbletonTrackService : NSObject, TrackService {
 
       self.osc.sendMessage(OSCMessage(address: "/live/name/scene", arguments: []))
       
-      // TODO ugh
-      sortedScenesSignal.observe(callback)
+      // TODO handle UI thread stuff in the view controller
+      sortedScenesSignal.deliverOn(UIScheduler()).observe(callback)
 
       return sortedScenesSignal
     }
