@@ -2,6 +2,13 @@ import ReactiveCocoa
 
 class AbletonTrackService : NSObject, TrackService {
   let osc = OSCService()
+  
+  struct Scene : Printable {
+    let order: Int
+    let name: String
+    
+    var description: String { return name }
+  }
 
   // TODO return a signal instead of using a callback
   func listTracks(callback: ([String]) -> ()) {
@@ -20,30 +27,33 @@ class AbletonTrackService : NSObject, TrackService {
         // Recursive signal deadlocks, so delay the value (https://github.com/ReactiveCocoa/ReactiveCocoa/issues/1670)
         .delay(0, onScheduler: QueueScheduler())
       
-    let sceneNames : HotSignal<[String]> = numberOfScenes.mergeMap { n in
+    let sceneNames : HotSignal<[Scene]> = numberOfScenes.mergeMap { n in
       NSLog("Will map \(n) tracks to their names")
 
 
-      // TODO scenes might not arrive in correct order
-      let sceneNameReplies : HotSignal<[String]> =
+      let scenesSignal : HotSignal<[Scene]> =
         self.osc.incomingMessagesSignal
           .filter { $0.address == "/live/name/scene" }
           .take(n)
-          .map { [$0.arguments[1] as String] }
-          .scan(initial: [], +)
+          .map { Scene(order: $0.arguments[0] as Int, name: $0.arguments[1] as String) }
+          .scan(initial: []) { $0 + [$1] }
           // FIXME ugly: scan returns intermittent results, only choose the last one
           .filter { $0.count == n }
           .take(1)
+          
+      let sortedScenesSignal = scenesSignal.map { scenes in
+        scenes.sorted({$0.order < $1.order})
+      }
 
       self.osc.sendMessage(OSCMessage(address: "/live/name/scene", arguments: []))
       
-      sceneNameReplies.observe { NSLog("Inner got name \($0)") }
+      sortedScenesSignal.observe { NSLog("Inner got name \($0)") }
 
-      return sceneNameReplies
+      return sortedScenesSignal
     }
     
     // TODO fix mergemapping, no replies received here!
-    sceneNames.observe { NSLog("Got name \($0)") }
+    sceneNames.observe { NSLog("Got scene \($0)") }
   }
 }
 
