@@ -3,9 +3,9 @@ import UIKit
 let CellId = "PlaylistCell"
 
 class PlaylistViewController: UICollectionViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-  
+  let osc = OSCService()
   let dataSource = PlaylistDataSource()
-  let trackService : TrackService
+  let trackService: TrackService
   
   // MARK: UIViewController
   
@@ -17,10 +17,8 @@ class PlaylistViewController: UICollectionViewController, UICollectionViewDelega
   // MARK: UICollectionViewDelegate
   
   override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-    NSLog("Querying for tracks")
-    trackService.listTracks { tracks in
-      NSLog("Tracks are \(tracks)")
-    }
+    let track = dataSource.tracks[indexPath.indexAtPosition(1)]
+    osc.sendMessage(OSCMessage(address: "/live/play/scene", arguments: [track.order]))
   }
   
   // MARK: UICollectionViewDelegateFlowLayout
@@ -32,10 +30,16 @@ class PlaylistViewController: UICollectionViewController, UICollectionViewDelega
   // MARK: Init & dealloc
   
   override init() {
-    trackService = AbletonTrackService()
+    trackService = AbletonTrackService(osc: osc)
+    
     super.init(collectionViewLayout: UICollectionViewFlowLayout())
     collectionView!.registerClass(PlaylistCell.self, forCellWithReuseIdentifier: CellId)
     collectionView!.dataSource = dataSource
+    
+    trackService.listTracks { tracks in
+      self.dataSource.tracks = tracks
+      self.collectionView!.reloadData()
+    }
   }
   
   required init(coder: NSCoder) {
