@@ -3,9 +3,8 @@ import UIKit
 let CellId = "PlaylistCell"
 
 class PlaylistViewController: UICollectionViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-  let osc = OSCService()
-  let dataSource = PlaylistDataSource()
-  let trackService: TrackService
+  let osc: OSCService
+  let dataSource: PlaylistDataSource
   
   // MARK: UIViewController
   
@@ -30,14 +29,14 @@ class PlaylistViewController: UICollectionViewController, UICollectionViewDelega
   // MARK: Init & dealloc
   
   override init() {
-    trackService = AbletonTrackService(osc: osc)
+    osc = OSCService()
+    dataSource = PlaylistDataSource(osc: osc)
     
     super.init(collectionViewLayout: UICollectionViewFlowLayout())
     collectionView!.registerClass(PlaylistCell.self, forCellWithReuseIdentifier: CellId)
     collectionView!.dataSource = dataSource
     
-    trackService.listTracks { tracks in
-      self.dataSource.tracks = tracks
+    dataSource.reloadData() {
       self.collectionView!.reloadData()
     }
   }
