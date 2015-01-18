@@ -2,6 +2,7 @@ import Foundation
 import ReactiveCocoa
 
 class OSCService : NSObject, OSCServerDelegate {
+  private let localPort = 9001
   private let client = OSCClient()
   private let server = OSCServer()
   private let incomingMessagesSink : SinkOf<OSCMessage>
@@ -15,7 +16,13 @@ class OSCService : NSObject, OSCServerDelegate {
 
     super.init()
     server.delegate = self
-    server.listen(9001)
+    server.listen(localPort)
+    
+    registerWithLiveOSC()
+  }
+  
+  private func registerWithLiveOSC() {
+    sendMessage(OSCMessage(address: "/remix/set_peer", arguments: ["", localPort]))
   }
   
   func sendMessage(message: OSCMessage) {
