@@ -5,6 +5,7 @@ let CellId = "PlaylistCell"
 class PlaylistViewController: UICollectionViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
   let osc: OSCService
   let dataSource: PlaylistDataSource
+  let refreshControl: UIRefreshControl
   
   // MARK: UIViewController
   
@@ -31,18 +32,30 @@ class PlaylistViewController: UICollectionViewController, UICollectionViewDelega
   override init() {
     osc = OSCService()
     dataSource = PlaylistDataSource(osc: osc)
+    refreshControl = UIRefreshControl()
     
     super.init(collectionViewLayout: UICollectionViewFlowLayout())
     collectionView!.registerClass(PlaylistCell.self, forCellWithReuseIdentifier: CellId)
     collectionView!.dataSource = dataSource
+   
+    refreshControl.addTarget(self, action: "refreshTracks", forControlEvents: .ValueChanged)
+    collectionView!.addSubview(refreshControl)
+    collectionView!.alwaysBounceVertical = true
     
-    dataSource.reloadData() {
-      self.collectionView!.reloadData()
-    }
+    refreshTracks()
   }
   
   required init(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  // MARK: UIRefreshControl delegate
+
+  func refreshTracks() {
+    dataSource.reloadData() {
+      self.collectionView!.reloadData()
+      self.refreshControl.endRefreshing()
+    }
   }
 }
 
