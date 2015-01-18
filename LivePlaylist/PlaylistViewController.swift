@@ -24,7 +24,7 @@ class PlaylistViewController: UICollectionViewController, UICollectionViewDelega
   // MARK: UICollectionViewDelegateFlowLayout
   
   func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-    return CGSize(width: collectionView.bounds.width, height: 100)
+    return CGSize(width: collectionView.bounds.width, height: 40)
   }
   
   // MARK: Init & dealloc
