@@ -19,6 +19,7 @@ class OSCService : NSObject, OSCServerDelegate {
   }
   
   func sendMessage(message: OSCMessage) {
+    println("[OSCService] Sending message #\(message.address): \(message.arguments)")
     client.sendMessage(message, to: "udp://localhost:9000")
   }
   
