@@ -34,7 +34,10 @@ class PlaylistViewController: UICollectionViewController, UICollectionViewDelega
     dataSource = PlaylistDataSource(osc: osc)
     refreshControl = UIRefreshControl()
     
-    super.init(collectionViewLayout: UICollectionViewFlowLayout())
+    let layout = UICollectionViewFlowLayout()
+    super.init(collectionViewLayout: layout)
+    layout.sectionInset = UIEdgeInsetsMake(20, 0, 20, 0)
+    
     collectionView!.registerClass(PlaylistCell.self, forCellWithReuseIdentifier: CellId)
     collectionView!.dataSource = dataSource
    
