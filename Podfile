@@ -1,1 +1,1 @@
-pod 'OSCKit', '~> 0.2'
+pod 'OSCKit', '~> 0.3'
