@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		193EEB641A50368E0035C59F /* OSCService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193EEB631A50368E0035C59F /* OSCService.swift */; };
+		19684B641A6F152F000D201B /* LlamaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19684B621A6F152F000D201B /* LlamaKit.framework */; };
+		19684B651A6F152F000D201B /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19684B631A6F152F000D201B /* ReactiveCocoa.framework */; };
 		198E33ED1A6F0D4600952B92 /* Cartography.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 198E33EC1A6F0D4600952B92 /* Cartography.framework */; };
 		19A5C7821A3598A100DF5D6B /* PlaylistDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A5C7811A3598A100DF5D6B /* PlaylistDataSource.swift */; };
 		19A5C7851A359A7600DF5D6B /* PlaylistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A5C7841A359A7600DF5D6B /* PlaylistCell.swift */; };
@@ -37,6 +39,8 @@
 		190DE7201A6C7B7700754757 /* LlamaKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LlamaKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		193539F91A6C712E00D08D3B /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ReactiveCocoa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		193EEB631A50368E0035C59F /* OSCService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OSCService.swift; path = LivePlaylist/OSCService.swift; sourceTree = "<group>"; };
+		19684B621A6F152F000D201B /* LlamaKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LlamaKit.framework; path = Carthage/Build/iOS/LlamaKit.framework; sourceTree = "<group>"; };
+		19684B631A6F152F000D201B /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = Carthage/Build/iOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
 		198E33EC1A6F0D4600952B92 /* Cartography.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cartography.framework; path = Carthage/Build/iOS/Cartography.framework; sourceTree = "<group>"; };
 		19A5C7811A3598A100DF5D6B /* PlaylistDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistDataSource.swift; sourceTree = "<group>"; };
 		19A5C7841A359A7600DF5D6B /* PlaylistCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistCell.swift; sourceTree = "<group>"; };
@@ -66,6 +70,8 @@
 			files = (
 				B6A79B9028E95EC04D0AE254 /* libPods.a in Frameworks */,
 				198E33ED1A6F0D4600952B92 /* Cartography.framework in Frameworks */,
+				19684B641A6F152F000D201B /* LlamaKit.framework in Frameworks */,
+				19684B651A6F152F000D201B /* ReactiveCocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,6 +188,8 @@
 		679A4B2320A4163901D06C8B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				19684B621A6F152F000D201B /* LlamaKit.framework */,
+				19684B631A6F152F000D201B /* ReactiveCocoa.framework */,
 				198E33EC1A6F0D4600952B92 /* Cartography.framework */,
 				190DE7201A6C7B7700754757 /* LlamaKit.framework */,
 				193539F91A6C712E00D08D3B /* ReactiveCocoa.framework */,
@@ -295,6 +303,8 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Cartography.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/LlamaKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ReactiveCocoa.framework",
 			);
 			outputPaths = (
 			);
