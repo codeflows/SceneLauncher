@@ -228,6 +228,7 @@
 				19B6B5821A2F9B4000DEA4B2 /* Resources */,
 				B6CBF46DE2B0A17A855B724D /* Copy Pods Resources */,
 				190DE71F1A6C7AD600754757 /* Embed Frameworks */,
+				19DF81FF1A6F10A600B3F454 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -313,6 +314,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		19DF81FF1A6F10A600B3F454 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Cartography.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
 		23A295F5F164AA8BF1015FEA /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
