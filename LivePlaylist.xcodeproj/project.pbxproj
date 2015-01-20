@@ -7,13 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		190DE71D1A6C7AD600754757 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 193539F91A6C712E00D08D3B /* ReactiveCocoa.framework */; };
-		190DE71E1A6C7AD600754757 /* ReactiveCocoa.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 193539F91A6C712E00D08D3B /* ReactiveCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		190DE7211A6C7B7700754757 /* LlamaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 190DE7201A6C7B7700754757 /* LlamaKit.framework */; };
-		190DE7221A6C7BB700754757 /* LlamaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 190DE7201A6C7B7700754757 /* LlamaKit.framework */; };
-		190DE7231A6C7BB700754757 /* LlamaKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 190DE7201A6C7B7700754757 /* LlamaKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		193539FA1A6C712E00D08D3B /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 193539F91A6C712E00D08D3B /* ReactiveCocoa.framework */; };
 		193EEB641A50368E0035C59F /* OSCService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193EEB631A50368E0035C59F /* OSCService.swift */; };
+		19684B641A6F152F000D201B /* LlamaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19684B621A6F152F000D201B /* LlamaKit.framework */; };
+		19684B651A6F152F000D201B /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19684B631A6F152F000D201B /* ReactiveCocoa.framework */; };
+		198E33ED1A6F0D4600952B92 /* Cartography.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 198E33EC1A6F0D4600952B92 /* Cartography.framework */; };
 		19A5C7821A3598A100DF5D6B /* PlaylistDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A5C7811A3598A100DF5D6B /* PlaylistDataSource.swift */; };
 		19A5C7851A359A7600DF5D6B /* PlaylistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A5C7841A359A7600DF5D6B /* PlaylistCell.swift */; };
 		19B6B58A1A2F9B4000DEA4B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B6B5891A2F9B4000DEA4B2 /* AppDelegate.swift */; };
@@ -38,25 +35,13 @@
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		190DE71F1A6C7AD600754757 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				190DE71E1A6C7AD600754757 /* ReactiveCocoa.framework in Embed Frameworks */,
-				190DE7231A6C7BB700754757 /* LlamaKit.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
 		190DE7201A6C7B7700754757 /* LlamaKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LlamaKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		193539F91A6C712E00D08D3B /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ReactiveCocoa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		193EEB631A50368E0035C59F /* OSCService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OSCService.swift; path = LivePlaylist/OSCService.swift; sourceTree = "<group>"; };
+		19684B621A6F152F000D201B /* LlamaKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LlamaKit.framework; path = Carthage/Build/iOS/LlamaKit.framework; sourceTree = "<group>"; };
+		19684B631A6F152F000D201B /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = Carthage/Build/iOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
+		198E33EC1A6F0D4600952B92 /* Cartography.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cartography.framework; path = Carthage/Build/iOS/Cartography.framework; sourceTree = "<group>"; };
 		19A5C7811A3598A100DF5D6B /* PlaylistDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistDataSource.swift; sourceTree = "<group>"; };
 		19A5C7841A359A7600DF5D6B /* PlaylistCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistCell.swift; sourceTree = "<group>"; };
 		19B6B5841A2F9B4000DEA4B2 /* LivePlaylist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LivePlaylist.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -83,11 +68,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				190DE7211A6C7B7700754757 /* LlamaKit.framework in Frameworks */,
-				193539FA1A6C712E00D08D3B /* ReactiveCocoa.framework in Frameworks */,
-				190DE71D1A6C7AD600754757 /* ReactiveCocoa.framework in Frameworks */,
 				B6A79B9028E95EC04D0AE254 /* libPods.a in Frameworks */,
-				190DE7221A6C7BB700754757 /* LlamaKit.framework in Frameworks */,
+				198E33ED1A6F0D4600952B92 /* Cartography.framework in Frameworks */,
+				19684B641A6F152F000D201B /* LlamaKit.framework in Frameworks */,
+				19684B651A6F152F000D201B /* ReactiveCocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,6 +188,9 @@
 		679A4B2320A4163901D06C8B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				19684B621A6F152F000D201B /* LlamaKit.framework */,
+				19684B631A6F152F000D201B /* ReactiveCocoa.framework */,
+				198E33EC1A6F0D4600952B92 /* Cartography.framework */,
 				190DE7201A6C7B7700754757 /* LlamaKit.framework */,
 				193539F91A6C712E00D08D3B /* ReactiveCocoa.framework */,
 				5333478E210EFBCA732D90B8 /* libPods.a */,
@@ -223,7 +210,7 @@
 				19B6B5811A2F9B4000DEA4B2 /* Frameworks */,
 				19B6B5821A2F9B4000DEA4B2 /* Resources */,
 				B6CBF46DE2B0A17A855B724D /* Copy Pods Resources */,
-				190DE71F1A6C7AD600754757 /* Embed Frameworks */,
+				19DF81FF1A6F10A600B3F454 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -309,6 +296,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		19DF81FF1A6F10A600B3F454 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Cartography.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/LlamaKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ReactiveCocoa.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
 		23A295F5F164AA8BF1015FEA /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -481,7 +484,10 @@
 				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
@@ -521,7 +527,10 @@
 				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
