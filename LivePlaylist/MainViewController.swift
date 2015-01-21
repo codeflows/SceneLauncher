@@ -15,12 +15,14 @@ class MainViewController: UIViewController {
     
     let stopButton = UIButton()
     stopButton.setTitle("Stop", forState: .Normal)
-    stopButton.bounds = CGRect(x: 100, y: 100, width: 100, height: 10)
     stopButton.backgroundColor = UIColor.redColor()
     view!.addSubview(stopButton)
     
     layout(stopButton) { stop in
-      stop.bottom == stop.superview!.bottom; return
+      stop.bottom == stop.superview!.bottom - 10
+      stop.width == stop.superview!.width - 20
+      stop.left == stop.superview!.left + 10
+      stop.right == stop.superview!.right - 10
     }
   }
   
