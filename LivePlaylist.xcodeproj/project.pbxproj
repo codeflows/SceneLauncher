@@ -53,7 +53,7 @@
 		19B6B5991A2F9B4000DEA4B2 /* LivePlaylistTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LivePlaylistTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B6B59E1A2F9B4000DEA4B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19B6B59F1A2F9B4000DEA4B2 /* LivePlaylistTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePlaylistTests.swift; sourceTree = "<group>"; };
-		19DA8FC91A6ACD960033A1C5 /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
+		19DA8FC91A6ACD960033A1C5 /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Track.swift; path = LivePlaylist/Track.swift; sourceTree = "<group>"; };
 		19E4F7AB1A327F66002DE579 /* LivePlaylist-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "LivePlaylist-Bridging-Header.h"; path = "LivePlaylist/LivePlaylist-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		19E4F7AE1A3281F3002DE579 /* Dummy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dummy.cpp; sourceTree = "<group>"; };
 		19FB71D31A3F78C300D77F1E /* TrackService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackService.swift; path = LivePlaylist/TrackService.swift; sourceTree = "<group>"; };
