@@ -24,6 +24,8 @@ class MainViewController: UIViewController {
     stopButton.setTitle("Stop", forState: .Normal)
     stopButton.backgroundColor = UIColor.redColor()
     stopButton.addTarget(self, action: "stopPlayback", forControlEvents: .TouchUpInside)
+    // TODO use system font size?
+    stopButton.titleLabel?.font = UIFont(name: "Avenir", size: 18)
     view!.addSubview(stopButton)
     
     layout(stopButton) { stop in
