@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		19063F531A70289400EE34AE /* ApplicationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19063F521A70289400EE34AE /* ApplicationContext.swift */; };
 		193EEB641A50368E0035C59F /* OSCService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193EEB631A50368E0035C59F /* OSCService.swift */; };
 		19684B641A6F152F000D201B /* LlamaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19684B621A6F152F000D201B /* LlamaKit.framework */; };
 		19684B651A6F152F000D201B /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19684B631A6F152F000D201B /* ReactiveCocoa.framework */; };
@@ -19,6 +20,7 @@
 		19B6B5941A2F9B4000DEA4B2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19B6B5921A2F9B4000DEA4B2 /* LaunchScreen.xib */; };
 		19B6B5A01A2F9B4000DEA4B2 /* LivePlaylistTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B6B59F1A2F9B4000DEA4B2 /* LivePlaylistTests.swift */; };
 		19DA8FCA1A6ACD960033A1C5 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DA8FC91A6ACD960033A1C5 /* Track.swift */; };
+		19DC46FA1A7016B5004DB578 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DC46F91A7016B5004DB578 /* MainViewController.swift */; };
 		19E4F7AF1A3281F3002DE579 /* Dummy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 19E4F7AE1A3281F3002DE579 /* Dummy.cpp */; };
 		19FB71D41A3F78C300D77F1E /* TrackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB71D31A3F78C300D77F1E /* TrackService.swift */; };
 		19FB71D61A3F7A9A00D77F1E /* AbletonTrackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB71D51A3F7A9A00D77F1E /* AbletonTrackService.swift */; };
@@ -36,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		19063F521A70289400EE34AE /* ApplicationContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationContext.swift; sourceTree = "<group>"; };
 		190DE7201A6C7B7700754757 /* LlamaKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LlamaKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		193539F91A6C712E00D08D3B /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ReactiveCocoa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		193EEB631A50368E0035C59F /* OSCService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OSCService.swift; path = LivePlaylist/OSCService.swift; sourceTree = "<group>"; };
@@ -54,6 +57,7 @@
 		19B6B59E1A2F9B4000DEA4B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19B6B59F1A2F9B4000DEA4B2 /* LivePlaylistTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePlaylistTests.swift; sourceTree = "<group>"; };
 		19DA8FC91A6ACD960033A1C5 /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Track.swift; path = LivePlaylist/Track.swift; sourceTree = "<group>"; };
+		19DC46F91A7016B5004DB578 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = LivePlaylist/MainViewController.swift; sourceTree = "<group>"; };
 		19E4F7AB1A327F66002DE579 /* LivePlaylist-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "LivePlaylist-Bridging-Header.h"; path = "LivePlaylist/LivePlaylist-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		19E4F7AE1A3281F3002DE579 /* Dummy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dummy.cpp; sourceTree = "<group>"; };
 		19FB71D31A3F78C300D77F1E /* TrackService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackService.swift; path = LivePlaylist/TrackService.swift; sourceTree = "<group>"; };
@@ -94,12 +98,12 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		193EEB621A5036690035C59F /* OSC Service */ = {
+		193EEB621A5036690035C59F /* OSC service */ = {
 			isa = PBXGroup;
 			children = (
 				193EEB631A50368E0035C59F /* OSCService.swift */,
 			);
-			name = "OSC Service";
+			name = "OSC service";
 			sourceTree = "<group>";
 		};
 		19A5C7831A359A2D00DF5D6B /* Playlist view */ = {
@@ -116,10 +120,11 @@
 		19B6B57B1A2F9B4000DEA4B2 = {
 			isa = PBXGroup;
 			children = (
-				193EEB621A5036690035C59F /* OSC Service */,
-				19FB71D21A3F789400D77F1E /* Track service */,
-				19A5C7831A359A2D00DF5D6B /* Playlist view */,
 				19B6B5861A2F9B4000DEA4B2 /* Common */,
+				19DC46FB1A7016BD004DB578 /* Main view */,
+				19A5C7831A359A2D00DF5D6B /* Playlist view */,
+				193EEB621A5036690035C59F /* OSC service */,
+				19FB71D21A3F789400D77F1E /* Track service */,
 				19B6B59C1A2F9B4000DEA4B2 /* LivePlaylistTests */,
 				19B6B5851A2F9B4000DEA4B2 /* Products */,
 				0411C01C11CB84E34C890832 /* Pods */,
@@ -145,6 +150,7 @@
 				19B6B5921A2F9B4000DEA4B2 /* LaunchScreen.xib */,
 				19B6B5871A2F9B4000DEA4B2 /* Supporting Files */,
 				19E4F7AE1A3281F3002DE579 /* Dummy.cpp */,
+				19063F521A70289400EE34AE /* ApplicationContext.swift */,
 			);
 			name = Common;
 			path = LivePlaylist;
@@ -173,6 +179,14 @@
 				19B6B59E1A2F9B4000DEA4B2 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		19DC46FB1A7016BD004DB578 /* Main view */ = {
+			isa = PBXGroup;
+			children = (
+				19DC46F91A7016B5004DB578 /* MainViewController.swift */,
+			);
+			name = "Main view";
 			sourceTree = "<group>";
 		};
 		19FB71D21A3F789400D77F1E /* Track service */ = {
@@ -354,10 +368,12 @@
 				19B6B58C1A2F9B4000DEA4B2 /* PlaylistViewController.swift in Sources */,
 				19B6B58A1A2F9B4000DEA4B2 /* AppDelegate.swift in Sources */,
 				19FB71D61A3F7A9A00D77F1E /* AbletonTrackService.swift in Sources */,
+				19063F531A70289400EE34AE /* ApplicationContext.swift in Sources */,
 				19DA8FCA1A6ACD960033A1C5 /* Track.swift in Sources */,
 				19FB71D41A3F78C300D77F1E /* TrackService.swift in Sources */,
 				19A5C7851A359A7600DF5D6B /* PlaylistCell.swift in Sources */,
 				19E4F7AF1A3281F3002DE579 /* Dummy.cpp in Sources */,
+				19DC46FA1A7016B5004DB578 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

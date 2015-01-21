@@ -1,14 +1,11 @@
 import UIKit
-import Cartography
 
 class PlaylistCell: UICollectionViewCell {
   let titleLabel = UILabel()
   
   override func layoutSubviews() {
     titleLabel.frame = self.contentView.bounds
-    // FIXME
-    layout(titleLabel) { label in
-    }
+    titleLabel.font = UIFont(name: "Avenir", size: 18)
   }
   
   override init(frame: CGRect) {
