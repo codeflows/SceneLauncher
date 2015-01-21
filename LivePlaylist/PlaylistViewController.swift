@@ -29,8 +29,8 @@ class PlaylistViewController: UICollectionViewController, UICollectionViewDelega
   
   // MARK: Init & dealloc
   
-  override init() {
-    osc = OSCService()
+  init(applicationContext: ApplicationContext) {
+    self.osc = applicationContext.oscService
     dataSource = PlaylistDataSource(osc: osc)
     refreshControl = UIRefreshControl()
     
