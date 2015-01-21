@@ -1,4 +1,5 @@
 import UIKit
+import Cartography
 
 class MainViewController: UIViewController {
   override init() {
@@ -14,9 +15,13 @@ class MainViewController: UIViewController {
     
     let stopButton = UIButton()
     stopButton.setTitle("Stop", forState: .Normal)
-    stopButton.setTitleColor(UIColor.redColor(), forState: .Normal)
     stopButton.bounds = CGRect(x: 100, y: 100, width: 100, height: 10)
+    stopButton.backgroundColor = UIColor.redColor()
     view!.addSubview(stopButton)
+    
+    layout(stopButton) { stop in
+      stop.bottom == stop.superview!.bottom; return
+    }
   }
   
   required init(coder: NSCoder) {
