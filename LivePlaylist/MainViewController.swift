@@ -22,21 +22,35 @@ class MainViewController: UIViewController {
     
     let stopButton = UIButton()
     stopButton.setTitle("Stop", forState: .Normal)
-    stopButton.backgroundColor = UIColor.redColor()
-    stopButton.addTarget(self, action: "stopPlayback", forControlEvents: .TouchUpInside)
     stopButton.titleLabel?.font = UIFont(name: "Avenir", size: 25)
+    stopButton.backgroundColor = UIColor.redColor()
     stopButton.layer.cornerRadius = 3
+    stopButton.addTarget(self, action: "stopPlayback", forControlEvents: .TouchUpInside)
     view!.addSubview(stopButton)
+
+    let settingsButton = UIButton()
+    settingsButton.setTitle("?", forState: .Normal)
+    settingsButton.titleLabel?.font = UIFont(name: "Avenir", size: 25)
+    settingsButton.backgroundColor = UIColor.grayColor()
+    settingsButton.layer.cornerRadius = 3
+    settingsButton.addTarget(self, action: "openSettings", forControlEvents: .TouchUpInside)
+    view!.addSubview(settingsButton)
     
-    layout(stopButton) { stop in
+    layout(stopButton, settingsButton) { stop, settings in
       stop.bottom == stop.superview!.bottom - 10
-      stop.width == stop.superview!.width - 20
       stop.left == stop.superview!.left + 10
-      stop.right == stop.superview!.right - 10
+      
+      settings.left == stop.right + 10
+      settings.top == stop.top
+      settings.right == settings.superview!.right - 10
     }
   }
   
   func stopPlayback() {
     applicationContext.oscService.sendMessage(OSCMessage(address: "/live/stop", arguments: []))
+  }
+  
+  func openSettings() {
+    println("Would open settings")
   }
 }
