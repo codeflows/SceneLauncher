@@ -5,7 +5,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   let window = UIWindow(frame: UIScreen.mainScreen().bounds)
   
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    window.rootViewController = PlaylistViewController()
+    window.rootViewController = MainViewController()
     window.backgroundColor = UIColor.whiteColor()
     window.makeKeyAndVisible()
     return true
