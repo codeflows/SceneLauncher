@@ -51,6 +51,10 @@ class MainViewController: UIViewController {
   }
   
   func openSettings() {
-    presentViewController(SettingsViewController(), animated: true, completion: nil)
+    presentViewController(SettingsViewController(settingsSavedCallback: dismissSettingsDialog), animated: true, completion: nil)
+  }
+  
+  func dismissSettingsDialog() {
+    dismissViewControllerAnimated(true, completion: nil)
   }
 }
