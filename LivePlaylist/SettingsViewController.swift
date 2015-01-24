@@ -20,6 +20,8 @@ class SettingsViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    view.backgroundColor = UIColor.whiteColor()
+    
     let title = UILabel()
     title.text = "Server address"
     title.font = UIFont(name: "Avenir", size: 25)
