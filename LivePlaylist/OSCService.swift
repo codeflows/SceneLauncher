@@ -8,6 +8,7 @@ class OSCService : NSObject, OSCServerDelegate {
   private let incomingMessagesSink : SinkOf<OSCMessage>
 
   let incomingMessagesSignal : HotSignal<OSCMessage>
+  var serverAddress = "localhost"
 
   override init() {
     let (signal, sink) = HotSignal<OSCMessage>.pipe()
@@ -27,7 +28,7 @@ class OSCService : NSObject, OSCServerDelegate {
   
   func sendMessage(message: OSCMessage) {
     println("[OSCService] Sending message \(message.address): \(message.arguments)")
-    client.sendMessage(message, to: "udp://localhost:9000")
+    client.sendMessage(message, to: "udp://\(serverAddress):9000")
   }
   
   func handleMessage(incomingMessage: OSCMessage!) {

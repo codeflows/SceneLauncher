@@ -55,7 +55,11 @@ class MainViewController: UIViewController {
   }
   
   func dismissSettingsDialog(ipAddress: String?) {
-    println("New server address", ipAddress)
+    if let newAddress = ipAddress {
+      println("Received new server address", ipAddress)
+      applicationContext.oscService.serverAddress = newAddress
+    }
+    
     dismissViewControllerAnimated(true, completion: nil)
   }
 }
