@@ -1,6 +1,7 @@
 import UIKit
 import Cartography
 
+// TODO expose Stream<Optional<IpAddress>>. If there is value, use that and save it to prefs.
 class SettingsViewController: UIViewController {
   let settingsSavedCallback: () -> ()
   
