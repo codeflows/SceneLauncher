@@ -6,9 +6,9 @@ class OSCService : NSObject, OSCServerDelegate {
   private let client = OSCClient()
   private let server = OSCServer()
   private let incomingMessagesSink : SinkOf<OSCMessage>
+  private var serverAddress = "localhost"
 
   let incomingMessagesSignal : HotSignal<OSCMessage>
-  var serverAddress = "localhost"
 
   override init() {
     let (signal, sink) = HotSignal<OSCMessage>.pipe()
@@ -18,12 +18,6 @@ class OSCService : NSObject, OSCServerDelegate {
     super.init()
     server.delegate = self
     server.listen(localPort)
-    
-    registerWithLiveOSC()
-  }
-  
-  private func registerWithLiveOSC() {
-    sendMessage(OSCMessage(address: "/remix/set_peer", arguments: ["", localPort]))
   }
   
   func sendMessage(message: OSCMessage) {
@@ -36,5 +30,14 @@ class OSCService : NSObject, OSCServerDelegate {
       println("[OSCService] Received message \(message.address): \(message.arguments)")
       incomingMessagesSink.put(message)
     }
+  }
+  
+  func reconfigureServerAddress(address: String) {
+    serverAddress = address
+    registerWithLiveOSC()
+  }
+  
+  private func registerWithLiveOSC() {
+    sendMessage(OSCMessage(address: "/remix/set_peer", arguments: ["", localPort]))
   }
 }

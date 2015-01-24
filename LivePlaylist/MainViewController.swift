@@ -57,7 +57,7 @@ class MainViewController: UIViewController {
   func dismissSettingsDialog(ipAddress: String?) {
     if let newAddress = ipAddress {
       println("Received new server address", ipAddress)
-      applicationContext.oscService.serverAddress = newAddress
+      applicationContext.oscService.reconfigureServerAddress(newAddress)
     }
     
     dismissViewControllerAnimated(true, completion: nil)
