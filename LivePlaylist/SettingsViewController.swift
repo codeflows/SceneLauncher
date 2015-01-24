@@ -1,11 +1,12 @@
 import UIKit
 import Cartography
 
-// TODO expose Stream<Optional<IpAddress>>. If there is value, use that and save it to prefs.
+typealias IpAddressChangedCallback = (String?) -> ()
+
 class SettingsViewController: UIViewController {
-  let settingsSavedCallback: () -> ()
+  let settingsSavedCallback: IpAddressChangedCallback
   
-  init(settingsSavedCallback: () -> ()) {
+  init(settingsSavedCallback: IpAddressChangedCallback) {
     self.settingsSavedCallback = settingsSavedCallback
     super.init(nibName: nil, bundle: nil)
   }
@@ -27,13 +28,14 @@ class SettingsViewController: UIViewController {
     ipAddressTextField.becomeFirstResponder()
     view.addSubview(ipAddressTextField)
     
-    let helpText = UILabel()
-    helpText.text = "Enter the IP address of the computer that's running Ableton Live."
-    helpText.font = UIFont(name: "Avenir", size: 16)
-    helpText.numberOfLines = 0
-    view.addSubview(helpText)
+    let saveButton = UIButton()
+    saveButton.setTitle("Save", forState: .Normal)
+    saveButton.titleLabel?.font = UIFont(name: "Avenir", size: 20)
+    saveButton.backgroundColor = UIColor.grayColor()
+    saveButton.layer.cornerRadius = 3
+    view.addSubview(saveButton)
 
-    layout(title, ipAddressTextField, helpText) { title, ipAddressTextField, helpText in
+    layout(title, ipAddressTextField, saveButton) { title, ipAddressTextField, saveButton in
       // TODO hackish way to set top margin
       title.top == title.superview!.top + 40
       title.left == title.superview!.left + 10
@@ -41,15 +43,14 @@ class SettingsViewController: UIViewController {
       
       ipAddressTextField.top == title.bottom + 10
       ipAddressTextField.left == title.left
-      ipAddressTextField.width == title.width
-
-      helpText.top == ipAddressTextField.bottom + 10
-      helpText.left == title.left
-      helpText.width == title.width
+      
+      saveButton.left == ipAddressTextField.right + 10
+      saveButton.right == title.right
+      saveButton.baseline == ipAddressTextField.baseline
     }
   }
   
   func dismiss() {
-    settingsSavedCallback()
+    //settingsSavedCallback()
   }
 }

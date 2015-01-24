@@ -54,7 +54,7 @@ class MainViewController: UIViewController {
     presentViewController(SettingsViewController(settingsSavedCallback: dismissSettingsDialog), animated: true, completion: nil)
   }
   
-  func dismissSettingsDialog() {
+  func dismissSettingsDialog(ipAddress: String?) {
     dismissViewControllerAnimated(true, completion: nil)
   }
 }
