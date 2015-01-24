@@ -5,9 +5,11 @@ typealias IpAddressChangedCallback = (String?) -> ()
 
 class SettingsViewController: UIViewController {
   let settingsSavedCallback: IpAddressChangedCallback
+  let ipAddressTextField: UITextField
   
   init(settingsSavedCallback: IpAddressChangedCallback) {
     self.settingsSavedCallback = settingsSavedCallback
+    self.ipAddressTextField = UITextField()
     super.init(nibName: nil, bundle: nil)
   }
   
@@ -23,7 +25,6 @@ class SettingsViewController: UIViewController {
     title.font = UIFont(name: "Avenir", size: 25)
     view.addSubview(title)
     
-    let ipAddressTextField = UITextField()
     ipAddressTextField.font = UIFont(name: "Avenir", size: 20)
     ipAddressTextField.becomeFirstResponder()
     view.addSubview(ipAddressTextField)
@@ -33,6 +34,7 @@ class SettingsViewController: UIViewController {
     saveButton.titleLabel?.font = UIFont(name: "Avenir", size: 20)
     saveButton.backgroundColor = UIColor.grayColor()
     saveButton.layer.cornerRadius = 3
+    saveButton.addTarget(self, action: "dismiss", forControlEvents: .TouchUpInside)
     view.addSubview(saveButton)
 
     layout(title, ipAddressTextField, saveButton) { title, ipAddressTextField, saveButton in
@@ -51,6 +53,6 @@ class SettingsViewController: UIViewController {
   }
   
   func dismiss() {
-    //settingsSavedCallback()
+    settingsSavedCallback(ipAddressTextField.text)
   }
 }

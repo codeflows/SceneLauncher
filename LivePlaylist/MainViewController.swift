@@ -55,6 +55,7 @@ class MainViewController: UIViewController {
   }
   
   func dismissSettingsDialog(ipAddress: String?) {
+    println("New server address", ipAddress)
     dismissViewControllerAnimated(true, completion: nil)
   }
 }
