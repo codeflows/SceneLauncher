@@ -1,20 +1,18 @@
 Ableton Live scene launcher app for iOS, written in Swift as a learning project.
 
-The iOS app and Ableton Live communicate using the OSC protocol.
+### Setting up Ableton Live on OS X
 
-### OSC setup for Ableton Live on OS X
+The iOS app and Ableton Live communicate using the OSC protocol. 
 
-As Live doesn't have OSC support out of the box, you have to install LiveOSC first.
+However, Live doesn't have OSC support out of the box, and we have to install LiveOSC first.
 
 - Download and install Ableton Live 9: https://www.ableton.com/en/live/new-in-9/
-- Download LiveOSC: https://github.com/hanshuebner/LiveOSC/archive/master.zip
-- Unzip the archive
-- Install LiveOSC:
-  - Open Finder and go to /Applications
-  - Right-Click on Ableton Live and select _Show Package Contents_ 
+- Download LiveOSC and unzip the archive somewhere: http://livecontrol.q3f.org/ableton-liveapi/liveosc/
+- Open Finder and go to /Applications
+- Right-Click on Ableton Live and select _Show Package Contents_ 
     ![Show Package Contents](help/show_live_package_contents.png)
-  - Navigate to `Contents/App-Resources/MIDI Remote Scripts`
-  - Drag the `LiveOSC` folder under `MIDI Remote Scripts`
+- Navigate to `Contents/App-Resources/MIDI Remote Scripts`
+- Drag the `LiveOSC` folder under `MIDI Remote Scripts`
    ![Drag LiveOSC](help/drag_and_drop_liveosc.png)
 - Quit Ableton Live if it is running
 - Open Ableton Live and go to `Preferences` -> `MIDI Sync`
