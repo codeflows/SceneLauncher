@@ -51,6 +51,15 @@ class MainViewController: UIViewController {
   }
   
   func openSettings() {
-    println("Would open settings")
+    presentViewController(SettingsViewController(settingsSavedCallback: dismissSettingsDialog), animated: true, completion: nil)
+  }
+  
+  func dismissSettingsDialog(ipAddress: String?) {
+    if let newAddress = ipAddress {
+      println("Received new server address", ipAddress)
+      applicationContext.oscService.reconfigureServerAddress(newAddress)
+    }
+    
+    dismissViewControllerAnimated(true, completion: nil)
   }
 }
