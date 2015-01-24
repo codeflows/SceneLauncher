@@ -51,6 +51,6 @@ class MainViewController: UIViewController {
   }
   
   func openSettings() {
-    println("Would open settings")
+    presentViewController(SettingsViewController(), animated: true, completion: nil)
   }
 }
