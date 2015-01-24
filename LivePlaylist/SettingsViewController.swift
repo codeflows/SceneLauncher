@@ -22,13 +22,12 @@ class SettingsViewController: UIViewController {
     view.addSubview(title)
     
     let ipAddressTextField = UITextField()
-    ipAddressTextField.text = "192.168.0.1"
     ipAddressTextField.font = UIFont(name: "Avenir", size: 20)
     view.addSubview(ipAddressTextField)
     
     let helpText = UILabel()
     helpText.text = "Enter the IP address of the computer that's running Ableton Live."
-    helpText.font = UIFont(name: "Avenir", size: 18)
+    helpText.font = UIFont(name: "Avenir", size: 16)
     helpText.numberOfLines = 0
     view.addSubview(helpText)
 
