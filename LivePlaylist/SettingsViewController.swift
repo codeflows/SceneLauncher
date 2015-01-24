@@ -23,6 +23,7 @@ class SettingsViewController: UIViewController {
     
     let ipAddressTextField = UITextField()
     ipAddressTextField.font = UIFont(name: "Avenir", size: 20)
+    ipAddressTextField.becomeFirstResponder()
     view.addSubview(ipAddressTextField)
     
     let helpText = UILabel()
