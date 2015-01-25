@@ -16,7 +16,20 @@ class PlaylistCell: UICollectionViewCell {
         purpleColor
     }
   }
-  
+
+  // FIXME jari: duplicated etc
+  override var selected: Bool {
+    get {
+      return super.selected
+    }
+    set(h) {
+      super.selected = h
+      titleLabel.backgroundColor = h ?
+        purpleColor.colorWithAlphaComponent(0.6) :
+      purpleColor
+    }
+  }
+
   override func layoutSubviews() {
     titleLabel.frame = self.contentView.bounds
     titleLabel.font = UIFont(name: "Avenir", size: 18)
