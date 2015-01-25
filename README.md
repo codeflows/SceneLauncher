@@ -2,7 +2,7 @@
 
 Ableton Live scene launcher app for iOS 8+, written in Swift as a learning project.
 
-### Setting up Ableton Live on OS X
+### Setting up OSC on Ableton Live (OS X)
 
 The iOS app and Ableton Live communicate using the OSC protocol. 
 
