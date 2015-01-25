@@ -1,16 +1,16 @@
 import UIKit
 import Cartography
 
-typealias IpAddressChangedCallback = (String?) -> ()
+typealias ServerAddressChangedCallback = (String?) -> ()
 
 class SettingsViewController: UIViewController {
-  let settingsSavedCallback: IpAddressChangedCallback
-  let ipAddressTextField: UITextField
+  let settingsSavedCallback: ServerAddressChangedCallback
+  let serverAddressTextField: UITextField
   
-  init(currentIpAddress: String?, settingsSavedCallback: IpAddressChangedCallback) {
+  init(currentServerAddress: String?, settingsSavedCallback: ServerAddressChangedCallback) {
     self.settingsSavedCallback = settingsSavedCallback
-    self.ipAddressTextField = UITextField()
-    self.ipAddressTextField.text = currentIpAddress
+    self.serverAddressTextField = UITextField()
+    self.serverAddressTextField.text = currentServerAddress
     super.init(nibName: nil, bundle: nil)
   }
   
@@ -28,9 +28,9 @@ class SettingsViewController: UIViewController {
     title.font = UIFont(name: "Avenir", size: 25)
     view.addSubview(title)
     
-    ipAddressTextField.font = UIFont(name: "Avenir", size: 20)
-    ipAddressTextField.becomeFirstResponder()
-    view.addSubview(ipAddressTextField)
+    serverAddressTextField.font = UIFont(name: "Avenir", size: 20)
+    serverAddressTextField.becomeFirstResponder()
+    view.addSubview(serverAddressTextField)
     
     let saveButton = UIButton()
     saveButton.setTitle("Save", forState: .Normal)
@@ -40,22 +40,22 @@ class SettingsViewController: UIViewController {
     saveButton.addTarget(self, action: "dismiss", forControlEvents: .TouchUpInside)
     view.addSubview(saveButton)
 
-    layout(title, ipAddressTextField, saveButton) { title, ipAddressTextField, saveButton in
+    layout(title, serverAddressTextField, saveButton) { title, serverAddressTextField, saveButton in
       // TODO hackish way to set top margin
       title.top == title.superview!.top + 40
       title.left == title.superview!.left + 10
       title.width == title.superview!.width - 20
       
-      ipAddressTextField.top == title.bottom + 10
-      ipAddressTextField.left == title.left
+      serverAddressTextField.top == title.bottom + 10
+      serverAddressTextField.left == title.left
       
-      saveButton.left == ipAddressTextField.right + 10
+      saveButton.left == serverAddressTextField.right + 10
       saveButton.right == title.right
-      saveButton.baseline == ipAddressTextField.baseline
+      saveButton.baseline == serverAddressTextField.baseline
     }
   }
   
   func dismiss() {
-    settingsSavedCallback(ipAddressTextField.text)
+    settingsSavedCallback(serverAddressTextField.text)
   }
 }
