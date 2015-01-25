@@ -49,13 +49,13 @@
 		198E33EC1A6F0D4600952B92 /* Cartography.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cartography.framework; path = Carthage/Build/iOS/Cartography.framework; sourceTree = "<group>"; };
 		19A5C7811A3598A100DF5D6B /* PlaylistDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistDataSource.swift; sourceTree = "<group>"; };
 		19A5C7841A359A7600DF5D6B /* PlaylistCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistCell.swift; sourceTree = "<group>"; };
-		19B6B5841A2F9B4000DEA4B2 /* LivePlaylist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LivePlaylist.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		19B6B5841A2F9B4000DEA4B2 /* SceneLauncher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SceneLauncher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B6B5881A2F9B4000DEA4B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19B6B5891A2F9B4000DEA4B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19B6B58B1A2F9B4000DEA4B2 /* PlaylistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistViewController.swift; sourceTree = "<group>"; };
 		19B6B5901A2F9B4000DEA4B2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		19B6B5931A2F9B4000DEA4B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		19B6B5991A2F9B4000DEA4B2 /* LivePlaylistTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LivePlaylistTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		19B6B5991A2F9B4000DEA4B2 /* SceneLauncherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SceneLauncherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B6B59E1A2F9B4000DEA4B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19B6B59F1A2F9B4000DEA4B2 /* LivePlaylistTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePlaylistTests.swift; sourceTree = "<group>"; };
 		19DA8FC91A6ACD960033A1C5 /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Track.swift; path = LivePlaylist/Track.swift; sourceTree = "<group>"; };
@@ -146,8 +146,8 @@
 		19B6B5851A2F9B4000DEA4B2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				19B6B5841A2F9B4000DEA4B2 /* LivePlaylist.app */,
-				19B6B5991A2F9B4000DEA4B2 /* LivePlaylistTests.xctest */,
+				19B6B5841A2F9B4000DEA4B2 /* SceneLauncher.app */,
+				19B6B5991A2F9B4000DEA4B2 /* SceneLauncherTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -226,9 +226,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		19B6B5831A2F9B4000DEA4B2 /* LivePlaylist */ = {
+		19B6B5831A2F9B4000DEA4B2 /* SceneLauncher */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 19B6B5A31A2F9B4000DEA4B2 /* Build configuration list for PBXNativeTarget "LivePlaylist" */;
+			buildConfigurationList = 19B6B5A31A2F9B4000DEA4B2 /* Build configuration list for PBXNativeTarget "SceneLauncher" */;
 			buildPhases = (
 				23A295F5F164AA8BF1015FEA /* Check Pods Manifest.lock */,
 				19B6B5801A2F9B4000DEA4B2 /* Sources */,
@@ -241,14 +241,14 @@
 			);
 			dependencies = (
 			);
-			name = LivePlaylist;
+			name = SceneLauncher;
 			productName = LivePlaylist;
-			productReference = 19B6B5841A2F9B4000DEA4B2 /* LivePlaylist.app */;
+			productReference = 19B6B5841A2F9B4000DEA4B2 /* SceneLauncher.app */;
 			productType = "com.apple.product-type.application";
 		};
-		19B6B5981A2F9B4000DEA4B2 /* LivePlaylistTests */ = {
+		19B6B5981A2F9B4000DEA4B2 /* SceneLauncherTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 19B6B5A61A2F9B4000DEA4B2 /* Build configuration list for PBXNativeTarget "LivePlaylistTests" */;
+			buildConfigurationList = 19B6B5A61A2F9B4000DEA4B2 /* Build configuration list for PBXNativeTarget "SceneLauncherTests" */;
 			buildPhases = (
 				19B6B5951A2F9B4000DEA4B2 /* Sources */,
 				19B6B5961A2F9B4000DEA4B2 /* Frameworks */,
@@ -259,9 +259,9 @@
 			dependencies = (
 				19B6B59B1A2F9B4000DEA4B2 /* PBXTargetDependency */,
 			);
-			name = LivePlaylistTests;
+			name = SceneLauncherTests;
 			productName = LivePlaylistTests;
-			productReference = 19B6B5991A2F9B4000DEA4B2 /* LivePlaylistTests.xctest */;
+			productReference = 19B6B5991A2F9B4000DEA4B2 /* SceneLauncherTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -282,7 +282,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 19B6B57F1A2F9B4000DEA4B2 /* Build configuration list for PBXProject "LivePlaylist" */;
+			buildConfigurationList = 19B6B57F1A2F9B4000DEA4B2 /* Build configuration list for PBXProject "SceneLauncher" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -295,8 +295,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				19B6B5831A2F9B4000DEA4B2 /* LivePlaylist */,
-				19B6B5981A2F9B4000DEA4B2 /* LivePlaylistTests */,
+				19B6B5831A2F9B4000DEA4B2 /* SceneLauncher */,
+				19B6B5981A2F9B4000DEA4B2 /* SceneLauncherTests */,
 			);
 		};
 /* End PBXProject section */
@@ -402,7 +402,7 @@
 /* Begin PBXTargetDependency section */
 		19B6B59B1A2F9B4000DEA4B2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 19B6B5831A2F9B4000DEA4B2 /* LivePlaylist */;
+			target = 19B6B5831A2F9B4000DEA4B2 /* SceneLauncher */;
 			targetProxy = 19B6B59A1A2F9B4000DEA4B2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -534,7 +534,7 @@
 				);
 				INFOPLIST_FILE = LivePlaylist/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/../Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SceneLauncher;
 				SWIFT_OBJC_BRIDGING_HEADER = "LivePlaylist/LivePlaylist-Bridging-Header.h";
 			};
 			name = Debug;
@@ -577,7 +577,7 @@
 				);
 				INFOPLIST_FILE = LivePlaylist/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/../Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SceneLauncher;
 				SWIFT_OBJC_BRIDGING_HEADER = "LivePlaylist/LivePlaylist-Bridging-Header.h";
 			};
 			name = Release;
@@ -596,7 +596,7 @@
 				);
 				INFOPLIST_FILE = LivePlaylistTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SceneLauncherTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LivePlaylist.app/LivePlaylist";
 			};
 			name = Debug;
@@ -611,7 +611,7 @@
 				);
 				INFOPLIST_FILE = LivePlaylistTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SceneLauncherTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LivePlaylist.app/LivePlaylist";
 			};
 			name = Release;
@@ -619,7 +619,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		19B6B57F1A2F9B4000DEA4B2 /* Build configuration list for PBXProject "LivePlaylist" */ = {
+		19B6B57F1A2F9B4000DEA4B2 /* Build configuration list for PBXProject "SceneLauncher" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				19B6B5A11A2F9B4000DEA4B2 /* Debug */,
@@ -628,7 +628,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		19B6B5A31A2F9B4000DEA4B2 /* Build configuration list for PBXNativeTarget "LivePlaylist" */ = {
+		19B6B5A31A2F9B4000DEA4B2 /* Build configuration list for PBXNativeTarget "SceneLauncher" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				19B6B5A41A2F9B4000DEA4B2 /* Debug */,
@@ -637,7 +637,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		19B6B5A61A2F9B4000DEA4B2 /* Build configuration list for PBXNativeTarget "LivePlaylistTests" */ = {
+		19B6B5A61A2F9B4000DEA4B2 /* Build configuration list for PBXNativeTarget "SceneLauncherTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				19B6B5A71A2F9B4000DEA4B2 /* Debug */,
