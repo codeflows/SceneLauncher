@@ -19,7 +19,7 @@
 		19B6B58C1A2F9B4000DEA4B2 /* PlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B6B58B1A2F9B4000DEA4B2 /* PlaylistViewController.swift */; };
 		19B6B5911A2F9B4000DEA4B2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19B6B5901A2F9B4000DEA4B2 /* Images.xcassets */; };
 		19B6B5941A2F9B4000DEA4B2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19B6B5921A2F9B4000DEA4B2 /* LaunchScreen.xib */; };
-		19B6B5A01A2F9B4000DEA4B2 /* LivePlaylistTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B6B59F1A2F9B4000DEA4B2 /* LivePlaylistTests.swift */; };
+		19B6B5A01A2F9B4000DEA4B2 /* SceneLauncherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B6B59F1A2F9B4000DEA4B2 /* SceneLauncherTests.swift */; };
 		19DA8FCA1A6ACD960033A1C5 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DA8FC91A6ACD960033A1C5 /* Track.swift */; };
 		19DC46FA1A7016B5004DB578 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DC46F91A7016B5004DB578 /* MainViewController.swift */; };
 		19E4F7AF1A3281F3002DE579 /* Dummy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 19E4F7AE1A3281F3002DE579 /* Dummy.cpp */; };
@@ -57,7 +57,7 @@
 		19B6B5931A2F9B4000DEA4B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		19B6B5991A2F9B4000DEA4B2 /* SceneLauncherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SceneLauncherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B6B59E1A2F9B4000DEA4B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		19B6B59F1A2F9B4000DEA4B2 /* LivePlaylistTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePlaylistTests.swift; sourceTree = "<group>"; };
+		19B6B59F1A2F9B4000DEA4B2 /* SceneLauncherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneLauncherTests.swift; sourceTree = "<group>"; };
 		19DA8FC91A6ACD960033A1C5 /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Track.swift; path = src/Track.swift; sourceTree = "<group>"; };
 		19DC46F91A7016B5004DB578 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = src/MainViewController.swift; sourceTree = "<group>"; };
 		19E4F7AB1A327F66002DE579 /* LivePlaylist-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "LivePlaylist-Bridging-Header.h"; path = "src/LivePlaylist-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
@@ -136,7 +136,7 @@
 				192F521A1A73BE240072DEF7 /* Settings view */,
 				193EEB621A5036690035C59F /* OSC service */,
 				19FB71D21A3F789400D77F1E /* Track service */,
-				19B6B59C1A2F9B4000DEA4B2 /* LivePlaylistTests */,
+				19B6B59C1A2F9B4000DEA4B2 /* SceneLauncherTests */,
 				19B6B5851A2F9B4000DEA4B2 /* Products */,
 				0411C01C11CB84E34C890832 /* Pods */,
 				679A4B2320A4163901D06C8B /* Frameworks */,
@@ -175,10 +175,10 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		19B6B59C1A2F9B4000DEA4B2 /* LivePlaylistTests */ = {
+		19B6B59C1A2F9B4000DEA4B2 /* SceneLauncherTests */ = {
 			isa = PBXGroup;
 			children = (
-				19B6B59F1A2F9B4000DEA4B2 /* LivePlaylistTests.swift */,
+				19B6B59F1A2F9B4000DEA4B2 /* SceneLauncherTests.swift */,
 				19B6B59D1A2F9B4000DEA4B2 /* Supporting Files */,
 			);
 			path = test;
@@ -260,7 +260,7 @@
 				19B6B59B1A2F9B4000DEA4B2 /* PBXTargetDependency */,
 			);
 			name = SceneLauncherTests;
-			productName = LivePlaylistTests;
+			productName = SceneLauncherTests;
 			productReference = 19B6B5991A2F9B4000DEA4B2 /* SceneLauncherTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
@@ -393,7 +393,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				19B6B5A01A2F9B4000DEA4B2 /* LivePlaylistTests.swift in Sources */,
+				19B6B5A01A2F9B4000DEA4B2 /* SceneLauncherTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
