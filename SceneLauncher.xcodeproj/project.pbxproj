@@ -34,7 +34,7 @@
 			containerPortal = 19B6B57C1A2F9B4000DEA4B2 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 19B6B5831A2F9B4000DEA4B2;
-			remoteInfo = LivePlaylist;
+			remoteInfo = SceneLauncher;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -60,7 +60,7 @@
 		19B6B59F1A2F9B4000DEA4B2 /* SceneLauncherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneLauncherTests.swift; sourceTree = "<group>"; };
 		19DA8FC91A6ACD960033A1C5 /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Track.swift; path = src/Track.swift; sourceTree = "<group>"; };
 		19DC46F91A7016B5004DB578 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = src/MainViewController.swift; sourceTree = "<group>"; };
-		19E4F7AB1A327F66002DE579 /* LivePlaylist-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "LivePlaylist-Bridging-Header.h"; path = "src/LivePlaylist-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		19E4F7AB1A327F66002DE579 /* SceneLauncher-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "SceneLauncher-Bridging-Header.h"; path = "src/SceneLauncher-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		19E4F7AE1A3281F3002DE579 /* Dummy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dummy.cpp; sourceTree = "<group>"; };
 		19FB71D31A3F78C300D77F1E /* TrackService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackService.swift; path = src/TrackService.swift; sourceTree = "<group>"; };
 		19FB71D51A3F7A9A00D77F1E /* AbletonTrackService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AbletonTrackService.swift; path = src/AbletonTrackService.swift; sourceTree = "<group>"; };
@@ -155,7 +155,7 @@
 		19B6B5861A2F9B4000DEA4B2 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				19E4F7AB1A327F66002DE579 /* LivePlaylist-Bridging-Header.h */,
+				19E4F7AB1A327F66002DE579 /* SceneLauncher-Bridging-Header.h */,
 				19B6B5891A2F9B4000DEA4B2 /* AppDelegate.swift */,
 				19B6B5901A2F9B4000DEA4B2 /* Images.xcassets */,
 				19B6B5921A2F9B4000DEA4B2 /* LaunchScreen.xib */,
@@ -242,7 +242,7 @@
 			dependencies = (
 			);
 			name = SceneLauncher;
-			productName = LivePlaylist;
+			productName = SceneLauncher;
 			productReference = 19B6B5841A2F9B4000DEA4B2 /* SceneLauncher.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -535,7 +535,7 @@
 				INFOPLIST_FILE = src/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/../Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = SceneLauncher;
-				SWIFT_OBJC_BRIDGING_HEADER = "src/LivePlaylist-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "src/SceneLauncher-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -578,7 +578,7 @@
 				INFOPLIST_FILE = src/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/../Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = SceneLauncher;
-				SWIFT_OBJC_BRIDGING_HEADER = "src/LivePlaylist-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "src/SceneLauncher-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -597,7 +597,7 @@
 				INFOPLIST_FILE = test/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = SceneLauncherTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LivePlaylist.app/LivePlaylist";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SceneLauncher.app/SceneLauncher";
 			};
 			name = Debug;
 		};
@@ -612,7 +612,7 @@
 				INFOPLIST_FILE = test/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = SceneLauncherTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LivePlaylist.app/LivePlaylist";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SceneLauncher.app/SceneLauncher";
 			};
 			name = Release;
 		};
