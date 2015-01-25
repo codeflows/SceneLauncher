@@ -1,6 +1,6 @@
 import UIKit
 
-class PlaylistCell: UICollectionViewCell {
+class SceneCell: UICollectionViewCell {
   let titleLabel = UILabel()
   let purpleColor = UIColor(red: 169/255.0, green: 31/255.0, blue: 199/255.0, alpha: 1.0)
   

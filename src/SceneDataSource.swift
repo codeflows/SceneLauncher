@@ -1,6 +1,6 @@
 import UIKit
 
-class PlaylistDataSource: NSObject, UICollectionViewDataSource {
+class SceneDataSource: NSObject, UICollectionViewDataSource {
   let trackService: TrackService
   var tracks: [Track] = []
   
@@ -16,7 +16,7 @@ class PlaylistDataSource: NSObject, UICollectionViewDataSource {
   }
   
   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellId, forIndexPath: indexPath) as PlaylistCell
+    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellId, forIndexPath: indexPath) as SceneCell
     cell.titleLabel.text = String(tracks[indexPath.row].name)
     return cell
   }

@@ -23,9 +23,9 @@ class MainViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    let playlistViewController = PlaylistViewController(applicationContext: applicationContext)
-    addChildViewController(playlistViewController)
-    view!.addSubview(playlistViewController.view)
+    let sceneViewController = SceneViewController(applicationContext: applicationContext)
+    addChildViewController(sceneViewController)
+    view!.addSubview(sceneViewController.view)
     
     let stopButton = UIButton()
     stopButton.setTitle("Stop", forState: .Normal)
