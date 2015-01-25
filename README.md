@@ -24,13 +24,13 @@ However, Live doesn't have OSC support out of the box, and we have to install Li
 
 ### Building
 
-iOS 8+ framework dependencies ([ReactiveCocoa](/ReactiveCocoa/ReactiveCocoa), [Cartography](/robb/Cartography)) are installed using [Carthage](/Carthage/Carthage):
+iOS 8+ framework dependencies ([ReactiveCocoa](https://github.com/ReactiveCocoa/ReactiveCocoa), [Cartography](https://github.com/robb/Cartography)) are installed using [Carthage](https://github.com/Carthage/Carthage):
 
     # Needed if you get the "Multiple matching codesigning identities found" error
     export CODE_SIGN_IDENTITY="..." 
     carthage update
 
-[OSCKit](/256dpi/OSCKit) is installed using [CocoaPods](/cocoapods/cocoapods)
+[OSCKit](https://github.com/256dpi/OSCKit) is installed using [CocoaPods](https://github.com/cocoapods/cocoapods)
 
     pod install
 
