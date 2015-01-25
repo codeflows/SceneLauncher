@@ -2,10 +2,6 @@
 
 Ableton Live scene launcher app for iOS 8+, written in Swift as a learning project.
 
-### Building
-
-TODO
-
 ### Setting up Ableton Live on OS X
 
 The iOS app and Ableton Live communicate using the OSC protocol. 
@@ -25,6 +21,18 @@ However, Live doesn't have OSC support out of the box, and we have to install Li
 - Select `LiveOSC` from the control surface list
 ![Select LiveOSC as control surface](help/set_liveosc_as_control_surface.png)
 - You're all set!
+
+### Building
+
+iOS 8+ framework dependencies ([ReactiveCocoa](/ReactiveCocoa/ReactiveCocoa), [Cartography](/robb/Cartography)) are installed using [Carthage](/Carthage/Carthage):
+
+    # Needed if you get the "Multiple matching codesigning identities found" error
+    export CODE_SIGN_IDENTITY="..." 
+    carthage update
+
+[OSCKit](/256dpi/OSCKit) is installed using [CocoaPods](/cocoapods/cocoapods)
+
+    pod install
 
 ### Copyright
 
