@@ -6,6 +6,13 @@ class MainViewController: UIViewController {
   
   override init() {
     applicationContext = ApplicationContext()
+    
+    // TODO jari: listen to changes in preferences using RAC?
+    let preferences = NSUserDefaults.standardUserDefaults()
+    if let ipAddress = preferences.stringForKey("SceneLauncher.serverIpAddress") {
+      println("Got IP address from preferences: \(ipAddress)")
+      applicationContext.oscService.reconfigureServerAddress(ipAddress)
+    }
     super.init(nibName: nil, bundle: nil);
   }
 
@@ -51,12 +58,14 @@ class MainViewController: UIViewController {
   }
   
   func openSettings() {
-    presentViewController(SettingsViewController(settingsSavedCallback: dismissSettingsDialog), animated: true, completion: nil)
+    presentViewController(SettingsViewController(currentIpAddress: NSUserDefaults.standardUserDefaults().stringForKey("SceneLauncher.serverIpAddress"), settingsSavedCallback: dismissSettingsDialog), animated: true, completion: nil)
   }
   
   func dismissSettingsDialog(ipAddress: String?) {
     if let newAddress = ipAddress {
       println("Received new server address", ipAddress)
+      let preferences = NSUserDefaults.standardUserDefaults()
+      preferences.setObject(ipAddress, forKey: "SceneLauncher.serverIpAddress")
       applicationContext.oscService.reconfigureServerAddress(newAddress)
     }
     

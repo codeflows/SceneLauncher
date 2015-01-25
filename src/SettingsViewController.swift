@@ -7,9 +7,10 @@ class SettingsViewController: UIViewController {
   let settingsSavedCallback: IpAddressChangedCallback
   let ipAddressTextField: UITextField
   
-  init(settingsSavedCallback: IpAddressChangedCallback) {
+  init(currentIpAddress: String?, settingsSavedCallback: IpAddressChangedCallback) {
     self.settingsSavedCallback = settingsSavedCallback
     self.ipAddressTextField = UITextField()
+    self.ipAddressTextField.text = currentIpAddress
     super.init(nibName: nil, bundle: nil)
   }
   
