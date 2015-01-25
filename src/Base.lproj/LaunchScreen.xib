@@ -20,7 +20,7 @@
                     <size key="shadowOffset" width="-1" height="1"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" red="0.66274509803921566" green="0.12156862745098039" blue="0.7803921568627451" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.66274509803921566" green="0.12156862745098039" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
             <constraints>
                 <constraint firstItem="kId-c2-rCX" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="bottom" multiplier="1/3" constant="1" id="5cJ-9S-tgC"/>
