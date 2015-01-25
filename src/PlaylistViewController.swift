@@ -44,8 +44,6 @@ class PlaylistViewController: UICollectionViewController, UICollectionViewDelega
     refreshControl.addTarget(self, action: "refreshTracks", forControlEvents: .ValueChanged)
     collectionView!.addSubview(refreshControl)
     collectionView!.alwaysBounceVertical = true
-    
-    refreshTracks()
   }
   
   required init(coder: NSCoder) {

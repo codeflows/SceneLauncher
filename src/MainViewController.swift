@@ -6,6 +6,11 @@ class MainViewController: UIViewController {
   
   override init() {
     applicationContext = ApplicationContext()
+    
+    let preferences = NSUserDefaults.standardUserDefaults()
+    if let ipAddress = preferences.stringForKey("SceneLauncher.serverIpAddress") {
+      println("Got IP address from preferences: \(ipAddress)")
+    }
     super.init(nibName: nil, bundle: nil);
   }
 
@@ -57,6 +62,8 @@ class MainViewController: UIViewController {
   func dismissSettingsDialog(ipAddress: String?) {
     if let newAddress = ipAddress {
       println("Received new server address", ipAddress)
+      let preferences = NSUserDefaults.standardUserDefaults()
+      preferences.setObject(ipAddress, forKey: "SceneLauncher.serverIpAddress")
       applicationContext.oscService.reconfigureServerAddress(newAddress)
     }
     
