@@ -58,7 +58,7 @@ class MainViewController: UIViewController {
   }
   
   func openSettings() {
-    presentViewController(SettingsViewController(settingsSavedCallback: dismissSettingsDialog), animated: true, completion: nil)
+    presentViewController(SettingsViewController(currentIpAddress: NSUserDefaults.standardUserDefaults().stringForKey("SceneLauncher.serverIpAddress"), settingsSavedCallback: dismissSettingsDialog), animated: true, completion: nil)
   }
   
   func dismissSettingsDialog(ipAddress: String?) {
