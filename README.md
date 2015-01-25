@@ -1,4 +1,10 @@
-Ableton Live scene launcher app for iOS, written in Swift as a learning project.
+![Logo](src/Images.xcassets/AppIcon.appiconset/Icon-60%403x.png)
+
+Ableton Live scene launcher app for iOS 8+, written in Swift as a learning project.
+
+### Building
+
+TODO
 
 ### Setting up Ableton Live on OS X
 
