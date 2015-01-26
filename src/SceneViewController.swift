@@ -1,10 +1,10 @@
 import UIKit
 
-let CellId = "PlaylistCell"
+let CellId = "SceneCell"
 
-class PlaylistViewController: UICollectionViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class SceneViewController: UICollectionViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
   let osc: OSCService
-  let dataSource: PlaylistDataSource
+  let dataSource: SceneDataSource
   let refreshControl: UIRefreshControl
   
   // MARK: UIViewController
@@ -31,14 +31,13 @@ class PlaylistViewController: UICollectionViewController, UICollectionViewDelega
   
   init(applicationContext: ApplicationContext) {
     self.osc = applicationContext.oscService
-    dataSource = PlaylistDataSource(osc: osc)
+    dataSource = SceneDataSource(osc: osc)
     refreshControl = UIRefreshControl()
     
     let layout = UICollectionViewFlowLayout()
     super.init(collectionViewLayout: layout)
-    layout.sectionInset = UIEdgeInsetsMake(20, 0, 20, 0)
     
-    collectionView!.registerClass(PlaylistCell.self, forCellWithReuseIdentifier: CellId)
+    collectionView!.registerClass(SceneCell.self, forCellWithReuseIdentifier: CellId)
     collectionView!.dataSource = dataSource
    
     refreshControl.addTarget(self, action: "refreshTracks", forControlEvents: .ValueChanged)
