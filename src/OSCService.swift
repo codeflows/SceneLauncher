@@ -1,17 +1,18 @@
 import Foundation
 import ReactiveCocoa
+import LlamaKit
 
 class OSCService : NSObject, OSCServerDelegate {
   private let localPort = 9001
   private let client = OSCClient()
   private let server = OSCServer()
-  private let incomingMessagesSink : SinkOf<OSCMessage>
+  private let incomingMessagesSink : SinkOf<Event<OSCMessage, NoError>>
   private var serverAddress = "localhost"
 
-  let incomingMessagesSignal : HotSignal<OSCMessage>
+  let incomingMessagesSignal : Signal<OSCMessage, NoError>
 
   override init() {
-    let (signal, sink) = HotSignal<OSCMessage>.pipe()
+    let (signal, sink) = Signal<OSCMessage, NoError>.pipe()
     incomingMessagesSignal = signal
     incomingMessagesSink = sink
 
@@ -28,7 +29,7 @@ class OSCService : NSObject, OSCServerDelegate {
   func handleMessage(incomingMessage: OSCMessage!) {
     if let message = incomingMessage {
       println("[OSCService] Received message \(message.address): \(message.arguments)")
-      incomingMessagesSink.put(message)
+      incomingMessagesSink.put(Event.Next(Box(message)))
     }
   }
   

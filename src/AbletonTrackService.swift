@@ -15,17 +15,17 @@ class AbletonTrackService : NSObject, TrackService {
     // TODO make this time out after an approriate amount of time
     // TODO currently many requests might be waiting at the same time
     // TODO LiveOsc(?) fails if Scene name contains Unicode characters and returns /remix/error
-    let numberOfScenes : HotSignal<Int> =
+    let numberOfScenes : Signal<Int, NoError> =
       osc.incomingMessagesSignal
-        .filter { $0.address == "/live/scenes" }
-        .take(1)
-        .map { $0.arguments[0] as Int }
+        |> filter { $0.address == "/live/scenes" }
+        |> take(1)
+        |> map { $0.arguments[0] as Int }
 
     // Recursive signal deadlocks, so delay the value (https://github.com/ReactiveCocoa/ReactiveCocoa/issues/1670)
-    let asyncNumberOfScenes = numberOfScenes.delay(0, onScheduler: QueueScheduler())
+    let asyncNumberOfScenes = numberOfScenes |> delay(0, onScheduler: QueueScheduler())
       
-    let sceneNames : HotSignal<[Track]> = asyncNumberOfScenes.mergeMap { expectedNumberOfScenes in
-      let scenesSignal : HotSignal<[Track]> =
+    let sceneNames : Signal<[Track], NoError> = asyncNumberOfScenes |> mergeMap { expectedNumberOfScenes in
+      let scenesSignal : Signal<[Track], NoError> =
         self.osc.incomingMessagesSignal
           .filter { $0.address == "/live/name/scene" }
           .take(expectedNumberOfScenes)
