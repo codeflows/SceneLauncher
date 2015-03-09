@@ -6,12 +6,8 @@ class AbletonTrackService : NSObject, TrackService {
   init(osc: OSCService) {
     self.osc = osc
   }
-  
+
   func listTracks(callback: ([Track]) -> ()) {
-    // TODO also start listening for response prior to sending request?
-    let message = OSCMessage(address: "/live/scenes", arguments: [])
-    osc.sendMessage(message)
-    
     // TODO make this time out after an approriate amount of time
     // TODO currently many requests might be waiting at the same time
     // TODO LiveOsc(?) fails if Scene name contains Unicode characters and returns /remix/error
@@ -21,11 +17,11 @@ class AbletonTrackService : NSObject, TrackService {
         |> take(1)
         |> map { $0.arguments[0] as Int }
 
-    // Recursive signal deadlocks, so delay the value (https://github.com/ReactiveCocoa/ReactiveCocoa/issues/1670)
-    let asyncNumberOfScenes = numberOfScenes |> delay(0, onScheduler: QueueScheduler())
-
+    let message = OSCMessage(address: "/live/scenes", arguments: [])
+    osc.sendMessage(message)
+    
     // TODO really, we'd like to flatMap the Signal(numberOfScenes) to Signal([Track]) and return that
-    asyncNumberOfScenes.observe(next: { expectedNumberOfScenes in
+    numberOfScenes.observe(next: { expectedNumberOfScenes in
       let scenesSignal : Signal<[Track], NoError> =
         self.osc.incomingMessagesSignal
           |> filter { $0.address == "/live/name/scene" }
