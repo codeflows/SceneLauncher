@@ -23,32 +23,29 @@ class AbletonTrackService : NSObject, TrackService {
 
     // Recursive signal deadlocks, so delay the value (https://github.com/ReactiveCocoa/ReactiveCocoa/issues/1670)
     let asyncNumberOfScenes = numberOfScenes |> delay(0, onScheduler: QueueScheduler())
-      
-    let sceneNames : Signal<[Track], NoError> = asyncNumberOfScenes |> mergeMap { expectedNumberOfScenes in
+
+    // TODO really, we'd like to flatMap the Signal(numberOfScenes) to Signal([Track]) and return that
+    asyncNumberOfScenes.observe(next: { expectedNumberOfScenes in
       let scenesSignal : Signal<[Track], NoError> =
         self.osc.incomingMessagesSignal
-          .filter { $0.address == "/live/name/scene" }
-          .take(expectedNumberOfScenes)
-          .map { Track(order: $0.arguments[0] as Int, name: $0.arguments[1] as String) }
-          .scan(initial: []) { $0 + [$1] }
+          |> filter { $0.address == "/live/name/scene" }
+          |> take(expectedNumberOfScenes)
+          |> map { Track(order: $0.arguments[0] as Int, name: $0.arguments[1] as String) }
+          |> scan([], { $0 + [$1] })
           // FIXME ugly: scan returns intermittent results, only choose the last one (use ColdSignal?)
-          .filter { $0.count == expectedNumberOfScenes }
-          .take(1)
+          |> filter { $0.count == expectedNumberOfScenes }
+          |> take(1)
           
-      let sortedScenesSignal = scenesSignal.map { scenes in
+      let sortedScenesSignal = scenesSignal |> map { scenes in
         scenes.sorted({$0.order < $1.order})
       }
 
       self.osc.sendMessage(OSCMessage(address: "/live/name/scene", arguments: []))
       
       // TODO handle UI thread stuff in the view controller
-      sortedScenesSignal.deliverOn(UIScheduler()).observe(callback)
-
-      return sortedScenesSignal
-    }
-    
-    // TODO fix mergemapping, no replies received here!
-    sceneNames.observe { NSLog("Got scene \($0)") }
+      let tempSignal = sortedScenesSignal |> observeOn(UIScheduler())
+      tempSignal.observe(callback)
+    })
   }
 }
 
