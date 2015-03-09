@@ -10,7 +10,10 @@ class SceneDataSource: NSObject, UICollectionViewDataSource {
 
   func reloadData(callback: () -> ()) {
     trackService.listTracks { tracks in
-      self.tracks = tracks
+      // TODO poor man's error handling
+      if let newTracks = tracks {
+        self.tracks = newTracks
+      }
       callback()
     }
   }

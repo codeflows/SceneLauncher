@@ -7,17 +7,18 @@ class AbletonTrackService : NSObject, TrackService {
     self.osc = osc
   }
 
-  func listTracks(callback: ([Track]) -> ()) {
-    // TODO make this time out after an approriate amount of time
+  func listTracks(callback: ([Track]?) -> ()) {
+    // TODO timeout handling for all the requests
     // TODO currently many requests might be waiting at the same time
     // TODO LiveOsc(?) fails if Scene name contains Unicode characters and returns /remix/error
+    // TODO reliable mechanism for pinging if the server is still reachable
 
     let numberOfScenes : Signal<Int, NSError> =
       osc.incomingMessagesSignal
         |> filter { $0.address == "/live/scenes" }
         |> take(1)
         |> map { $0.arguments[0] as Int }
-        |> timeoutWithError(NSError(), afterInterval: 0, onScheduler: QueueScheduler.mainQueueScheduler)
+        |> timeoutWithError(NSError(), afterInterval: 5, onScheduler: QueueScheduler.mainQueueScheduler)
 
     let message = OSCMessage(address: "/live/scenes", arguments: [])
     osc.sendMessage(message)
@@ -44,7 +45,9 @@ class AbletonTrackService : NSObject, TrackService {
       let tempSignal = sortedScenesSignal |> observeOn(UIScheduler())
       tempSignal.observe(callback)
     }, error: { err in
-      println("Voe tokkiinsa ku nääs!")
+      // TODO
+      println("Error received")
+      callback(nil)
     })
   }
 }
