@@ -11,18 +11,20 @@ class AbletonTrackService : NSObject, TrackService {
     // TODO make this time out after an approriate amount of time
     // TODO currently many requests might be waiting at the same time
     // TODO LiveOsc(?) fails if Scene name contains Unicode characters and returns /remix/error
-    let numberOfScenes : Signal<Int, NoError> =
+
+    let numberOfScenes : Signal<Int, NSError> =
       osc.incomingMessagesSignal
         |> filter { $0.address == "/live/scenes" }
         |> take(1)
         |> map { $0.arguments[0] as Int }
+        |> timeoutWithError(NSError(), afterInterval: 0, onScheduler: QueueScheduler.mainQueueScheduler)
 
     let message = OSCMessage(address: "/live/scenes", arguments: [])
     osc.sendMessage(message)
     
     // TODO really, we'd like to flatMap the Signal(numberOfScenes) to Signal([Track]) and return that
     numberOfScenes.observe(next: { expectedNumberOfScenes in
-      let scenesSignal : Signal<[Track], NoError> =
+      let scenesSignal : Signal<[Track], NSError> =
         self.osc.incomingMessagesSignal
           |> filter { $0.address == "/live/name/scene" }
           |> take(expectedNumberOfScenes)
@@ -41,6 +43,8 @@ class AbletonTrackService : NSObject, TrackService {
       // TODO handle UI thread stuff in the view controller
       let tempSignal = sortedScenesSignal |> observeOn(UIScheduler())
       tempSignal.observe(callback)
+    }, error: { err in
+      println("Voe tokkiinsa ku nääs!")
     })
   }
 }
