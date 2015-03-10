@@ -6,13 +6,13 @@ class OSCService : NSObject, OSCServerDelegate {
   private let localPort = 9001
   private let client = OSCClient()
   private let server = OSCServer()
-  private let incomingMessagesSink : SinkOf<Event<OSCMessage, NoError>>
+  private let incomingMessagesSink : SinkOf<Event<OSCMessage, NSError>>
   private var serverAddress = "localhost"
 
-  let incomingMessagesSignal : Signal<OSCMessage, NoError>
+  let incomingMessagesSignal : Signal<OSCMessage, NSError>
 
   override init() {
-    let (signal, sink) = Signal<OSCMessage, NoError>.pipe()
+    let (signal, sink) = Signal<OSCMessage, NSError>.pipe()
     incomingMessagesSignal = signal
     incomingMessagesSink = sink
 
