@@ -1,3 +1,5 @@
+import LlamaKit
+
 protocol TrackService {
-  func listTracks(callback: ([Track]?) -> ())
+  func listTracks(callback: (Result<[Track], NSError>) -> ())
 }

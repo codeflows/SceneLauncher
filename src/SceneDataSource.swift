@@ -9,10 +9,14 @@ class SceneDataSource: NSObject, UICollectionViewDataSource {
   }
 
   func reloadData(callback: () -> ()) {
-    trackService.listTracks { tracks in
-      // TODO poor man's error handling
-      if let newTracks = tracks {
-        self.tracks = newTracks
+    trackService.listTracks { result in
+      switch result {
+        case let .Success(tracks):
+          self.tracks = tracks.unbox
+
+        // TODO show error
+        case let .Failure(error):
+          println("Got error: \(error)")
       }
       callback()
     }

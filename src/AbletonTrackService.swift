@@ -1,4 +1,5 @@
 import ReactiveCocoa
+import LlamaKit
 
 class AbletonTrackService : NSObject, TrackService {
   let osc : OSCService
@@ -6,8 +7,10 @@ class AbletonTrackService : NSObject, TrackService {
   init(osc: OSCService) {
     self.osc = osc
   }
+  
+  typealias TracksCallback = (Result<[Track], NSError>) -> ()
 
-  func listTracks(callback: ([Track]?) -> ()) {
+  func listTracks(callback: TracksCallback) {
     // TODO currently many requests might be waiting at the same time
     // TODO LiveOsc(?) fails if Scene name contains Unicode characters and returns /remix/error -> short-circuit signal here
     // TODO reliable mechanism for pinging if the server is still reachable
@@ -29,11 +32,11 @@ class AbletonTrackService : NSObject, TrackService {
     }, error: { err in
       // TODO
       println("Timeout in number of scenes response")
-      callback(nil)
+      callback(failure(err))
     })
   }
   
-  private func handleTrackListResponse(callback: ([Track]?) -> (), expectedNumberOfScenes: Int) {
+  private func handleTrackListResponse(callback: TracksCallback, expectedNumberOfScenes: Int) {
     let scenesSignal : Signal<[Track], NSError> =
       osc.incomingMessagesSignal
         |> filter { $0.address == "/live/name/scene" }
@@ -52,8 +55,8 @@ class AbletonTrackService : NSObject, TrackService {
     // TODO handle UI thread stuff in the view controller
     let tempSignal = sortedScenesSignal |> observeOn(UIScheduler())
     tempSignal.observe(
-      next: callback,
-      error: { err in println("Timeout in track list response"); callback(nil) }
+      next: { tracks in callback(success(tracks)) },
+      error: { err in println("Timeout in track list response"); callback(failure(err)) }
     )
   }
 }
