@@ -36,10 +36,9 @@ class MainViewController: UIViewController {
     view!.addSubview(stopButton)
 
     let settingsButton = UIButton()
-    settingsButton.setTitle("?", forState: .Normal)
-    settingsButton.titleLabel?.font = UIFont(name: "Avenir", size: 25)
-    settingsButton.backgroundColor = UIColor.grayColor()
-    settingsButton.layer.cornerRadius = 3
+    settingsButton.setTitle("⚙", forState: .Normal)
+    settingsButton.titleLabel?.font = UIFont(name: "Avenir", size: 45)
+    settingsButton.setTitleColor(UIColor.grayColor(), forState: .Normal)
     settingsButton.addTarget(self, action: "openSettings", forControlEvents: .TouchUpInside)
     view!.addSubview(settingsButton)
     
@@ -48,8 +47,9 @@ class MainViewController: UIViewController {
       stop.left == stop.superview!.left + 10
       
       settings.left == stop.right + 10
-      settings.top == stop.top
       settings.right == settings.superview!.right - 10
+      // TODO
+      settings.bottom == stop.bottom + 14
     }
   }
   
