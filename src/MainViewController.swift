@@ -53,6 +53,16 @@ class MainViewController: UIViewController {
     }
   }
   
+  override func viewWillAppear(animated: Bool) {
+    self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    super.viewWillAppear(animated)
+  }
+
+  override func viewWillDisappear(animated: Bool) {
+    self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    super.viewWillDisappear(animated)
+  }
+  
   func stopPlayback() {
     applicationContext.oscService.sendMessage(OSCMessage(address: "/live/stop", arguments: []))
   }
