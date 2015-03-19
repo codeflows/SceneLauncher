@@ -15,7 +15,7 @@
         margin: 50px;
       }
 
-      img.logo, section {
+      img.logo, section, footer {
         display: block;
         margin-left: auto;
         margin-right: auto;
@@ -27,9 +27,13 @@
         margin-bottom: 50px;
       }
 
-      section {
+      section, footer {
         width: 90%;
         max-width: 700px;
+      }
+
+      footer {
+        padding: 20px 0;
       }
 
       section img {
@@ -39,6 +43,10 @@
 
       a {
         color: #FF5FB9;
+      }
+
+      em {
+        font-weight: 600;
       }
     </style>
   </head>
@@ -71,28 +79,39 @@
           <a href="http://livecontrol.q3f.org/ableton-liveapi/liveosc/">Download LiveOSC</a> and unzip the archive.
         </li>
         <li>
-          Open Finder and go to <code>/Applications</code>
+          Open Finder and go to <em>/Applications</em>
         </li>
         <li>
           Right-Click on Ableton Live and select <em>Show Package Contents</em>
           <img src="help/show_live_package_contents.png"/>
         </li>
-      - Navigate to `Contents/App-Resources/MIDI Remote Scripts`
-      - Drag the `LiveOSC` folder under `MIDI Remote Scripts`
-         ![Drag LiveOSC](help/drag_and_drop_liveosc.png)
-      - Quit Ableton Live if it is running
-      - Open Ableton Live and go to `Preferences` -> `MIDI Sync`
-      - Select `LiveOSC` from the control surface list
-      ![Select LiveOSC as control surface](help/set_liveosc_as_control_surface.png)
-      - You're all set!
+        <li>
+          Navigate to <em>Contents/App-Resources/MIDI Remote Scripts</em>
+        </li>
+        <li>
+          Drag the <em>LiveOSC</em> folder under <em>MIDI Remote Scripts</em>
+          <img src="help/drag_and_drop_liveosc.png"/>
+        </li>
+        <li>Quit Ableton Live if it is running</li>
+        <li>Open Ableton Live and go to <em>Preferences → MIDI Sync</em></li>
+        <li>
+          Select <em>LiveOSC</em> from the control surface list
+          <img src="help/set_liveosc_as_control_surface.png"/>
+        </li>
+      </ul>
+
+      After these steps, your Ableton Live should be ready for use with SceneLauncher.
+      Next, start SceneLauncher on your iPhone, connect it with your computer and start playing!.
+
+      <!-- TODO image -->
     </section>
 
-    <section>
-      SceneLauncher. &copy; Jari Aarniala, 2015-.
-      <p>
+    <footer>
+      <small>
+        &copy; Jari Aarniala, 2015-.
         This product is in no way affiliated with Ableton.
-      </p>
-    </section>
+      </small>
+    </footer>
   </body>
 </html>
 
