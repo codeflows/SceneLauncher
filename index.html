@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>SceneLauncher</title>
+    <style type="text/css">
+      body {
+        background-color: #121212;
+        color: #ccc;
+        font-family: Avenir;
+      }
+
+      img.logo {
+        margin: 50px;
+      }
+
+      img.logo, section {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .introduction {
+        text-align: center;
+        font-size: 1.5em;
+        margin-bottom: 50px;
+      }
+
+      section {
+        width: 90%;
+        max-width: 700px;
+      }
+
+      section img {
+        max-width: 100%;
+        margin: 10px;
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- TODO app store link -->
+
+    <img
+      class="logo"
+      src="https://raw.githubusercontent.com/codeflows/SceneLauncher/master/src/Images.xcassets/AppIcon.appiconset/Icon-60%403x.png"/>
+
+    <section class="introduction">
+      <h1>SceneLauncher</h1>
+
+      An Ableton Live scene launcher app for iPhone.
+    </section>
+
+    <section>
+      <h3>Setting up Ableton Live for use with SceneLauncher</h3>
+
+      <p>
+        The SceneLauncher iPhone application and Ableton Live communicate using the OSC protocol. However, Live doesn't have OSC support out of the box, and we have to install LiveOSC first. (Note: these instructions apply for OS X only.)
+      </p>
+
+      <ul>
+        <li>
+          Download and install <a href="https://www.ableton.com/en/live/new-in-9/">Ableton Live 9</a>
+        </li>
+        <li>
+          <a href="http://livecontrol.q3f.org/ableton-liveapi/liveosc/">Download LiveOSC</a> and unzip the archive.
+        </li>
+        <li>
+          Open Finder and go to <code>/Applications</code>
+        </li>
+        <li>
+          Right-Click on Ableton Live and select <em>Show Package Contents</em>
+          <img src="help/show_live_package_contents.png"/>
+        </li>
+      - Navigate to `Contents/App-Resources/MIDI Remote Scripts`
+      - Drag the `LiveOSC` folder under `MIDI Remote Scripts`
+         ![Drag LiveOSC](help/drag_and_drop_liveosc.png)
+      - Quit Ableton Live if it is running
+      - Open Ableton Live and go to `Preferences` -> `MIDI Sync`
+      - Select `LiveOSC` from the control surface list
+      ![Select LiveOSC as control surface](help/set_liveosc_as_control_surface.png)
+      - You're all set!
+    </section>
+
+    <section>
+      SceneLauncher. &copy; Jari Aarniala, 2015-.
+      <p>
+        This product is in no way affiliated with Ableton.
+      </p>
+    </section>
+  </body>
+</html>
+
