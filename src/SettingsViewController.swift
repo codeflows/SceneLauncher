@@ -34,13 +34,16 @@ class SettingsViewController: UIViewController {
     serverAddressTextField.becomeFirstResponder()
     view.addSubview(serverAddressTextField)
 
-    let helpText = UILabel()
+    let helpText = UITextView()
+    helpText.scrollEnabled = false
+    helpText.editable = false
+    helpText.textContainer.lineFragmentPadding = 0
+    helpText.dataDetectorTypes = .Link
     helpText.text =
       "This should be the address of your computer running Ableton Live (with LiveOSC installed.) " +
       "For instructions on how to set up Ableton for use with SceneLauncher, " +
       "please see http://codeflo.ws/SceneLauncher"
     helpText.font = UIFont(name: UIConstants.fontName, size: 12)
-    helpText.numberOfLines = 0
     view.addSubview(helpText)
     
     let margin = CGFloat(10)
