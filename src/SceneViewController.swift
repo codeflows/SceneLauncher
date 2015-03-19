@@ -7,8 +7,6 @@ class SceneViewController: UICollectionViewController, UICollectionViewDelegate,
   let dataSource: SceneDataSource
   let refreshControl: UIRefreshControl
   
-  // MARK: UIViewController
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     collectionView!.backgroundColor = UIColor.whiteColor()
@@ -16,24 +14,17 @@ class SceneViewController: UICollectionViewController, UICollectionViewDelegate,
 
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
-    refreshControl.beginRefreshing()
-    collectionView?.contentOffset = CGPointMake(0, -refreshControl.frame.size.height)
+    refreshTracksAutomatically()
   }
-  
-  // MARK: UICollectionViewDelegate
   
   override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
     let track = dataSource.tracks[indexPath.indexAtPosition(1)]
     osc.sendMessage(OSCMessage(address: "/live/play/scene", arguments: [track.order]))
   }
   
-  // MARK: UICollectionViewDelegateFlowLayout
-  
   func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
     return CGSize(width: collectionView.bounds.width, height: 40)
   }
-  
-  // MARK: Init & dealloc
   
   init(applicationContext: ApplicationContext) {
     self.osc = applicationContext.oscService
@@ -55,7 +46,12 @@ class SceneViewController: UICollectionViewController, UICollectionViewDelegate,
     fatalError("init(coder:) has not been implemented")
   }
   
-  // MARK: UIRefreshControl delegate
+  private func refreshTracksAutomatically() {
+    refreshControl.beginRefreshing()
+    // Hack to make indicator visible: http://stackoverflow.com/questions/17930730/uirefreshcontrol-on-viewdidload
+    collectionView?.contentOffset = CGPointMake(0, -refreshControl.frame.size.height)
+    refreshTracks()
+  }
 
   func refreshTracks() {
     dataSource.reloadData() {
