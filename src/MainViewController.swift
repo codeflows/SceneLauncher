@@ -70,8 +70,9 @@ class MainViewController: UIViewController {
   func openSettings() {
     self.navigationController?.pushViewController(
       SettingsViewController(
-        currentServerAddress: NSUserDefaults.standardUserDefaults().stringForKey("SceneLauncher.serverAddress"), settingsSavedCallback:
-        dismissSettingsDialog),
+        currentServerAddress: NSUserDefaults.standardUserDefaults().stringForKey("SceneLauncher.serverAddress"),
+        settingsSavedCallback: dismissSettingsDialog
+      ),
       animated: true
     )
   }

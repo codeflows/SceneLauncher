@@ -32,30 +32,20 @@ class SettingsViewController: UIViewController {
     serverAddressTextField.becomeFirstResponder()
     view.addSubview(serverAddressTextField)
     
-    let saveButton = UIButton()
-    saveButton.setTitle("Save", forState: .Normal)
-    saveButton.titleLabel?.font = UIFont(name: "Avenir", size: 20)
-    saveButton.backgroundColor = UIColor.grayColor()
-    saveButton.layer.cornerRadius = 3
-    saveButton.addTarget(self, action: "dismiss", forControlEvents: .TouchUpInside)
-    view.addSubview(saveButton)
-
-    layout(title, serverAddressTextField, saveButton) { title, serverAddressTextField, saveButton in
+    layout(title, serverAddressTextField) { title, serverAddressTextField in
       // TODO hackish way to set top margin
       title.top == title.superview!.top + 40
       title.left == title.superview!.left + 10
       title.width == title.superview!.width - 20
-      
+
       serverAddressTextField.top == title.bottom + 10
       serverAddressTextField.left == title.left
-      
-      saveButton.left == serverAddressTextField.right + 10
-      saveButton.right == title.right
-      saveButton.baseline == serverAddressTextField.baseline
+      serverAddressTextField.width == title.superview!.width - 20
     }
   }
   
-  func dismiss() {
+  override func viewWillDisappear(animated: Bool) {
+    super.viewWillDisappear(animated)
     settingsSavedCallback(serverAddressTextField.text)
   }
 }
