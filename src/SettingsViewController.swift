@@ -25,23 +25,26 @@ class SettingsViewController: UIViewController {
     
     let title = UILabel()
     title.text = "Server address"
-    title.font = UIFont(name: "Avenir", size: 25)
+    title.font = UIFont(name: "Avenir", size: 20)
     view.addSubview(title)
     
-    serverAddressTextField.font = UIFont(name: "Avenir", size: 20)
+    serverAddressTextField.font = UIFont(name: "Avenir", size: 18)
+    serverAddressTextField.layer.cornerRadius = 3
     serverAddressTextField.becomeFirstResponder()
     view.addSubview(serverAddressTextField)
+    
+    let margin = CGFloat(10)
     
     layout(title, serverAddressTextField) { title, serverAddressTextField in
       // TODO would be nice to able to use this: https://github.com/robb/Cartography/issues/95
       title.top == title.superview!.top + 50
 
-      title.left == title.superview!.left + 10
-      title.width == title.superview!.width - 20
+      title.left == title.superview!.left + margin
+      title.width == title.superview!.width - (2 * margin)
 
-      serverAddressTextField.top == title.bottom + 10
+      serverAddressTextField.top == title.bottom + margin
       serverAddressTextField.left == title.left
-      serverAddressTextField.width == title.superview!.width - 20
+      serverAddressTextField.width == title.superview!.width - (2 * margin)
     }
   }
   
