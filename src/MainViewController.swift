@@ -29,7 +29,7 @@ class MainViewController: UIViewController {
     
     let stopButton = UIButton()
     stopButton.setTitle("Stop", forState: .Normal)
-    stopButton.titleLabel?.font = UIFont(name: "Avenir", size: 25)
+    stopButton.titleLabel?.font = UIFont(name: UIConstants.fontName, size: 25)
     stopButton.backgroundColor = UIColor.redColor()
     stopButton.layer.cornerRadius = 3
     stopButton.addTarget(self, action: "stopPlayback", forControlEvents: .TouchUpInside)
@@ -37,7 +37,7 @@ class MainViewController: UIViewController {
 
     let settingsButton = UIButton()
     settingsButton.setTitle("⚙", forState: .Normal)
-    settingsButton.titleLabel?.font = UIFont(name: "Avenir", size: 45)
+    settingsButton.titleLabel?.font = UIFont(name: UIConstants.fontName, size: 45)
     settingsButton.setTitleColor(UIColor.grayColor(), forState: .Normal)
     settingsButton.addTarget(self, action: "openSettings", forControlEvents: .TouchUpInside)
     view!.addSubview(settingsButton)

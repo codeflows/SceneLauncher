@@ -13,6 +13,7 @@
 		19684B641A6F152F000D201B /* LlamaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19684B621A6F152F000D201B /* LlamaKit.framework */; };
 		19684B651A6F152F000D201B /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19684B631A6F152F000D201B /* ReactiveCocoa.framework */; };
 		198E33ED1A6F0D4600952B92 /* Cartography.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 198E33EC1A6F0D4600952B92 /* Cartography.framework */; };
+		19A17ECB1ABB58F0004160F0 /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A17ECA1ABB58F0004160F0 /* UIConstants.swift */; };
 		19A5C7821A3598A100DF5D6B /* SceneDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A5C7811A3598A100DF5D6B /* SceneDataSource.swift */; };
 		19A5C7851A359A7600DF5D6B /* SceneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A5C7841A359A7600DF5D6B /* SceneCell.swift */; };
 		19B6B58A1A2F9B4000DEA4B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B6B5891A2F9B4000DEA4B2 /* AppDelegate.swift */; };
@@ -47,6 +48,7 @@
 		19684B621A6F152F000D201B /* LlamaKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LlamaKit.framework; path = Carthage/Build/iOS/LlamaKit.framework; sourceTree = "<group>"; };
 		19684B631A6F152F000D201B /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = Carthage/Build/iOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
 		198E33EC1A6F0D4600952B92 /* Cartography.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cartography.framework; path = Carthage/Build/iOS/Cartography.framework; sourceTree = "<group>"; };
+		19A17ECA1ABB58F0004160F0 /* UIConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIConstants.swift; sourceTree = "<group>"; };
 		19A5C7811A3598A100DF5D6B /* SceneDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDataSource.swift; sourceTree = "<group>"; };
 		19A5C7841A359A7600DF5D6B /* SceneCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneCell.swift; sourceTree = "<group>"; };
 		19B6B5841A2F9B4000DEA4B2 /* SceneLauncher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SceneLauncher.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -162,6 +164,7 @@
 				19B6B5871A2F9B4000DEA4B2 /* Supporting Files */,
 				19E4F7AE1A3281F3002DE579 /* Dummy.cpp */,
 				19063F521A70289400EE34AE /* ApplicationContext.swift */,
+				19A17ECA1ABB58F0004160F0 /* UIConstants.swift */,
 			);
 			name = Common;
 			path = src;
@@ -379,6 +382,7 @@
 				19B6B58C1A2F9B4000DEA4B2 /* SceneViewController.swift in Sources */,
 				19B6B58A1A2F9B4000DEA4B2 /* AppDelegate.swift in Sources */,
 				19FB71D61A3F7A9A00D77F1E /* AbletonTrackService.swift in Sources */,
+				19A17ECB1ABB58F0004160F0 /* UIConstants.swift in Sources */,
 				19063F531A70289400EE34AE /* ApplicationContext.swift in Sources */,
 				19DA8FCA1A6ACD960033A1C5 /* Track.swift in Sources */,
 				19FB71D41A3F78C300D77F1E /* TrackService.swift in Sources */,

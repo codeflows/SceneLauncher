@@ -32,7 +32,7 @@ class SceneCell: UICollectionViewCell {
 
   override func layoutSubviews() {
     titleLabel.frame = self.contentView.bounds
-    titleLabel.font = UIFont(name: "Avenir", size: 18)
+    titleLabel.font = UIFont(name: UIConstants.fontName, size: 18)
     titleLabel.backgroundColor = purpleColor
     titleLabel.textColor = UIColor.whiteColor()
   }

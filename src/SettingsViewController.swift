@@ -25,26 +25,39 @@ class SettingsViewController: UIViewController {
     
     let title = UILabel()
     title.text = "Server address"
-    title.font = UIFont(name: "Avenir", size: 20)
+    title.font = UIFont(name: UIConstants.fontName, size: 20)
     view.addSubview(title)
-    
-    serverAddressTextField.font = UIFont(name: "Avenir", size: 18)
+
+    serverAddressTextField.font = UIFont(name: UIConstants.fontName, size: 18)
     serverAddressTextField.layer.cornerRadius = 3
+    serverAddressTextField.backgroundColor = UIColor.grayColor()
     serverAddressTextField.becomeFirstResponder()
     view.addSubview(serverAddressTextField)
+
+    let helpText = UILabel()
+    helpText.text =
+      "This should be the address of your computer running Ableton Live (with LiveOSC installed.) " +
+      "For instructions on how to set up Ableton for use with SceneLauncher, " +
+      "please see http://codeflo.ws/SceneLauncher"
+    helpText.font = UIFont(name: UIConstants.fontName, size: 12)
+    helpText.numberOfLines = 0
+    view.addSubview(helpText)
     
     let margin = CGFloat(10)
     
-    layout(title, serverAddressTextField) { title, serverAddressTextField in
+    layout(title, serverAddressTextField, helpText) { title, serverAddressTextField, helpText in
       // TODO would be nice to able to use this: https://github.com/robb/Cartography/issues/95
-      title.top == title.superview!.top + 50
-
+      title.top == title.superview!.top + 55
       title.left == title.superview!.left + margin
       title.width == title.superview!.width - (2 * margin)
-
+      
       serverAddressTextField.top == title.bottom + margin
       serverAddressTextField.left == title.left
-      serverAddressTextField.width == title.superview!.width - (2 * margin)
+      serverAddressTextField.width == title.width
+
+      helpText.top == serverAddressTextField.bottom + margin
+      helpText.left == title.left
+      helpText.width == title.width
     }
   }
   
