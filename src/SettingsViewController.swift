@@ -3,7 +3,7 @@ import Cartography
 
 typealias ServerAddressChangedCallback = (String?) -> ()
 
-class SettingsViewController: UIViewController {
+class SettingsViewController: UIViewController, UITextFieldDelegate {
   let settingsSavedCallback: ServerAddressChangedCallback
   let serverAddressTextField: UITextField
   
@@ -25,37 +25,54 @@ class SettingsViewController: UIViewController {
     
     let title = UILabel()
     title.text = "Server address"
-    title.font = UIFont(name: "Avenir", size: 25)
+    title.font = UIFont(name: UIConstants.fontName, size: 20)
     view.addSubview(title)
-    
-    serverAddressTextField.font = UIFont(name: "Avenir", size: 20)
+
+    serverAddressTextField.font = UIFont(name: UIConstants.fontName, size: 18)
+    serverAddressTextField.layer.cornerRadius = 3
+    serverAddressTextField.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
     serverAddressTextField.becomeFirstResponder()
+    serverAddressTextField.returnKeyType = .Done
+    serverAddressTextField.delegate = self
     view.addSubview(serverAddressTextField)
     
-    let saveButton = UIButton()
-    saveButton.setTitle("Save", forState: .Normal)
-    saveButton.titleLabel?.font = UIFont(name: "Avenir", size: 20)
-    saveButton.backgroundColor = UIColor.grayColor()
-    saveButton.layer.cornerRadius = 3
-    saveButton.addTarget(self, action: "dismiss", forControlEvents: .TouchUpInside)
-    view.addSubview(saveButton)
-
-    layout(title, serverAddressTextField, saveButton) { title, serverAddressTextField, saveButton in
-      // TODO hackish way to set top margin
-      title.top == title.superview!.top + 40
-      title.left == title.superview!.left + 10
-      title.width == title.superview!.width - 20
+    let helpText = UITextView()
+    helpText.scrollEnabled = false
+    helpText.editable = false
+    helpText.textContainer.lineFragmentPadding = 0
+    helpText.dataDetectorTypes = .Link
+    helpText.text =
+      "This should be the address of your computer running Ableton Live (with LiveOSC installed.) " +
+      "For instructions on how to set up Ableton for use with SceneLauncher, " +
+      "please see http://codeflo.ws/SceneLauncher"
+    helpText.font = UIFont(name: UIConstants.fontName, size: 13)
+    view.addSubview(helpText)
+    
+    let margin = CGFloat(10)
+    
+    layout(title, serverAddressTextField, helpText) { title, serverAddressTextField, helpText in
+      // TODO would be nice to able to use this: https://github.com/robb/Cartography/issues/95
+      title.top == title.superview!.top + 55
+      title.left == title.superview!.left + margin
+      title.width == title.superview!.width - (2 * margin)
       
-      serverAddressTextField.top == title.bottom + 10
+      serverAddressTextField.top == title.bottom + margin
       serverAddressTextField.left == title.left
+      serverAddressTextField.width == title.width
       
-      saveButton.left == serverAddressTextField.right + 10
-      saveButton.right == title.right
-      saveButton.baseline == serverAddressTextField.baseline
+      helpText.top == serverAddressTextField.bottom + margin
+      helpText.left == title.left
+      helpText.width == title.width
     }
   }
   
-  func dismiss() {
+  override func viewWillDisappear(animated: Bool) {
+    super.viewWillDisappear(animated)
     settingsSavedCallback(serverAddressTextField.text)
+  }
+  
+  func textFieldShouldReturn(textField: UITextField) -> Bool {
+    textField.resignFirstResponder()
+    return true
   }
 }
