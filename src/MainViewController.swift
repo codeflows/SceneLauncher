@@ -71,20 +71,18 @@ class MainViewController: UIViewController {
     self.navigationController?.pushViewController(
       SettingsViewController(
         currentServerAddress: NSUserDefaults.standardUserDefaults().stringForKey("SceneLauncher.serverAddress"),
-        settingsSavedCallback: dismissSettingsDialog
+        settingsSavedCallback: serverAddressChanged
       ),
       animated: true
     )
   }
   
-  func dismissSettingsDialog(serverAddress: String?) {
+  private func serverAddressChanged(serverAddress: String?) {
     if let newAddress = serverAddress {
       println("Received new server address", serverAddress)
       let preferences = NSUserDefaults.standardUserDefaults()
       preferences.setObject(serverAddress, forKey: "SceneLauncher.serverAddress")
       applicationContext.oscService.reconfigureServerAddress(newAddress)
     }
-    
-    dismissViewControllerAnimated(true, completion: nil)
   }
 }
