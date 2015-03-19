@@ -33,8 +33,9 @@ class SettingsViewController: UIViewController {
     view.addSubview(serverAddressTextField)
     
     layout(title, serverAddressTextField) { title, serverAddressTextField in
-      // TODO hackish way to set top margin
-      title.top == title.superview!.top + 40
+      // TODO would be nice to able to use this: https://github.com/robb/Cartography/issues/95
+      title.top == title.superview!.top + 50
+
       title.left == title.superview!.left + 10
       title.width == title.superview!.width - 20
 
