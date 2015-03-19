@@ -13,6 +13,12 @@ class SceneViewController: UICollectionViewController, UICollectionViewDelegate,
     super.viewDidLoad()
     collectionView!.backgroundColor = UIColor.whiteColor()
   }
+
+  override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
+    refreshControl.beginRefreshing()
+    collectionView?.contentOffset = CGPointMake(0, -refreshControl.frame.size.height)
+  }
   
   // MARK: UICollectionViewDelegate
   
