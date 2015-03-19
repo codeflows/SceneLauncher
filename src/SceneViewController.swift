@@ -14,7 +14,10 @@ class SceneViewController: UICollectionViewController, UICollectionViewDelegate,
 
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
-    refreshTracksAutomatically()
+    // TODO if server address changes (note: ACTUALLY changes from previous) -> should discard any ongoing refresh
+    if(!refreshControl.refreshing) {
+      refreshTracksAutomatically()
+    }
   }
   
   override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
