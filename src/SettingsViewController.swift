@@ -36,9 +36,6 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     serverAddressTextField.delegate = self
     view.addSubview(serverAddressTextField)
     
-    // TODO UINavigationBar font + color = same as elsewhere
-    // http://stackoverflow.com/questions/8774531/change-uinavigationbar-font-properties
-
     let helpText = UITextView()
     helpText.scrollEnabled = false
     helpText.editable = false

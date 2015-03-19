@@ -9,6 +9,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     application.setStatusBarHidden(true, withAnimation: .Slide)
     
     let navigationController = UINavigationController(rootViewController: MainViewController())
+
+    if let font = UIFont(name: UIConstants.fontName, size: 18) {
+      UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName : font], forState: UIControlState.Normal)
+    }
+    
     window.rootViewController = navigationController
     
     window.backgroundColor = UIColor.whiteColor()
