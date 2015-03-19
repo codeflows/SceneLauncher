@@ -3,7 +3,7 @@ import Cartography
 
 typealias ServerAddressChangedCallback = (String?) -> ()
 
-class SettingsViewController: UIViewController {
+class SettingsViewController: UIViewController, UITextFieldDelegate {
   let settingsSavedCallback: ServerAddressChangedCallback
   let serverAddressTextField: UITextField
   
@@ -32,12 +32,12 @@ class SettingsViewController: UIViewController {
     serverAddressTextField.layer.cornerRadius = 3
     serverAddressTextField.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
     serverAddressTextField.becomeFirstResponder()
+    serverAddressTextField.returnKeyType = .Done
+    serverAddressTextField.delegate = self
     view.addSubview(serverAddressTextField)
     
     // TODO UINavigationBar font + color = same as elsewhere
     // http://stackoverflow.com/questions/8774531/change-uinavigationbar-font-properties
-    // TODO Hide UINavigationBar when editing, keyboard button should be "Done"
-    // http://stackoverflow.com/questions/10077155/how-to-add-done-button-to-the-keyboard
 
     let helpText = UITextView()
     helpText.scrollEnabled = false
@@ -48,7 +48,7 @@ class SettingsViewController: UIViewController {
       "This should be the address of your computer running Ableton Live (with LiveOSC installed.) " +
       "For instructions on how to set up Ableton for use with SceneLauncher, " +
       "please see http://codeflo.ws/SceneLauncher"
-    helpText.font = UIFont(name: UIConstants.fontName, size: 12)
+    helpText.font = UIFont(name: UIConstants.fontName, size: 13)
     view.addSubview(helpText)
     
     let margin = CGFloat(10)
@@ -72,5 +72,10 @@ class SettingsViewController: UIViewController {
   override func viewWillDisappear(animated: Bool) {
     super.viewWillDisappear(animated)
     settingsSavedCallback(serverAddressTextField.text)
+  }
+  
+  func textFieldShouldReturn(textField: UITextField) -> Bool {
+    textField.resignFirstResponder()
+    return true
   }
 }
