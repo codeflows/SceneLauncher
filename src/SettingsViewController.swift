@@ -30,9 +30,14 @@ class SettingsViewController: UIViewController {
 
     serverAddressTextField.font = UIFont(name: UIConstants.fontName, size: 18)
     serverAddressTextField.layer.cornerRadius = 3
-    serverAddressTextField.backgroundColor = UIColor.grayColor()
+    serverAddressTextField.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
     serverAddressTextField.becomeFirstResponder()
     view.addSubview(serverAddressTextField)
+    
+    // TODO UINavigationBar font + color = same as elsewhere
+    // http://stackoverflow.com/questions/8774531/change-uinavigationbar-font-properties
+    // TODO Hide UINavigationBar when editing, keyboard button should be "Done"
+    // http://stackoverflow.com/questions/10077155/how-to-add-done-button-to-the-keyboard
 
     let helpText = UITextView()
     helpText.scrollEnabled = false
@@ -57,7 +62,7 @@ class SettingsViewController: UIViewController {
       serverAddressTextField.top == title.bottom + margin
       serverAddressTextField.left == title.left
       serverAddressTextField.width == title.width
-
+      
       helpText.top == serverAddressTextField.bottom + margin
       helpText.left == title.left
       helpText.width == title.width
