@@ -7,7 +7,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
    
     application.setStatusBarHidden(true, withAnimation: .Slide)
-    window.rootViewController = MainViewController()
+    
+    let navigationController = UINavigationController(rootViewController: MainViewController())
+    window.rootViewController = navigationController
+    
     window.backgroundColor = UIColor.whiteColor()
     window.makeKeyAndVisible()
     return true
