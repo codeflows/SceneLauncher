@@ -21,8 +21,6 @@ class AbletonSceneService : NSObject, SceneService {
         |> map { $0.arguments[0] as Int }
         |> timeoutWithError(NSError(), afterInterval: 5, onScheduler: QueueScheduler.mainQueueScheduler)
 
-    osc.sendMessage(OSCMessage(address: "/live/scenes", arguments: []))
-    
     // TODO really, we'd like to flatMap the Signal(numberOfScenes) to Signal([Scene]) and timeout in one place
     numberOfScenes.observe(next: { expectedNumberOfScenes in
       self.handleSceneListResponse(callback, expectedNumberOfScenes: expectedNumberOfScenes)
@@ -32,6 +30,8 @@ class AbletonSceneService : NSObject, SceneService {
       println("Timeout in number of scenes response")
       callback(failure(err))
     })
+
+    osc.sendMessage(OSCMessage(address: "/live/scenes", arguments: []))
   }
   
   private func handleSceneListResponse(callback: ScenesCallback, expectedNumberOfScenes: Int) {
