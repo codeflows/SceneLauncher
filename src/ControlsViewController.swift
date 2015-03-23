@@ -19,11 +19,11 @@ class ControlsViewController: UIViewController {
     let settingsButton = UIButton()
     settingsButton.setTitle("⚙", forState: .Normal)
     settingsButton.titleLabel?.font = UIFont(name: UIConstants.fontName, size: 35)
-    settingsButton.setTitleColor(UIColor.grayColor(), forState: .Normal)
+    settingsButton.setTitleColor(UIColor(white: 0.92, alpha: 1.0), forState: .Normal)
     settingsButton.addTarget(self, action: "openSettings", forControlEvents: .TouchUpInside)
     view!.addSubview(settingsButton)
 
-    let blurEffect = UIBlurEffect(style: .Light)
+    let blurEffect = UIBlurEffect(style: .Dark)
     let blurView = UIVisualEffectView(effect: blurEffect)
     view!.insertSubview(blurView, atIndex: 0)
     
