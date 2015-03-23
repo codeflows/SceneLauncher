@@ -10,6 +10,7 @@
 		19063F531A70289400EE34AE /* ApplicationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19063F521A70289400EE34AE /* ApplicationContext.swift */; };
 		192F521C1A73BE460072DEF7 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192F521B1A73BE460072DEF7 /* SettingsViewController.swift */; };
 		193EEB641A50368E0035C59F /* OSCService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193EEB631A50368E0035C59F /* OSCService.swift */; };
+		1947F4CF1AC0C7970011C9BC /* ControlsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1947F4CE1AC0C7970011C9BC /* ControlsViewController.swift */; };
 		19684B641A6F152F000D201B /* LlamaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19684B621A6F152F000D201B /* LlamaKit.framework */; };
 		19684B651A6F152F000D201B /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19684B631A6F152F000D201B /* ReactiveCocoa.framework */; };
 		198E33ED1A6F0D4600952B92 /* Cartography.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 198E33EC1A6F0D4600952B92 /* Cartography.framework */; };
@@ -45,6 +46,7 @@
 		192F521B1A73BE460072DEF7 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsViewController.swift; path = src/SettingsViewController.swift; sourceTree = "<group>"; };
 		193539F91A6C712E00D08D3B /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ReactiveCocoa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		193EEB631A50368E0035C59F /* OSCService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OSCService.swift; path = src/OSCService.swift; sourceTree = "<group>"; };
+		1947F4CE1AC0C7970011C9BC /* ControlsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ControlsViewController.swift; path = src/ControlsViewController.swift; sourceTree = "<group>"; };
 		19684B621A6F152F000D201B /* LlamaKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LlamaKit.framework; path = Carthage/Build/iOS/LlamaKit.framework; sourceTree = "<group>"; };
 		19684B631A6F152F000D201B /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = Carthage/Build/iOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
 		198E33EC1A6F0D4600952B92 /* Cartography.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cartography.framework; path = Carthage/Build/iOS/Cartography.framework; sourceTree = "<group>"; };
@@ -118,6 +120,14 @@
 			name = "OSC service";
 			sourceTree = "<group>";
 		};
+		1947F4CD1AC0C7730011C9BC /* Controls view */ = {
+			isa = PBXGroup;
+			children = (
+				1947F4CE1AC0C7970011C9BC /* ControlsViewController.swift */,
+			);
+			name = "Controls view";
+			sourceTree = "<group>";
+		};
 		19A5C7831A359A2D00DF5D6B /* Scene view */ = {
 			isa = PBXGroup;
 			children = (
@@ -135,6 +145,7 @@
 				19B6B5861A2F9B4000DEA4B2 /* Common */,
 				19DC46FB1A7016BD004DB578 /* Main view */,
 				19A5C7831A359A2D00DF5D6B /* Scene view */,
+				1947F4CD1AC0C7730011C9BC /* Controls view */,
 				192F521A1A73BE240072DEF7 /* Settings view */,
 				193EEB621A5036690035C59F /* OSC service */,
 				19FB71D21A3F789400D77F1E /* Scene service */,
@@ -387,6 +398,7 @@
 				19DA8FCA1A6ACD960033A1C5 /* Scene.swift in Sources */,
 				19FB71D41A3F78C300D77F1E /* SceneService.swift in Sources */,
 				19A5C7851A359A7600DF5D6B /* SceneCell.swift in Sources */,
+				1947F4CF1AC0C7970011C9BC /* ControlsViewController.swift in Sources */,
 				19E4F7AF1A3281F3002DE579 /* Dummy.cpp in Sources */,
 				19DC46FA1A7016B5004DB578 /* MainViewController.swift in Sources */,
 				192F521C1A73BE460072DEF7 /* SettingsViewController.swift in Sources */,
