@@ -37,6 +37,9 @@ class AbletonSceneService : NSObject, SceneService {
   private func handleSceneListResponse(callback: ScenesCallback, expectedNumberOfScenes: Int) {
     let scenesSignal : Signal<[Scene], NSError> =
       osc.incomingMessagesSignal
+        // TODO this should be done in every request-response case
+        |> try { $0.address == "/remix/error" ? failure(NSError()) : success() }
+
         |> filter { $0.address == "/live/name/scene" }
         |> take(expectedNumberOfScenes)
         |> map { Scene(order: $0.arguments[0] as Int, name: $0.arguments[1] as String) }
