@@ -27,8 +27,6 @@ class ControlsViewController: UIViewController {
     let blurView = UIVisualEffectView(effect: blurEffect)
     view!.insertSubview(blurView, atIndex: 0)
     
-    view!.frame.size.height = 65
-    
     layout(stopButton, settingsButton, blurView) { stop, settings, blurView in
       let margin = CGFloat(10)
       
@@ -40,6 +38,7 @@ class ControlsViewController: UIViewController {
       settings.left == stop.right + margin
       settings.right == settings.superview!.right - margin
       
+      blurView.top == stop.superview!.top
       blurView.height == stop.superview!.height
       blurView.width == stop.superview!.width
     }

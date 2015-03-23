@@ -23,6 +23,12 @@ class MainViewController: UIViewController {
     let controlsViewController = ControlsViewController(applicationContext: applicationContext)
     addChildViewController(controlsViewController)
     view!.addSubview(controlsViewController.view)
+    
+    layout(controlsViewController.view) { controls in
+      controls.width == controls.superview!.width
+      controls.height == 62
+      controls.bottom == controls.superview!.bottom
+    }
   }
   
   override func viewWillAppear(animated: Bool) {
