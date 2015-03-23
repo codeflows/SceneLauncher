@@ -1,16 +1,16 @@
 import ReactiveCocoa
 import LlamaKit
 
-class AbletonTrackService : NSObject, TrackService {
+class AbletonSceneService : NSObject, SceneService {
   let osc : OSCService
   
   init(osc: OSCService) {
     self.osc = osc
   }
   
-  typealias TracksCallback = (Result<[Track], NSError>) -> ()
+  typealias ScenesCallback = (Result<[Scene], NSError>) -> ()
 
-  func listTracks(callback: TracksCallback) {
+  func listScenes(callback: ScenesCallback) {
     // TODO currently many requests might be waiting at the same time
     // TODO LiveOsc(?) fails if Scene name contains Unicode characters and returns /remix/error -> short-circuit signal here
     // TODO reliable mechanism for pinging if the server is still reachable
@@ -25,9 +25,9 @@ class AbletonTrackService : NSObject, TrackService {
 
     osc.sendMessage(OSCMessage(address: "/live/scenes", arguments: []))
     
-    // TODO really, we'd like to flatMap the Signal(numberOfScenes) to Signal([Track]) and timeout in one place
+    // TODO really, we'd like to flatMap the Signal(numberOfScenes) to Signal([Scene]) and timeout in one place
     numberOfScenes.observe(next: { expectedNumberOfScenes in
-      self.handleTrackListResponse(callback, expectedNumberOfScenes: expectedNumberOfScenes)
+      self.handleSceneListResponse(callback, expectedNumberOfScenes: expectedNumberOfScenes)
       self.osc.sendMessage(OSCMessage(address: "/live/name/scene", arguments: []))
     }, error: { err in
       // TODO
@@ -36,12 +36,12 @@ class AbletonTrackService : NSObject, TrackService {
     })
   }
   
-  private func handleTrackListResponse(callback: TracksCallback, expectedNumberOfScenes: Int) {
-    let scenesSignal : Signal<[Track], NSError> =
+  private func handleSceneListResponse(callback: ScenesCallback, expectedNumberOfScenes: Int) {
+    let scenesSignal : Signal<[Scene], NSError> =
       osc.incomingMessagesSignal
         |> filter { $0.address == "/live/name/scene" }
         |> take(expectedNumberOfScenes)
-        |> map { Track(order: $0.arguments[0] as Int, name: $0.arguments[1] as String) }
+        |> map { Scene(order: $0.arguments[0] as Int, name: $0.arguments[1] as String) }
         |> scan([], { $0 + [$1] })
         // FIXME ugly: scan returns intermittent results, only choose the last one (use SignalProducer.takeLast?)
         |> filter { $0.count == expectedNumberOfScenes }
@@ -55,8 +55,8 @@ class AbletonTrackService : NSObject, TrackService {
     // TODO handle UI thread stuff in the view controller
     let tempSignal = sortedScenesSignal |> observeOn(UIScheduler())
     tempSignal.observe(
-      next: { tracks in callback(success(tracks)) },
-      error: { err in println("Timeout in track list response"); callback(failure(err)) }
+      next: { scenes in callback(success(scenes)) },
+      error: { err in println("Timeout in scene list response"); callback(failure(err)) }
     )
   }
 }

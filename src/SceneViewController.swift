@@ -16,13 +16,13 @@ class SceneViewController: UICollectionViewController, UICollectionViewDelegate,
     super.viewDidAppear(animated)
     // TODO if server address changes (note: ACTUALLY changes from previous) -> should discard any ongoing refresh
     if(!refreshControl.refreshing) {
-      refreshTracksAutomatically()
+      refreshScenesAutomatically()
     }
   }
   
   override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-    let track = dataSource.tracks[indexPath.indexAtPosition(1)]
-    osc.sendMessage(OSCMessage(address: "/live/play/scene", arguments: [track.order]))
+    let scene = dataSource.scenes[indexPath.indexAtPosition(1)]
+    osc.sendMessage(OSCMessage(address: "/live/play/scene", arguments: [scene.order]))
   }
   
   func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
@@ -40,7 +40,7 @@ class SceneViewController: UICollectionViewController, UICollectionViewDelegate,
     collectionView!.registerClass(SceneCell.self, forCellWithReuseIdentifier: CellId)
     collectionView!.dataSource = dataSource
    
-    refreshControl.addTarget(self, action: "refreshTracks", forControlEvents: .ValueChanged)
+    refreshControl.addTarget(self, action: "refreshScenes", forControlEvents: .ValueChanged)
     collectionView!.addSubview(refreshControl)
     collectionView!.alwaysBounceVertical = true
   }
@@ -49,14 +49,14 @@ class SceneViewController: UICollectionViewController, UICollectionViewDelegate,
     fatalError("init(coder:) has not been implemented")
   }
   
-  private func refreshTracksAutomatically() {
+  private func refreshScenesAutomatically() {
     refreshControl.beginRefreshing()
     // Hack to make indicator visible: http://stackoverflow.com/questions/17930730/uirefreshcontrol-on-viewdidload
     collectionView?.contentOffset = CGPointMake(0, -refreshControl.frame.size.height)
-    refreshTracks()
+    refreshScenes()
   }
 
-  func refreshTracks() {
+  func refreshScenes() {
     dataSource.reloadData() {
       self.collectionView!.reloadData()
       self.refreshControl.endRefreshing()

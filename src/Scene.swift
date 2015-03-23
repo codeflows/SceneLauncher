@@ -1,4 +1,4 @@
-struct Track : Printable {
+struct Scene : Printable {
   let order: Int
   let name: String
 

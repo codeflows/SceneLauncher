@@ -1,18 +1,18 @@
 import UIKit
 
 class SceneDataSource: NSObject, UICollectionViewDataSource {
-  let trackService: TrackService
-  var tracks: [Track] = []
+  let sceneService: SceneService
+  var scenes: [Scene] = []
   
   init(osc: OSCService) {
-    trackService = AbletonTrackService(osc: osc)
+    sceneService = AbletonSceneService(osc: osc)
   }
 
   func reloadData(callback: () -> ()) {
-    trackService.listTracks { result in
+    sceneService.listScenes { result in
       switch result {
-        case let .Success(tracks):
-          self.tracks = tracks.unbox
+        case let .Success(scenes):
+          self.scenes = scenes.unbox
 
         // TODO show error
         case let .Failure(error):
@@ -24,12 +24,12 @@ class SceneDataSource: NSObject, UICollectionViewDataSource {
   
   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellId, forIndexPath: indexPath) as SceneCell
-    cell.titleLabel.text = String(tracks[indexPath.row].name)
+    cell.titleLabel.text = String(scenes[indexPath.row].name)
     return cell
   }
   
   func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return tracks.count
+    return scenes.count
   }
   
   func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {

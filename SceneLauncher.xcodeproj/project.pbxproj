@@ -21,11 +21,11 @@
 		19B6B5911A2F9B4000DEA4B2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19B6B5901A2F9B4000DEA4B2 /* Images.xcassets */; };
 		19B6B5941A2F9B4000DEA4B2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19B6B5921A2F9B4000DEA4B2 /* LaunchScreen.xib */; };
 		19B6B5A01A2F9B4000DEA4B2 /* SceneLauncherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B6B59F1A2F9B4000DEA4B2 /* SceneLauncherTests.swift */; };
-		19DA8FCA1A6ACD960033A1C5 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DA8FC91A6ACD960033A1C5 /* Track.swift */; };
+		19DA8FCA1A6ACD960033A1C5 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DA8FC91A6ACD960033A1C5 /* Scene.swift */; };
 		19DC46FA1A7016B5004DB578 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DC46F91A7016B5004DB578 /* MainViewController.swift */; };
 		19E4F7AF1A3281F3002DE579 /* Dummy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 19E4F7AE1A3281F3002DE579 /* Dummy.cpp */; };
-		19FB71D41A3F78C300D77F1E /* TrackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB71D31A3F78C300D77F1E /* TrackService.swift */; };
-		19FB71D61A3F7A9A00D77F1E /* AbletonTrackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB71D51A3F7A9A00D77F1E /* AbletonTrackService.swift */; };
+		19FB71D41A3F78C300D77F1E /* SceneService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB71D31A3F78C300D77F1E /* SceneService.swift */; };
+		19FB71D61A3F7A9A00D77F1E /* AbletonSceneService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB71D51A3F7A9A00D77F1E /* AbletonSceneService.swift */; };
 		B6A79B9028E95EC04D0AE254 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5333478E210EFBCA732D90B8 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -60,12 +60,12 @@
 		19B6B5991A2F9B4000DEA4B2 /* SceneLauncherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SceneLauncherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B6B59E1A2F9B4000DEA4B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19B6B59F1A2F9B4000DEA4B2 /* SceneLauncherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneLauncherTests.swift; sourceTree = "<group>"; };
-		19DA8FC91A6ACD960033A1C5 /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Track.swift; path = src/Track.swift; sourceTree = "<group>"; };
+		19DA8FC91A6ACD960033A1C5 /* Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Scene.swift; path = src/Scene.swift; sourceTree = "<group>"; };
 		19DC46F91A7016B5004DB578 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = src/MainViewController.swift; sourceTree = "<group>"; };
 		19E4F7AB1A327F66002DE579 /* SceneLauncher-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "SceneLauncher-Bridging-Header.h"; path = "src/SceneLauncher-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		19E4F7AE1A3281F3002DE579 /* Dummy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dummy.cpp; sourceTree = "<group>"; };
-		19FB71D31A3F78C300D77F1E /* TrackService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackService.swift; path = src/TrackService.swift; sourceTree = "<group>"; };
-		19FB71D51A3F7A9A00D77F1E /* AbletonTrackService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AbletonTrackService.swift; path = src/AbletonTrackService.swift; sourceTree = "<group>"; };
+		19FB71D31A3F78C300D77F1E /* SceneService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SceneService.swift; path = src/SceneService.swift; sourceTree = "<group>"; };
+		19FB71D51A3F7A9A00D77F1E /* AbletonSceneService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AbletonSceneService.swift; path = src/AbletonSceneService.swift; sourceTree = "<group>"; };
 		5333478E210EFBCA732D90B8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		816F1F95B46B4B13AB7B7E9A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		F2D4CB0834A218F9593069CB /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -137,7 +137,7 @@
 				19A5C7831A359A2D00DF5D6B /* Scene view */,
 				192F521A1A73BE240072DEF7 /* Settings view */,
 				193EEB621A5036690035C59F /* OSC service */,
-				19FB71D21A3F789400D77F1E /* Track service */,
+				19FB71D21A3F789400D77F1E /* Scene service */,
 				19B6B59C1A2F9B4000DEA4B2 /* test */,
 				19B6B5851A2F9B4000DEA4B2 /* Products */,
 				0411C01C11CB84E34C890832 /* Pods */,
@@ -203,14 +203,14 @@
 			name = "Main view";
 			sourceTree = "<group>";
 		};
-		19FB71D21A3F789400D77F1E /* Track service */ = {
+		19FB71D21A3F789400D77F1E /* Scene service */ = {
 			isa = PBXGroup;
 			children = (
-				19FB71D31A3F78C300D77F1E /* TrackService.swift */,
-				19FB71D51A3F7A9A00D77F1E /* AbletonTrackService.swift */,
-				19DA8FC91A6ACD960033A1C5 /* Track.swift */,
+				19FB71D31A3F78C300D77F1E /* SceneService.swift */,
+				19FB71D51A3F7A9A00D77F1E /* AbletonSceneService.swift */,
+				19DA8FC91A6ACD960033A1C5 /* Scene.swift */,
 			);
-			name = "Track service";
+			name = "Scene service";
 			sourceTree = "<group>";
 		};
 		679A4B2320A4163901D06C8B /* Frameworks */ = {
@@ -381,11 +381,11 @@
 				193EEB641A50368E0035C59F /* OSCService.swift in Sources */,
 				19B6B58C1A2F9B4000DEA4B2 /* SceneViewController.swift in Sources */,
 				19B6B58A1A2F9B4000DEA4B2 /* AppDelegate.swift in Sources */,
-				19FB71D61A3F7A9A00D77F1E /* AbletonTrackService.swift in Sources */,
+				19FB71D61A3F7A9A00D77F1E /* AbletonSceneService.swift in Sources */,
 				19A17ECB1ABB58F0004160F0 /* UIConstants.swift in Sources */,
 				19063F531A70289400EE34AE /* ApplicationContext.swift in Sources */,
-				19DA8FCA1A6ACD960033A1C5 /* Track.swift in Sources */,
-				19FB71D41A3F78C300D77F1E /* TrackService.swift in Sources */,
+				19DA8FCA1A6ACD960033A1C5 /* Scene.swift in Sources */,
+				19FB71D41A3F78C300D77F1E /* SceneService.swift in Sources */,
 				19A5C7851A359A7600DF5D6B /* SceneCell.swift in Sources */,
 				19E4F7AF1A3281F3002DE579 /* Dummy.cpp in Sources */,
 				19DC46FA1A7016B5004DB578 /* MainViewController.swift in Sources */,
