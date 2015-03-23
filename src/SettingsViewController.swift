@@ -29,8 +29,14 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     view.addSubview(title)
 
     serverAddressTextField.font = UIFont(name: UIConstants.fontName, size: 18)
+
+    // TODO this is retarded
+    let padding = UIView(frame: CGRectMake(0, 0, 4, 0))
+    serverAddressTextField.leftView = padding;
+    serverAddressTextField.leftViewMode = .Always;
     serverAddressTextField.layer.cornerRadius = 3
-    serverAddressTextField.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
+    serverAddressTextField.backgroundColor = UIColor(white: 0.92, alpha: 1.0)
+
     serverAddressTextField.becomeFirstResponder()
     serverAddressTextField.returnKeyType = .Done
     serverAddressTextField.delegate = self
@@ -59,6 +65,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
       serverAddressTextField.top == title.bottom + margin
       serverAddressTextField.left == title.left
       serverAddressTextField.width == title.width
+      serverAddressTextField.height == 30
       
       helpText.top == serverAddressTextField.bottom + margin
       helpText.left == title.left
