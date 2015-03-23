@@ -40,10 +40,7 @@ class AbletonSceneService : NSObject, SceneService {
         |> filter { $0.address == "/live/name/scene" }
         |> take(expectedNumberOfScenes)
         |> map { Scene(order: $0.arguments[0] as Int, name: $0.arguments[1] as String) }
-        |> scan([], { $0 + [$1] })
-        // FIXME ugly: scan returns intermittent results, only choose the last one (use SignalProducer.takeLast?)
-        |> filter { $0.count == expectedNumberOfScenes }
-        |> take(1)
+        |> collect
         |> timeoutWithError(NSError(), afterInterval: 5, onScheduler: QueueScheduler.mainQueueScheduler)
     
     let sortedScenesSignal = scenesSignal |> map { scenes in
