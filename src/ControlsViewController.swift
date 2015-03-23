@@ -18,7 +18,7 @@ class ControlsViewController: UIViewController {
     
     let settingsButton = UIButton()
     settingsButton.setTitle("⚙", forState: .Normal)
-    settingsButton.titleLabel?.font = UIFont(name: UIConstants.fontName, size: 45)
+    settingsButton.titleLabel?.font = UIFont(name: UIConstants.fontName, size: 35)
     settingsButton.setTitleColor(UIColor.grayColor(), forState: .Normal)
     settingsButton.addTarget(self, action: "openSettings", forControlEvents: .TouchUpInside)
     view!.addSubview(settingsButton)
@@ -27,17 +27,20 @@ class ControlsViewController: UIViewController {
     let blurView = UIVisualEffectView(effect: blurEffect)
     view!.insertSubview(blurView, atIndex: 0)
     
+    view!.frame.size.height = 65
+    
     layout(stopButton, settingsButton, blurView) { stop, settings, blurView in
-      stop.bottom == stop.superview!.bottom - 10
-      stop.left == stop.superview!.left + 10
+      let margin = CGFloat(10)
       
-      settings.left == stop.right + 10
-      settings.right == settings.superview!.right - 10
-      // TODO
-      settings.bottom == stop.bottom + 14
+      stop.top == stop.superview!.top + margin
+      stop.left == stop.superview!.left + margin
+      stop.bottom == stop.superview!.bottom - margin
       
-      blurView.top == stop.superview!.top
-      blurView.bottom == stop.superview!.bottom
+      settings.centerY == stop.centerY
+      settings.left == stop.right + margin
+      settings.right == settings.superview!.right - margin
+      
+      blurView.height == stop.superview!.height
       blurView.width == stop.superview!.width
     }
   }
