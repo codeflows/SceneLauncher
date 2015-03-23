@@ -8,17 +8,13 @@ class SceneDataSource: NSObject, UICollectionViewDataSource {
     sceneService = AbletonSceneService(osc: osc)
   }
 
-  func reloadData(callback: () -> ()) {
+  func reloadData(callback: ScenesCallback) {
     sceneService.listScenes { result in
       switch result {
-        case let .Success(scenes):
-          self.scenes = scenes.unbox
-
-        // TODO show error
-        case let .Failure(error):
-          println("Got error: \(error)")
+        case let .Success(scenes): self.scenes = scenes.unbox
+        case let .Failure(error): ()
       }
-      callback()
+      callback(result)
     }
   }
   

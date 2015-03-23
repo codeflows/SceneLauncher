@@ -8,8 +8,6 @@ class AbletonSceneService : NSObject, SceneService {
     self.osc = osc
   }
   
-  typealias ScenesCallback = (Result<[Scene], NSError>) -> ()
-
   func listScenes(callback: ScenesCallback) {
     // TODO currently many requests might be waiting at the same time
     // TODO LiveOsc(?) fails if Scene name contains Unicode characters and returns /remix/error -> short-circuit signal here

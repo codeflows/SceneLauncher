@@ -57,7 +57,11 @@ class SceneViewController: UICollectionViewController, UICollectionViewDelegate,
   }
 
   func refreshScenes() {
-    dataSource.reloadData() {
+    dataSource.reloadData() { result in
+      if let error = result.error {
+        let alert = UIAlertView(title: "Timeout loading scenes", message: "Make sure the Ableton Live server address is correct in settings", delegate: nil, cancelButtonTitle: "OK")
+        alert.show()
+      }
       self.collectionView!.reloadData()
       self.refreshControl.endRefreshing()
     }
