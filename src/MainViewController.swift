@@ -26,7 +26,7 @@ class MainViewController: UIViewController {
     
     layout(controlsViewController.view) { controls in
       controls.width == controls.superview!.width
-      controls.height == 62
+      controls.height == UIConstants.controlsHeight
       controls.bottom == controls.superview!.bottom
     }
   }

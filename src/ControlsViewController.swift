@@ -28,7 +28,7 @@ class ControlsViewController: UIViewController {
     view!.insertSubview(blurView, atIndex: 0)
     
     layout(stopButton, settingsButton, blurView) { stop, settings, blurView in
-      let margin = CGFloat(10)
+      let margin = UIConstants.margin
       
       stop.top == stop.superview!.top + margin
       stop.left == stop.superview!.left + margin

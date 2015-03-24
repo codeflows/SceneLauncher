@@ -54,7 +54,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     helpText.font = UIFont(name: UIConstants.fontName, size: 13)
     view.addSubview(helpText)
     
-    let margin = CGFloat(10)
+    let margin = UIConstants.margin
     
     layout(title, serverAddressTextField, helpText) { title, serverAddressTextField, helpText in
       // TODO would be nice to able to use this: https://github.com/robb/Cartography/issues/95
