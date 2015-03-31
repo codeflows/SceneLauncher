@@ -1,4 +1,5 @@
 import UIKit
+import ReactiveCocoa
 
 let CellId = "SceneCell"
 
@@ -52,6 +53,23 @@ class SceneViewController: UICollectionViewController, UICollectionViewDelegate,
     refreshControl.addTarget(self, action: "refreshScenes", forControlEvents: .ValueChanged)
     collectionView!.addSubview(refreshControl)
     collectionView!.alwaysBounceVertical = true
+    
+    // TODO jari: move somewhere else
+    let sceneNumberChanges: Signal<Int, NoError> =
+      osc.incomingMessagesSignal
+        |> filter { $0.address == "/live/scene" }
+        // This seems to be off-by-one??!
+        |> map { ($0.arguments[0] as Int) - 1 }
+        |> observeOn(UIScheduler())
+
+    sceneNumberChanges.observe(next: { sceneNumber in
+      for (index, scene) in enumerate(self.dataSource.scenes) {
+        if(scene.order == sceneNumber) {
+          let p = NSIndexPath(forRow: index, inSection: 0)
+          self.collectionView?.selectItemAtIndexPath(p, animated: true, scrollPosition: UICollectionViewScrollPosition.CenteredVertically)
+        }
+      }
+    })
   }
   
   required init(coder: NSCoder) {

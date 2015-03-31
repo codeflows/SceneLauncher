@@ -3,13 +3,29 @@ import Cartography
 
 class SceneCell: UICollectionViewCell {
   let titleLabel = UILabel()
-  let purpleColor = UIColor(red: 169/255.0, green: 31/255.0, blue: 199/255.0, alpha: 1.0)
-
+  let purpleColor,
+      cellBackgroundColor,
+      cellSelectedBackgroundColor: UIColor
+  
+  override var selected: Bool {
+    get {
+      return super.selected
+    }
+    set(h) {
+      super.selected = h
+      self.toggleBackgroundColor(h)
+    }
+  }
+  
   override init(frame: CGRect) {
+    purpleColor = UIColor(red: 169/255.0, green: 31/255.0, blue: 199/255.0, alpha: 1.0)
+    cellBackgroundColor = purpleColor.colorWithAlphaComponent(0.1)
+    cellSelectedBackgroundColor = purpleColor.colorWithAlphaComponent(0.4)
+    
     super.init(frame: frame)
+    
     self.contentView.addSubview(titleLabel)
-
-    self.contentView.backgroundColor = purpleColor.colorWithAlphaComponent(0.1)
+    toggleBackgroundColor(false)
 
     var bottomBorder = CALayer()
     bottomBorder.backgroundColor = purpleColor.colorWithAlphaComponent(0.7).CGColor
@@ -24,6 +40,12 @@ class SceneCell: UICollectionViewCell {
       titleLabel.left == titleLabel.superview!.left + UIConstants.margin
       titleLabel.right == titleLabel.superview!.right - UIConstants.margin
     }
+  }
+  
+  private func toggleBackgroundColor(selected: Bool) {
+    self.contentView.backgroundColor = selected ?
+      cellSelectedBackgroundColor :
+      cellBackgroundColor
   }
   
   required init(coder aDecoder: NSCoder) {
