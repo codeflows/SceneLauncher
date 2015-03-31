@@ -58,11 +58,17 @@ class SceneViewController: UICollectionViewController, UICollectionViewDelegate,
     let sceneNumberChanges: Signal<Int, NoError> =
       osc.incomingMessagesSignal
         |> filter { $0.address == "/live/scene" }
-        |> map { $0.arguments[0] as Int }
+        // This seems to be off-by-one??!
+        |> map { ($0.arguments[0] as Int) - 1 }
         |> observeOn(UIScheduler())
 
     sceneNumberChanges.observe(next: { sceneNumber in
-      println("Playing scene \(sceneNumber)")
+      for (index, scene) in enumerate(self.dataSource.scenes) {
+        if(scene.order == sceneNumber) {
+          let p = NSIndexPath(forRow: index, inSection: 0)
+          self.collectionView?.selectItemAtIndexPath(p, animated: true, scrollPosition: UICollectionViewScrollPosition.CenteredVertically)
+        }
+      }
     })
   }
   
