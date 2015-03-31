@@ -16,6 +16,7 @@ class AbletonSceneService : NSObject, SceneService {
 
     let numberOfScenes : Signal<Int, SceneLoadingError> =
       osc.incomingMessagesSignal
+        |> mapError { _ in SceneLoadingError.Unknown }
         |> filter { $0.address == "/live/scenes" }
         |> take(1)
         |> map { $0.arguments[0] as Int }
@@ -35,8 +36,10 @@ class AbletonSceneService : NSObject, SceneService {
   private func handleSceneListResponse(callback: ScenesCallback, expectedNumberOfScenes: Int) {
     let scenesSignal : Signal<[Scene], SceneLoadingError> =
       osc.incomingMessagesSignal
+        |> mapError { _ in SceneLoadingError.Unknown }
+
         // TODO this should be done in every request-response case
-        |> try { $0.address == "/remix/error" ? failure(NSError()) : success() }
+        |> try { $0.address == "/remix/error" ? failure(SceneLoadingError.ServerError($0)) : success() }
 
         |> filter { $0.address == "/live/name/scene" }
         |> take(expectedNumberOfScenes)

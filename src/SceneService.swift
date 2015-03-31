@@ -8,7 +8,9 @@ protocol SceneService {
 typealias ScenesCallback = (Result<[Scene], SceneLoadingError>) -> ()
 
 public enum SceneLoadingError {
+  case Unknown
   case Timeout(String)
+  case ServerError(OSCMessage)
   case NoAddressConfigured
 }
 
