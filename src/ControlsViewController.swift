@@ -3,7 +3,6 @@ import Cartography
 
 class ControlsViewController: UIViewController {
   let applicationContext: ApplicationContext
-  let serverAddressKey = "SceneLauncher.serverAddress"
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -47,9 +46,7 @@ class ControlsViewController: UIViewController {
   init(applicationContext: ApplicationContext) {
     self.applicationContext = applicationContext
     
-    // TODO jari: listen to changes in preferences using RAC?
-    let preferences = NSUserDefaults.standardUserDefaults()
-    if let serverAddress = preferences.stringForKey(serverAddressKey) {
+    if let serverAddress = SettingsRepository.getServerAddress() {
       println("Got server address from preferences: \(serverAddress)")
       applicationContext.oscService.reconfigureServerAddress(serverAddress)
     }
@@ -67,7 +64,7 @@ class ControlsViewController: UIViewController {
   func openSettings() {
     self.navigationController?.pushViewController(
       SettingsViewController(
-        currentServerAddress: NSUserDefaults.standardUserDefaults().stringForKey(serverAddressKey),
+        currentServerAddress: SettingsRepository.getServerAddress(),
         settingsSavedCallback: serverAddressChanged
       ),
       animated: true
@@ -76,9 +73,8 @@ class ControlsViewController: UIViewController {
   
   private func serverAddressChanged(serverAddress: String?) {
     if let newAddress = serverAddress {
-      println("Received new server address", serverAddress)
-      let preferences = NSUserDefaults.standardUserDefaults()
-      preferences.setObject(serverAddress, forKey: serverAddressKey)
+      println("Received new server address", newAddress)
+      SettingsRepository.setServerAddress(newAddress)
       applicationContext.oscService.reconfigureServerAddress(newAddress)
     }
   }
