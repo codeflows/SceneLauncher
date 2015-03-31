@@ -10,8 +10,8 @@ typealias ScenesCallback = (Result<[Scene], SceneLoadingError>) -> ()
 public enum SceneLoadingError {
   case Unknown
   case Timeout
-  case ServerError(OSCMessage)
-  case NoAddressConfigured
+  case LiveOsc(String)
+  //case NoAddressConfigured
 }
 
 extension SceneLoadingError: ErrorType {

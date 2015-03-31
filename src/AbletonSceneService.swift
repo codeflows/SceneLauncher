@@ -53,8 +53,24 @@ class AbletonSceneService : NSObject, SceneService {
   private func incomingMessages() -> Signal<OSCMessage, SceneLoadingError> {
     return osc.incomingMessagesSignal
       |> mapError { _ in SceneLoadingError.Unknown }
-      |> try { $0.address == "/remix/error" ? failure(SceneLoadingError.ServerError($0)) : success() }
+      |> try { message in
+        if(message.address == "/remix/error") {
+          return failure(SceneLoadingError.LiveOsc(self.parseLiveOSCErrorReason(message)))
+        }
+        return success()
+      }
       |> timeoutWithError(SceneLoadingError.Timeout, afterInterval: 5, onScheduler: QueueScheduler.mainQueueScheduler)
+  }
+  
+  private func parseLiveOSCErrorReason(message: OSCMessage) -> String {
+    if(message.arguments.count == 1 && message.arguments[0] is String) {
+      let errorMessage = message.arguments[0] as String
+      
+      if errorMessage.rangeOfString("UnicodeEncodeError") != nil {
+        return "Unicode error: LiveOSC doesn't support special unicode characters, please check your scene names."
+      }
+    }
+    return "Unknown error from LiveOSC"
   }
 }
 
