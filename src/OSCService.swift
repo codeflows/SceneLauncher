@@ -6,13 +6,13 @@ class OSCService : NSObject, OSCServerDelegate {
   private let localPort = 9001
   private let client = OSCClient()
   private let server = OSCServer()
-  private let incomingMessagesSink : SinkOf<Event<OSCMessage, NSError>>
+  private let incomingMessagesSink : SinkOf<Event<OSCMessage, NoError>>
   private var serverAddress: String?
 
-  let incomingMessagesSignal : Signal<OSCMessage, NSError>
+  let incomingMessagesSignal : Signal<OSCMessage, NoError>
 
   override init() {
-    let (signal, sink) = Signal<OSCMessage, NSError>.pipe()
+    let (signal, sink) = Signal<OSCMessage, NoError>.pipe()
     incomingMessagesSignal = signal
     incomingMessagesSink = sink
 
@@ -22,12 +22,8 @@ class OSCService : NSObject, OSCServerDelegate {
   }
   
   func sendMessage(message: OSCMessage) {
-    if let address = serverAddress {
-      println("[OSCService] Sending message \(message.address): \(message.arguments)")
-      client.sendMessage(message, to: "udp://\(serverAddress):9000")
-    } else {
-      println("[OSCService] Not sending message - no server address configured")
-    }
+    println("[OSCService] Sending message \(message.address): \(message.arguments)")
+    client.sendMessage(message, to: "udp://\(serverAddress!):9000")
   }
   
   func handleMessage(incomingMessage: OSCMessage!) {

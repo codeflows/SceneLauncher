@@ -65,11 +65,21 @@ class SceneViewController: UICollectionViewController, UICollectionViewDelegate,
   func refreshScenes() {
     dataSource.reloadData() { result in
       if let error = result.error {
-        let alert = UIAlertView(title: "Timeout loading scenes", message: "Make sure the Ableton Live server address is correct in settings", delegate: nil, cancelButtonTitle: "OK")
+        let (title, message) = self.errorTextsFor(error)
+        let alert = UIAlertView(title: title, message: message, delegate: nil, cancelButtonTitle: "OK")
         alert.show()
       }
       self.collectionView!.reloadData()
       self.refreshControl.endRefreshing()
+    }
+  }
+  
+  private func errorTextsFor(error: SceneLoadingError) -> (String, String) {
+    switch error {
+    case let .NoAddressConfigured: return ("Welcome to SceneLauncher!", "Please start by clicking on the settings icon and configuring your IP address")
+    case let .Unknown: return ("Unknown error", "Could not load scenes")
+    case let .LiveOsc(message): return ("LiveOSC error", message)
+    case let .Timeout: return ("Timeout loading scenes", "Make sure the Ableton Live server address is correct in settings")
     }
   }
 }
