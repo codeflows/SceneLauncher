@@ -16,7 +16,7 @@ class SceneCell: UICollectionViewCell {
     bottomBorder.frame = CGRect(x: 0, y: self.contentView.frame.height - 0.5, width: self.contentView.frame.width, height: 0.5)
     self.contentView.layer.addSublayer(bottomBorder)
     
-    titleLabel.font = UIFont(name: UIConstants.fontName, size: 18)
+    titleLabel.font = UIFont(name: UIConstants.fontName, size: 20)
     titleLabel.textColor = UIColor.blackColor()
 
     layout(titleLabel) { titleLabel in

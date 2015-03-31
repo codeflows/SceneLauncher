@@ -26,7 +26,7 @@ class SceneViewController: UICollectionViewController, UICollectionViewDelegate,
   }
   
   func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-    return CGSize(width: collectionView.bounds.width, height: 54)
+    return CGSize(width: collectionView.bounds.width, height: 58)
   }
 
   private let sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: UIConstants.controlsHeight, right: 0)
