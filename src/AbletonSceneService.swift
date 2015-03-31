@@ -40,7 +40,7 @@ class AbletonSceneService : NSObject, SceneService {
       incomingMessages()
         |> filter { $0.address == "/live/name/scene" }
         |> take(expectedNumberOfScenes)
-        |> map { Scene(order: $0.arguments[0] as Int, name: $0.arguments[1] as String) }
+        |> map { Scene(order: $0.arguments[0] as Int, name: self.trim($0.arguments[1] as String)) }
         |> collect
     
     let sortedScenesSignal = scenesSignal |> map { scenes in
@@ -76,6 +76,11 @@ class AbletonSceneService : NSObject, SceneService {
       }
     }
     return "Unknown error from LiveOSC"
+  }
+  
+  // Scenes are named " 1" etc by default
+  private func trim(str: String) -> String {
+    return str.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
   }
 }
 
