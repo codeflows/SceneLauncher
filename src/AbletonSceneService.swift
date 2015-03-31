@@ -14,20 +14,18 @@ class AbletonSceneService : NSObject, SceneService {
     // TODO reliable mechanism for pinging if the server is still reachable
     // TODO refactor: abstraction for sending and receiving message of the same address (e.g. both cases below)
 
-    let numberOfScenes : Signal<Int, NSError> =
+    let numberOfScenes : Signal<Int, SceneLoadingError> =
       osc.incomingMessagesSignal
         |> filter { $0.address == "/live/scenes" }
         |> take(1)
         |> map { $0.arguments[0] as Int }
-        |> timeoutWithError(NSError(), afterInterval: 5, onScheduler: QueueScheduler.mainQueueScheduler)
+        |> timeoutWithError(SceneLoadingError.Timeout("Timeout in number of scenes response"), afterInterval: 5, onScheduler: QueueScheduler.mainQueueScheduler)
 
     // TODO really, we'd like to flatMap the Signal(numberOfScenes) to Signal([Scene]) and timeout in one place
     numberOfScenes.observe(next: { expectedNumberOfScenes in
       self.handleSceneListResponse(callback, expectedNumberOfScenes: expectedNumberOfScenes)
       self.osc.sendMessage(OSCMessage(address: "/live/name/scene", arguments: []))
     }, error: { err in
-      // TODO
-      println("Timeout in number of scenes response")
       callback(failure(err))
     })
 
@@ -35,7 +33,7 @@ class AbletonSceneService : NSObject, SceneService {
   }
   
   private func handleSceneListResponse(callback: ScenesCallback, expectedNumberOfScenes: Int) {
-    let scenesSignal : Signal<[Scene], NSError> =
+    let scenesSignal : Signal<[Scene], SceneLoadingError> =
       osc.incomingMessagesSignal
         // TODO this should be done in every request-response case
         |> try { $0.address == "/remix/error" ? failure(NSError()) : success() }
@@ -44,7 +42,7 @@ class AbletonSceneService : NSObject, SceneService {
         |> take(expectedNumberOfScenes)
         |> map { Scene(order: $0.arguments[0] as Int, name: $0.arguments[1] as String) }
         |> collect
-        |> timeoutWithError(NSError(), afterInterval: 5, onScheduler: QueueScheduler.mainQueueScheduler)
+        |> timeoutWithError(SceneLoadingError.Timeout("Timeout in scene names response"), afterInterval: 5, onScheduler: QueueScheduler.mainQueueScheduler)
     
     let sortedScenesSignal = scenesSignal |> map { scenes in
       scenes.sorted({$0.order < $1.order})
@@ -54,7 +52,7 @@ class AbletonSceneService : NSObject, SceneService {
     let tempSignal = sortedScenesSignal |> observeOn(UIScheduler())
     tempSignal.observe(
       next: { scenes in callback(success(scenes)) },
-      error: { err in println("Timeout in scene list response"); callback(failure(err)) }
+      error: { err in callback(failure(err)) }
     )
   }
 }
