@@ -76,6 +76,7 @@ class SceneViewController: UICollectionViewController, UICollectionViewDelegate,
   
   private func errorTextsFor(error: SceneLoadingError) -> (String, String) {
     switch error {
+    case let .NoAddressConfigured: return ("Welcome to SceneLauncher!", "Please start by clicking on the settings icon and configuring your IP address")
     case let .Unknown: return ("Unknown error", "Could not load scenes")
     case let .LiveOsc(message): return ("LiveOSC error", message)
     case let .Timeout: return ("Timeout loading scenes", "Make sure the Ableton Live server address is correct in settings")

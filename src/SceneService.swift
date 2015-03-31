@@ -11,7 +11,7 @@ public enum SceneLoadingError {
   case Unknown
   case Timeout
   case LiveOsc(String)
-  //case NoAddressConfigured
+  case NoAddressConfigured
 }
 
 extension SceneLoadingError: ErrorType {

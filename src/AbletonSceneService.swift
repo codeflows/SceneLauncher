@@ -13,6 +13,11 @@ class AbletonSceneService : NSObject, SceneService {
     // TODO reliable mechanism for pinging if the server is still reachable
     // TODO refactor: abstraction for sending and receiving message of the same address (e.g. both cases below)
 
+    if(SettingsRepository.getServerAddress() == nil) {
+      callback(failure(.NoAddressConfigured))
+      return
+    }
+    
     let numberOfScenes : Signal<Int, SceneLoadingError> =
       incomingMessages()
         |> filter { $0.address == "/live/scenes" }
@@ -52,14 +57,14 @@ class AbletonSceneService : NSObject, SceneService {
   
   private func incomingMessages() -> Signal<OSCMessage, SceneLoadingError> {
     return osc.incomingMessagesSignal
-      |> mapError { _ in SceneLoadingError.Unknown }
+      |> mapError { _ in .Unknown }
       |> try { message in
         if(message.address == "/remix/error") {
-          return failure(SceneLoadingError.LiveOsc(self.parseLiveOSCErrorReason(message)))
+          return failure(.LiveOsc(self.parseLiveOSCErrorReason(message)))
         }
         return success()
       }
-      |> timeoutWithError(SceneLoadingError.Timeout, afterInterval: 5, onScheduler: QueueScheduler.mainQueueScheduler)
+      |> timeoutWithError(.Timeout, afterInterval: 5, onScheduler: QueueScheduler.mainQueueScheduler)
   }
   
   private func parseLiveOSCErrorReason(message: OSCMessage) -> String {
