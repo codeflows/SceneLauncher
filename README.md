@@ -20,6 +20,4 @@ iOS 8+ framework dependencies ([ReactiveCocoa](https://github.com/ReactiveCocoa/
 
 ### Copyright
 
-Jari Aarniala, 2015.
-
-License TODO
+Jari Aarniala, 2015. Licensed under the MIT license.
