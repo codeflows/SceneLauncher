@@ -22,13 +22,13 @@ class OSCService : NSObject, OSCServerDelegate {
   }
   
   func sendMessage(message: OSCMessage) {
-    println("[OSCService] Sending message \(message.address): \(message.arguments)")
+    NSLog("[OSCService] Sending message \(message.address): \(message.arguments)")
     client.sendMessage(message, to: "udp://\(serverAddress!):9000")
   }
   
   func handleMessage(incomingMessage: OSCMessage!) {
     if let message = incomingMessage {
-      println("[OSCService] Received message \(message.address): \(message.arguments)")
+      NSLog("[OSCService] Received message \(message.address): \(message.arguments)")
       incomingMessagesSink.put(Event.Next(Box(message)))
     }
   }

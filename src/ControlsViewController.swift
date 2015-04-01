@@ -47,7 +47,7 @@ class ControlsViewController: UIViewController {
     self.applicationContext = applicationContext
     
     if let serverAddress = SettingsRepository.getServerAddress() {
-      println("Got server address from preferences: \(serverAddress)")
+      NSLog("Got server address from preferences: \(serverAddress)")
       applicationContext.oscService.reconfigureServerAddress(serverAddress)
     }
     super.init(nibName: nil, bundle: nil)
@@ -73,7 +73,7 @@ class ControlsViewController: UIViewController {
   
   private func serverAddressChanged(serverAddress: String?) {
     if let newAddress = serverAddress {
-      println("Received new server address", newAddress)
+      NSLog("Received new server address", newAddress)
       SettingsRepository.setServerAddress(newAddress)
       applicationContext.oscService.reconfigureServerAddress(newAddress)
     }
