@@ -17,9 +17,7 @@ class OSCService : NSObject, OSCServerDelegate {
 
     super.init()
     server.delegate = self
-    server.listen(0)
-    
-    NSLog("[OSCService] Started listening on local port \(server.getPort())")
+    startListeningOnAnyFreeLocalPort()
   }
   
   func sendMessage(message: OSCMessage) {
@@ -34,9 +32,20 @@ class OSCService : NSObject, OSCServerDelegate {
     }
   }
   
+  func handleDisconnect(error: NSError!) {
+    NSLog("[OSCService] UDP socket was disconnected, attempting to reconnect")
+    startListeningOnAnyFreeLocalPort()
+    registerWithLiveOSC()
+  }
+  
   func reconfigureServerAddress(address: String) {
     serverAddress = address
     registerWithLiveOSC()
+  }
+  
+  private func startListeningOnAnyFreeLocalPort() {
+    server.listen(0)
+    NSLog("[OSCService] Started listening on local port \(server.getPort())")
   }
   
   private func registerWithLiveOSC() {
