@@ -3,7 +3,6 @@ import ReactiveCocoa
 import LlamaKit
 
 class OSCService : NSObject, OSCServerDelegate {
-  private let localPort = 9001
   private let client = OSCClient()
   private let server = OSCServer()
   private let incomingMessagesSink : SinkOf<Event<OSCMessage, NoError>>
@@ -18,7 +17,7 @@ class OSCService : NSObject, OSCServerDelegate {
 
     super.init()
     server.delegate = self
-    server.listen(localPort)
+    startListeningOnAnyFreeLocalPort()
   }
   
   func sendMessage(message: OSCMessage) {
@@ -33,12 +32,23 @@ class OSCService : NSObject, OSCServerDelegate {
     }
   }
   
+  func handleDisconnect(error: NSError!) {
+    NSLog("[OSCService] UDP socket was disconnected, attempting to reconnect")
+    startListeningOnAnyFreeLocalPort()
+    registerWithLiveOSC()
+  }
+  
   func reconfigureServerAddress(address: String) {
     serverAddress = address
     registerWithLiveOSC()
   }
   
+  private func startListeningOnAnyFreeLocalPort() {
+    server.listen(0)
+    NSLog("[OSCService] Started listening on local port \(server.getPort())")
+  }
+  
   private func registerWithLiveOSC() {
-    sendMessage(OSCMessage(address: "/remix/set_peer", arguments: ["", localPort]))
+    sendMessage(OSCMessage(address: "/remix/set_peer", arguments: ["", server.getPort()]))
   }
 }
