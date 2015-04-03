@@ -50,7 +50,7 @@ class SceneViewController: UICollectionViewController, UICollectionViewDelegate,
     collectionView!.registerClass(SceneCell.self, forCellWithReuseIdentifier: CellId)
     collectionView!.dataSource = dataSource
    
-    refreshControl.addTarget(self, action: "refreshScenes", forControlEvents: .ValueChanged)
+    refreshControl.addTarget(self, action: "refreshScenesManually", forControlEvents: .ValueChanged)
     collectionView!.addSubview(refreshControl)
     collectionView!.alwaysBounceVertical = true
     
@@ -76,6 +76,23 @@ class SceneViewController: UICollectionViewController, UICollectionViewDelegate,
     fatalError("init(coder:) has not been implemented")
   }
   
+  func refreshScenesManually() {
+    // TODO jari: inelegant "error handling" here
+    //
+    // Messages are lost due to UDP dropouts etc, so make sure
+    // LiveOSC knows our address whenever the user manually refreshes the list
+    //
+    // A much more robust way would be to e.g.
+    // 1) broadcast our new address to LiveOSC
+    // 2) ping for a response from the server, wait for an answer
+    // 3) possibly retry a couple of times
+    // 4) only then proceed with sending any other messages
+    if let serverAddress = SettingsRepository.getServerAddress() {
+      osc.reconfigureServerAddress(serverAddress)
+    }
+    refreshScenes()
+  }
+  
   private func refreshScenesAutomatically() {
     refreshControl.beginRefreshing()
     // Hack to make indicator visible: http://stackoverflow.com/questions/17930730/uirefreshcontrol-on-viewdidload
@@ -83,7 +100,7 @@ class SceneViewController: UICollectionViewController, UICollectionViewDelegate,
     refreshScenes()
   }
 
-  func refreshScenes() {
+  private func refreshScenes() {
     dataSource.reloadData() { result in
       if let error = result.error {
         let (title, message) = self.errorTextsFor(error)
