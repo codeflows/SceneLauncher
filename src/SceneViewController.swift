@@ -7,10 +7,13 @@ class SceneViewController: UICollectionViewController, UICollectionViewDelegate,
   let osc: OSCService
   let dataSource: SceneDataSource
   let refreshControl: UIRefreshControl
+  let helpMessageView: UITextView
   
   override func viewDidLoad() {
     super.viewDidLoad()
     collectionView!.backgroundColor = UIColor.whiteColor()
+    // TODO autolayout
+    helpMessageView.frame = CGRect(x: UIConstants.margin, y: UIConstants.margin, width: collectionView!.bounds.width - 2 * UIConstants.margin, height: collectionView!.bounds.height)
   }
 
   override func viewDidAppear(animated: Bool) {
@@ -40,19 +43,25 @@ class SceneViewController: UICollectionViewController, UICollectionViewDelegate,
     self.osc = applicationContext.oscService
     dataSource = SceneDataSource(osc: osc)
     refreshControl = UIRefreshControl()
+    helpMessageView = UITextView()
     
     let layout = UICollectionViewFlowLayout()
     layout.minimumInteritemSpacing = 0
     layout.minimumLineSpacing = 0
-    
+
     super.init(collectionViewLayout: layout)
-    
+
     collectionView!.registerClass(SceneCell.self, forCellWithReuseIdentifier: CellId)
     collectionView!.dataSource = dataSource
    
     refreshControl.addTarget(self, action: "refreshScenesManually", forControlEvents: .ValueChanged)
     collectionView!.addSubview(refreshControl)
     collectionView!.alwaysBounceVertical = true
+    
+    collectionView!.addSubview(helpMessageView)
+    helpMessageView.font = UIFont(name: UIConstants.fontName, size: 20)
+    helpMessageView.scrollEnabled = false
+    helpMessageView.editable = false
     
     // TODO jari: move somewhere else
     let sceneNumberChanges: Signal<Int, NoError> =
@@ -104,6 +113,8 @@ class SceneViewController: UICollectionViewController, UICollectionViewDelegate,
     dataSource.reloadData() { result in
       if let error = result.error {
         self.handleError(error)
+      } else {
+        self.helpMessageView.hidden = true
       }
       self.collectionView!.reloadData()
       self.refreshControl.endRefreshing()
@@ -111,11 +122,26 @@ class SceneViewController: UICollectionViewController, UICollectionViewDelegate,
   }
   
   private func handleError(error: SceneLoadingError) {
+    let scenesHaveBeenPreviouslyLoaded = dataSource.scenes.count > 0
+    
     switch error {
-    case let .NoAddressConfigured: showAlert("Welcome to SceneLauncher!", message: "Please start by clicking on the settings icon and configuring your IP address")
-    case let .Unknown: showAlert("Unknown error", message: "Could not load scenes")
-    case let .LiveOsc(message): showAlert("LiveOSC error", message: message)
-    case let .Timeout: showAlert("Timeout loading scenes", message: "Make sure the Ableton Live server address is correct in settings")
+      case let .NoAddressConfigured:
+        if scenesHaveBeenPreviouslyLoaded {
+          showAlert("No address configured", message: "Please go to settings and configure your Ableton Live server address")
+        }
+      case let .Unknown: showAlert("Unknown error", message: "Could not load scenes")
+      case let .LiveOsc(message): showAlert("LiveOSC error", message: message)
+      case let .Timeout: showAlert("Timeout loading scenes", message: "Please make sure Ableton Live is running and the server address is correct in settings")
+    }
+
+    if !scenesHaveBeenPreviouslyLoaded {
+      helpMessageView.hidden = false
+      switch error {
+        case let .NoAddressConfigured:
+          helpMessageView.text = "Welcome to SceneLauncher!\n\nTo start, please click the settings icon below and configure your Ableton Live server address."
+        default:
+          helpMessageView.text = "Scenes could not be loaded. Please make sure Ableton Live is running and the server address is correct in settings.\n\nTo try loading the scenes again, simply pull down to refresh."
+      }
     }
   }
   
