@@ -22,6 +22,10 @@ class ControlsViewController: UIViewController {
     settingsButton.addTarget(self, action: "openSettings", forControlEvents: .TouchUpInside)
     view!.addSubview(settingsButton)
 
+    if SettingsRepository.getServerAddress() == nil {
+      pulsate(settingsButton)
+    }
+
     let blurEffect = UIBlurEffect(style: .Dark)
     let blurView = UIVisualEffectView(effect: blurEffect)
     view!.insertSubview(blurView, atIndex: 0)
@@ -77,6 +81,17 @@ class ControlsViewController: UIViewController {
       SettingsRepository.setServerAddress(newAddress)
       applicationContext.oscService.reconfigureServerAddress(newAddress)
     }
+  }
+  
+  private func pulsate(view: UIView) {
+    let pulsatingAnimation = CABasicAnimation(keyPath: "transform.scale")
+    pulsatingAnimation.fromValue = 1.0
+    pulsatingAnimation.toValue = 1.3
+    pulsatingAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+    pulsatingAnimation.duration = 0.5
+    pulsatingAnimation.autoreverses = true
+    pulsatingAnimation.repeatCount = 5
+    view.layer.addAnimation(pulsatingAnimation, forKey: nil)
   }
 }
 
