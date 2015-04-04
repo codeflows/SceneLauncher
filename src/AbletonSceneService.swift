@@ -13,13 +13,14 @@ class AbletonSceneService : NSObject, SceneService {
     // TODO reliable mechanism for pinging if the server is still reachable
     // TODO refactor: abstraction for sending and receiving message of the same address (e.g. both cases below)
 
-    if(SettingsRepository.getServerAddress() == nil) {
+    let address = SettingsRepository.getServerAddress()
+    if address == nil || address?.isEmpty == true {
       callback(failure(.NoAddressConfigured))
       return
     }
     
     let numberOfScenes : Signal<Int, SceneLoadingError> =
-      incomingMessages()
+      incomingMessages(timeout: 2)
         |> filter { $0.address == "/live/scenes" }
         |> take(1)
         |> map { $0.arguments[0] as Int }
@@ -37,7 +38,7 @@ class AbletonSceneService : NSObject, SceneService {
   
   private func handleSceneListResponse(callback: ScenesCallback, expectedNumberOfScenes: Int) {
     let scenesSignal : Signal<[Scene], SceneLoadingError> =
-      incomingMessages()
+      incomingMessages(timeout: 3)
         |> filter { $0.address == "/live/name/scene" }
         |> take(expectedNumberOfScenes)
         |> map { Scene(order: $0.arguments[0] as Int, name: self.trim($0.arguments[1] as String)) }
@@ -55,7 +56,7 @@ class AbletonSceneService : NSObject, SceneService {
     )
   }
   
-  private func incomingMessages() -> Signal<OSCMessage, SceneLoadingError> {
+  private func incomingMessages(#timeout: NSTimeInterval) -> Signal<OSCMessage, SceneLoadingError> {
     return osc.incomingMessagesSignal
       |> mapError { _ in .Unknown }
       |> try { message in
@@ -64,7 +65,7 @@ class AbletonSceneService : NSObject, SceneService {
         }
         return success()
       }
-      |> timeoutWithError(.Timeout, afterInterval: 5, onScheduler: QueueScheduler.mainQueueScheduler)
+      |> timeoutWithError(.Timeout, afterInterval: timeout, onScheduler: QueueScheduler.mainQueueScheduler)
   }
   
   private func parseLiveOSCErrorReason(message: OSCMessage) -> String {
