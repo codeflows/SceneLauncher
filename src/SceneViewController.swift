@@ -131,7 +131,7 @@ class SceneViewController: UICollectionViewController, UICollectionViewDelegate,
         }
       case let .Unknown: showAlert("Unknown error", message: "Could not load scenes")
       case let .LiveOsc(message): showAlert("LiveOSC error", message: message)
-      case let .Timeout: showAlert("Timeout loading scenes", message: "Please make sure Ableton Live is running and the server address is correct in settings")
+      case let .Timeout: showAlert("Could not load scenes", message: "Please make sure Ableton Live is running and the server address is correct in settings")
     }
 
     if !scenesHaveBeenPreviouslyLoaded {
