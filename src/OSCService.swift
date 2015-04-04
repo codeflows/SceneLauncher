@@ -21,13 +21,17 @@ class OSCService : NSObject, OSCServerDelegate {
   }
   
   func sendMessage(message: OSCMessage) {
-    NSLog("[OSCService] Sending message \(message.address): \(message.arguments)")
-    client.sendMessage(message, to: "udp://\(serverAddress!):9000")
+    if let address = serverAddress {
+      NSLog("[OSCService] Sending message \(message)")
+      client.sendMessage(message, to: "udp://\(serverAddress!):9000")
+    } else {
+      NSLog("[OSCService] WARNING: Server address not configured, not sending message \(message)")
+    }
   }
   
   func handleMessage(incomingMessage: OSCMessage!) {
     if let message = incomingMessage {
-      NSLog("[OSCService] Received message \(message.address): \(message.arguments)")
+      NSLog("[OSCService] Received message \(message)")
       incomingMessagesSink.put(Event.Next(Box(message)))
     }
   }
@@ -50,5 +54,11 @@ class OSCService : NSObject, OSCServerDelegate {
   
   private func registerWithLiveOSC() {
     sendMessage(OSCMessage(address: "/remix/set_peer", arguments: ["", server.getPort()]))
+  }
+}
+
+extension OSCMessage: Printable {
+  override public var description: String {
+    return "\(address) \(arguments)"
   }
 }
