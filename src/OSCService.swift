@@ -43,12 +43,7 @@ class OSCService : NSObject, OSCServerDelegate {
     registerWithLiveOSC()
   }
   
-  // TODO
-  func ensureServerRunning() {
-    reconfigureServerAddress()
-  }
-  
-  func reconfigureServerAddress() {
+  private func reconfigureServerAddress() {
     registerWithLiveOSC()
   }
   

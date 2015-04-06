@@ -74,7 +74,6 @@ class ControlsViewController: UIViewController {
     if let newAddress = serverAddress {
       NSLog("Received new server address", newAddress)
       Settings.serverAddress.put(newAddress)
-      applicationContext.oscService.reconfigureServerAddress()
     }
   }
   
