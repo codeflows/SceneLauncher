@@ -28,9 +28,8 @@ class OSCService : NSObject, OSCServerDelegate {
     
     serverAddressSignal
       |> combineLatestWith(applicationBecameActive)
-      |> map { $0.0 }
       |> start(
-        next: ensureConnected,
+        next: { _ in self.ensureConnected() },
         error: { _ in () }
       )
     
@@ -57,8 +56,10 @@ class OSCService : NSObject, OSCServerDelegate {
     NSLog("[OSCService] Local UDP server socket was disconnected: Error: \(error)")
   }
   
-  private func ensureConnected(address: String) {
-    NSLog("[OSCService] Ensuring we're able to communicate with Ableton at \(address)")
+  // TODO This is currently public so that we can call it when manually refreshing scenes.
+  //      Ideally, connections would be automatically kept alive in the background.
+  func ensureConnected() {
+    NSLog("[OSCService] Ensuring we're able to communicate with Ableton at \(Settings.serverAddress.value)")
     startLocalServerIfNecessary()
     registerWithLiveOSC()
   }

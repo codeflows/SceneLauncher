@@ -86,6 +86,7 @@ class SceneViewController: UICollectionViewController, UICollectionViewDelegate,
   }
   
   func refreshScenesManually() {
+    osc.ensureConnected()
     refreshScenes()
   }
   
