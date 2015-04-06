@@ -6,7 +6,6 @@ class OSCService : NSObject, OSCServerDelegate {
   private let client = OSCClient()
   private let server = OSCServer()
   private let incomingMessagesSink : SinkOf<Event<OSCMessage, NoError>>
-  private var serverAddress: String?
 
   let incomingMessagesSignal : Signal<OSCMessage, NoError>
 
@@ -21,9 +20,9 @@ class OSCService : NSObject, OSCServerDelegate {
   }
   
   func sendMessage(message: OSCMessage) {
-    if let address = serverAddress {
+    if let serverAddress = Settings.serverAddress.value {
       NSLog("[OSCService] Sending message \(message)")
-      client.sendMessage(message, to: "udp://\(serverAddress!):9000")
+      client.sendMessage(message, to: "udp://\(serverAddress):9000")
     } else {
       NSLog("[OSCService] WARNING: Server address not configured, not sending message \(message)")
     }
@@ -43,7 +42,6 @@ class OSCService : NSObject, OSCServerDelegate {
   }
   
   func reconfigureServerAddress(address: String) {
-    serverAddress = address
     registerWithLiveOSC()
   }
   
