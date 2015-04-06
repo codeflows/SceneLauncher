@@ -62,10 +62,7 @@ class ControlsViewController: UIViewController {
   
   func openSettings() {
     self.navigationController?.pushViewController(
-      SettingsViewController(
-        currentServerAddress: Settings.serverAddress.value,
-        settingsSavedCallback: serverAddressChanged
-      ),
+      SettingsViewController(serverAddressProperty: Settings.serverAddress),
       animated: true
     )
   }
