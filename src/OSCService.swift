@@ -10,9 +10,7 @@ class OSCService : NSObject, OSCServerDelegate {
   let incomingMessagesSignal: Signal<OSCMessage, NoError>
   
   init(applicationState: ApplicationState) {
-    let (signal, sink) = Signal<OSCMessage, NoError>.pipe()
-    incomingMessagesSignal = signal
-    incomingMessagesSink = sink
+    (incomingMessagesSignal, incomingMessagesSink) = Signal<OSCMessage, NoError>.pipe()
 
     super.init()
     localServer.delegate = self
