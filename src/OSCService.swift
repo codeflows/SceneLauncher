@@ -4,7 +4,7 @@ import LlamaKit
 
 class OSCService : NSObject, OSCServerDelegate {
   private let client = OSCClient()
-  private let server = OSCServer()
+  private let localServer = OSCServer()
   private let incomingMessagesSink : SinkOf<Event<OSCMessage, NoError>>
 
   let incomingMessagesSignal : Signal<OSCMessage, NoError>
@@ -15,10 +15,10 @@ class OSCService : NSObject, OSCServerDelegate {
     incomingMessagesSink = sink
 
     super.init()
-    server.delegate = self
+    localServer.delegate = self
 
-    startListeningOnAnyFreeLocalPort()
-    
+    startLocalServer()
+
     Settings.serverAddress.producer
       // TODO ignoreNil would be nice
       |> filter { $0 != nil }
@@ -31,6 +31,9 @@ class OSCService : NSObject, OSCServerDelegate {
         },
         error: { error in () }
       )
+
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationWillResign", name: UIApplicationWillResignActiveNotification, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationDidBecomeActive", name: UIApplicationDidBecomeActiveNotification, object: nil)
   }
   
   func sendMessage(message: OSCMessage) {
@@ -48,6 +51,15 @@ class OSCService : NSObject, OSCServerDelegate {
       incomingMessagesSink.put(Event.Next(Box(message)))
     }
   }
+
+  func applicationWillResign() {
+    NSLog("[OSCService] Application will resign, stopping OSC server")
+    localServer.stop()
+  }
+
+  func applicationDidBecomeActive() {
+    NSLog("[OSCService] Application became active")
+  }
   
   // TODO rewrite
   func handleDisconnect(error: NSError!) {
@@ -56,13 +68,13 @@ class OSCService : NSObject, OSCServerDelegate {
     //registerWithLiveOSC()
   }
   
-  private func startListeningOnAnyFreeLocalPort() {
-    server.listen(0)
-    NSLog("[OSCService] Started listening on local port \(server.getPort())")
+  private func startLocalServer() {
+    localServer.listen(0)
+    NSLog("[OSCService] Started listening on local port \(localServer.getPort())")
   }
   
   private func registerWithLiveOSC() {
-    sendMessage(OSCMessage(address: "/remix/set_peer", arguments: ["", server.getPort()]))
+    sendMessage(OSCMessage(address: "/remix/set_peer", arguments: ["", localServer.getPort()]))
   }
 }
 
