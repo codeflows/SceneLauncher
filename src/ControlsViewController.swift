@@ -22,7 +22,7 @@ class ControlsViewController: UIViewController {
     settingsButton.addTarget(self, action: "openSettings", forControlEvents: .TouchUpInside)
     view!.addSubview(settingsButton)
 
-    if Settings.getServerAddress() == nil {
+    if Settings.serverAddress.value == nil {
       pulsate(settingsButton)
     }
 
@@ -50,7 +50,7 @@ class ControlsViewController: UIViewController {
   init(applicationContext: ApplicationContext) {
     self.applicationContext = applicationContext
     
-    if let serverAddress = Settings.getServerAddress() {
+    if let serverAddress = Settings.serverAddress.value {
       NSLog("Got server address from preferences: \(serverAddress)")
       applicationContext.oscService.reconfigureServerAddress(serverAddress)
     }
@@ -68,7 +68,7 @@ class ControlsViewController: UIViewController {
   func openSettings() {
     self.navigationController?.pushViewController(
       SettingsViewController(
-        currentServerAddress: Settings.getServerAddress(),
+        currentServerAddress: Settings.serverAddress.value,
         settingsSavedCallback: serverAddressChanged
       ),
       animated: true
@@ -78,7 +78,7 @@ class ControlsViewController: UIViewController {
   private func serverAddressChanged(serverAddress: String?) {
     if let newAddress = serverAddress {
       NSLog("Received new server address", newAddress)
-      Settings.setServerAddress(newAddress)
+      Settings.serverAddress.put(newAddress)
       applicationContext.oscService.reconfigureServerAddress(newAddress)
     }
   }

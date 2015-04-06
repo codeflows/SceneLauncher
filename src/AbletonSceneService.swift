@@ -13,7 +13,7 @@ class AbletonSceneService : NSObject, SceneService {
     // TODO reliable mechanism for pinging if the server is still reachable
     // TODO refactor: abstraction for sending and receiving message of the same address (e.g. both cases below)
 
-    let address = Settings.getServerAddress()
+    let address = Settings.serverAddress.value
     if address == nil || address?.isEmpty == true {
       callback(failure(.NoAddressConfigured))
       return
