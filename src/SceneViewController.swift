@@ -96,9 +96,7 @@ class SceneViewController: UICollectionViewController, UICollectionViewDelegate,
     // 2) ping for a response from the server, wait for an answer
     // 3) possibly retry a couple of times
     // 4) only then proceed with sending any other messages
-    if let serverAddress = Settings.serverAddress.value {
-      osc.reconfigureServerAddress()
-    }
+    osc.ensureServerRunning()
     refreshScenes()
   }
   
