@@ -25,12 +25,9 @@ class OSCService : NSObject, OSCServerDelegate {
 
     serverAddressSignal
       |> combineLatestWith(systemSignals.applicationDidBecomeActiveSignal)
+      |> map { $0.0 }
       |> start(
-        next: { tuple in
-          NSLog("[OSCService] Either we woke up or the server address changed; will make sure local server is running, and registering with Ableton at \(tuple.0)")
-          self.startLocalServerIfNecessary()
-          self.registerWithLiveOSC()
-        },
+        next: ensureConnected,
         error: { error in () }
       )
     
@@ -55,6 +52,12 @@ class OSCService : NSObject, OSCServerDelegate {
 
   func handleDisconnect(error: NSError!) {
     NSLog("[OSCService] Local UDP server socket was disconnected: Error: \(error)")
+  }
+  
+  private func ensureConnected(address: String) {
+    NSLog("[OSCService] Ensuring we're able to communicate with Ableton at \(address)")
+    startLocalServerIfNecessary()
+    registerWithLiveOSC()
   }
   
   private func startLocalServerIfNecessary() {
