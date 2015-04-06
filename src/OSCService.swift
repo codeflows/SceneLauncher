@@ -5,11 +5,11 @@ import LlamaKit
 class OSCService : NSObject, OSCServerDelegate {
   private let client = OSCClient()
   private let localServer = OSCServer()
-  private let incomingMessagesSink : SinkOf<Event<OSCMessage, NoError>>
+  private let incomingMessagesSink: SinkOf<Event<OSCMessage, NoError>>
 
-  let incomingMessagesSignal : Signal<OSCMessage, NoError>
-
-  override init() {
+  let incomingMessagesSignal: Signal<OSCMessage, NoError>
+  
+  init(systemSignals: SystemSignals) {
     let (signal, sink) = Signal<OSCMessage, NoError>.pipe()
     incomingMessagesSignal = signal
     incomingMessagesSink = sink
@@ -17,23 +17,24 @@ class OSCService : NSObject, OSCServerDelegate {
     super.init()
     localServer.delegate = self
 
-    startLocalServer()
-
-    Settings.serverAddress.producer
+    let serverAddressSignal = Settings.serverAddress.producer
       // TODO ignoreNil would be nice
       |> filter { $0 != nil }
       |> map { $0! }
       |> skipRepeats
+
+    serverAddressSignal
+      |> combineLatestWith(systemSignals.applicationDidBecomeActiveSignal)
       |> start(
-        next: { address in
-          NSLog("[OSCService] Server address is now \(address), registering with LiveOSC")
+        next: { tuple in
+          NSLog("[OSCService] Either we woke up or the server address changed; will make sure local server is running, and registering with Ableton at \(tuple.0)")
+          self.startLocalServerIfNecessary()
           self.registerWithLiveOSC()
         },
         error: { error in () }
       )
-
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationWillResign", name: UIApplicationWillResignActiveNotification, object: nil)
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationDidBecomeActive", name: UIApplicationDidBecomeActiveNotification, object: nil)
+    
+    systemSignals.applicationWillResignSignal.observe(next: { self.localServer.stop() })
   }
   
   func sendMessage(message: OSCMessage) {
@@ -52,15 +53,6 @@ class OSCService : NSObject, OSCServerDelegate {
     }
   }
 
-  func applicationWillResign() {
-    NSLog("[OSCService] Application will resign, stopping OSC server")
-    localServer.stop()
-  }
-
-  func applicationDidBecomeActive() {
-    NSLog("[OSCService] Application became active")
-  }
-  
   // TODO rewrite
   func handleDisconnect(error: NSError!) {
     NSLog("[OSCService] UDP socket was disconnected, attempting to reconnect")
@@ -68,9 +60,13 @@ class OSCService : NSObject, OSCServerDelegate {
     //registerWithLiveOSC()
   }
   
-  private func startLocalServer() {
-    localServer.listen(0)
-    NSLog("[OSCService] Started listening on local port \(localServer.getPort())")
+  private func startLocalServerIfNecessary() {
+    if(localServer.isClosed()) {
+      localServer.listen(0)
+      NSLog("[OSCService] Started local server on port \(localServer.getPort())")
+    } else {
+      NSLog("[OSCService] Local server already running at port \(localServer.getPort())")
+    }
   }
   
   private func registerWithLiveOSC() {
