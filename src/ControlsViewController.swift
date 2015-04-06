@@ -71,6 +71,7 @@ class ControlsViewController: UIViewController {
   }
   
   private func serverAddressChanged(serverAddress: String?) {
+    // TODO would be awesome if SettingsViewController only returned potentially valid hostnames
     if let newAddress = serverAddress {
       NSLog("Received new server address", newAddress)
       Settings.serverAddress.put(newAddress)

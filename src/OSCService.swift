@@ -18,7 +18,13 @@ class OSCService : NSObject, OSCServerDelegate {
     server.delegate = self
 
     startListeningOnAnyFreeLocalPort()
-    reconfigureServerAddress()
+    
+    Settings.serverAddress.producer.start(next: { newAddress in
+      if let address = newAddress {
+        NSLog("[OSCService] Server address is now \(address), registering with LiveOSC")
+        self.registerWithLiveOSC()
+      }
+    })
   }
   
   func sendMessage(message: OSCMessage) {
@@ -37,14 +43,11 @@ class OSCService : NSObject, OSCServerDelegate {
     }
   }
   
+  // TODO rewrite
   func handleDisconnect(error: NSError!) {
     NSLog("[OSCService] UDP socket was disconnected, attempting to reconnect")
-    startListeningOnAnyFreeLocalPort()
-    registerWithLiveOSC()
-  }
-  
-  private func reconfigureServerAddress() {
-    registerWithLiveOSC()
+    //startListeningOnAnyFreeLocalPort()
+    //registerWithLiveOSC()
   }
   
   private func startListeningOnAnyFreeLocalPort() {
