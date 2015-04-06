@@ -1,5 +1,6 @@
 import UIKit
 import Cartography
+import ReactiveCocoa
 
 class ControlsViewController: UIViewController {
   let applicationContext: ApplicationContext
@@ -22,9 +23,13 @@ class ControlsViewController: UIViewController {
     settingsButton.addTarget(self, action: "openSettings", forControlEvents: .TouchUpInside)
     view!.addSubview(settingsButton)
 
-    if SettingsRepository.getServerAddress() == nil {
-      pulsate(settingsButton)
-    }
+    Settings.serverAddress.producer
+      |> map { $0 == nil }
+      |> skipRepeats
+      |> start(
+        next: pulsateWhenTrue(settingsButton),
+        error: { _ in () }
+      )
 
     let blurEffect = UIBlurEffect(style: .Dark)
     let blurView = UIVisualEffectView(effect: blurEffect)
@@ -49,11 +54,6 @@ class ControlsViewController: UIViewController {
   
   init(applicationContext: ApplicationContext) {
     self.applicationContext = applicationContext
-    
-    if let serverAddress = SettingsRepository.getServerAddress() {
-      NSLog("Got server address from preferences: \(serverAddress)")
-      applicationContext.oscService.reconfigureServerAddress(serverAddress)
-    }
     super.init(nibName: nil, bundle: nil)
   }
   
@@ -67,31 +67,28 @@ class ControlsViewController: UIViewController {
   
   func openSettings() {
     self.navigationController?.pushViewController(
-      SettingsViewController(
-        currentServerAddress: SettingsRepository.getServerAddress(),
-        settingsSavedCallback: serverAddressChanged
-      ),
+      SettingsViewController(serverAddressProperty: Settings.serverAddress),
       animated: true
     )
   }
   
-  private func serverAddressChanged(serverAddress: String?) {
-    if let newAddress = serverAddress {
-      NSLog("Received new server address", newAddress)
-      SettingsRepository.setServerAddress(newAddress)
-      applicationContext.oscService.reconfigureServerAddress(newAddress)
+  private func pulsateWhenTrue(view: UIView)(state: Bool) {
+    if state {
+      view.layer.addAnimation(pulsatingAnimation(), forKey: "pulsatingSettingsIcon")
+    } else {
+      view.layer.removeAnimationForKey("pulsatingSettingsIcon")
     }
   }
   
-  private func pulsate(view: UIView) {
+  private func pulsatingAnimation() -> CABasicAnimation {
     let pulsatingAnimation = CABasicAnimation(keyPath: "transform.scale")
     pulsatingAnimation.fromValue = 1.0
     pulsatingAnimation.toValue = 1.3
     pulsatingAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
     pulsatingAnimation.duration = 0.5
     pulsatingAnimation.autoreverses = true
-    pulsatingAnimation.repeatCount = 5
-    view.layer.addAnimation(pulsatingAnimation, forKey: nil)
+    pulsatingAnimation.repeatCount = FLT_MAX
+    return pulsatingAnimation
   }
 }
 

@@ -4,26 +4,42 @@ import LlamaKit
 
 class OSCService : NSObject, OSCServerDelegate {
   private let client = OSCClient()
-  private let server = OSCServer()
-  private let incomingMessagesSink : SinkOf<Event<OSCMessage, NoError>>
-  private var serverAddress: String?
+  private let localServer = OSCServer()
+  private let incomingMessagesSink: SinkOf<Event<OSCMessage, NoError>>
 
-  let incomingMessagesSignal : Signal<OSCMessage, NoError>
-
-  override init() {
+  let incomingMessagesSignal: Signal<OSCMessage, NoError>
+  
+  init(applicationState: ApplicationState) {
     let (signal, sink) = Signal<OSCMessage, NoError>.pipe()
     incomingMessagesSignal = signal
     incomingMessagesSink = sink
 
     super.init()
-    server.delegate = self
-    startListeningOnAnyFreeLocalPort()
+    localServer.delegate = self
+
+    let serverAddressSignal = Settings.serverAddress.producer
+      // TODO ignoreNil would be nice
+      |> filter { $0 != nil }
+      |> map { $0! }
+      |> skipRepeats
+
+    let applicationBecameActive = applicationState.active.producer |> filter { $0 }
+    let applicationResigned = applicationState.active.producer |> filter { !$0 }
+    
+    serverAddressSignal
+      |> combineLatestWith(applicationBecameActive)
+      |> start(
+        next: { _ in self.ensureConnected() },
+        error: { _ in () }
+      )
+    
+    applicationResigned |> start(next: { _ in self.stopLocalServer() }, error: { _ in () })
   }
   
   func sendMessage(message: OSCMessage) {
-    if let address = serverAddress {
+    if let serverAddress = Settings.serverAddress.value {
       NSLog("[OSCService] Sending message \(message)")
-      client.sendMessage(message, to: "udp://\(serverAddress!):9000")
+      client.sendMessage(message, to: "udp://\(serverAddress):9000")
     } else {
       NSLog("[OSCService] WARNING: Server address not configured, not sending message \(message)")
     }
@@ -35,25 +51,34 @@ class OSCService : NSObject, OSCServerDelegate {
       incomingMessagesSink.put(Event.Next(Box(message)))
     }
   }
-  
+
   func handleDisconnect(error: NSError!) {
-    NSLog("[OSCService] UDP socket was disconnected, attempting to reconnect")
-    startListeningOnAnyFreeLocalPort()
+    NSLog("[OSCService] Local UDP server socket was disconnected: Error: \(error)")
+  }
+  
+  // TODO This is currently public so that we can call it when manually refreshing scenes.
+  //      Ideally, connections would be automatically kept alive in the background.
+  func ensureConnected() {
+    NSLog("[OSCService] Ensuring we're able to communicate with Ableton at \(Settings.serverAddress.value)")
+    startLocalServerIfNecessary()
     registerWithLiveOSC()
   }
   
-  func reconfigureServerAddress(address: String) {
-    serverAddress = address
-    registerWithLiveOSC()
+  private func startLocalServerIfNecessary() {
+    if(localServer.isClosed()) {
+      localServer.listen(0)
+      NSLog("[OSCService] Started local server on port \(localServer.getPort())")
+    } else {
+      NSLog("[OSCService] Local server already running at port \(localServer.getPort())")
+    }
   }
   
-  private func startListeningOnAnyFreeLocalPort() {
-    server.listen(0)
-    NSLog("[OSCService] Started listening on local port \(server.getPort())")
+  private func stopLocalServer() {
+    localServer.stop()
   }
   
   private func registerWithLiveOSC() {
-    sendMessage(OSCMessage(address: "/remix/set_peer", arguments: ["", server.getPort()]))
+    sendMessage(OSCMessage(address: "/remix/set_peer", arguments: ["", localServer.getPort()]))
   }
 }
 

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		19063F531A70289400EE34AE /* ApplicationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19063F521A70289400EE34AE /* ApplicationContext.swift */; };
+		191698D31AD2D69D000757E7 /* ApplicationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191698D21AD2D69D000757E7 /* ApplicationState.swift */; };
 		192F521C1A73BE460072DEF7 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192F521B1A73BE460072DEF7 /* SettingsViewController.swift */; };
 		193EEB641A50368E0035C59F /* OSCService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193EEB631A50368E0035C59F /* OSCService.swift */; };
 		1947F4CF1AC0C7970011C9BC /* ControlsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1947F4CE1AC0C7970011C9BC /* ControlsViewController.swift */; };
@@ -22,7 +23,7 @@
 		19B6B5911A2F9B4000DEA4B2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19B6B5901A2F9B4000DEA4B2 /* Images.xcassets */; };
 		19B6B5941A2F9B4000DEA4B2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19B6B5921A2F9B4000DEA4B2 /* LaunchScreen.xib */; };
 		19B6B5A01A2F9B4000DEA4B2 /* SceneLauncherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B6B59F1A2F9B4000DEA4B2 /* SceneLauncherTests.swift */; };
-		19C692CC1ACB203F002D8762 /* SettingsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C692CB1ACB203F002D8762 /* SettingsRepository.swift */; };
+		19C692CC1ACB203F002D8762 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C692CB1ACB203F002D8762 /* Settings.swift */; };
 		19DA8FCA1A6ACD960033A1C5 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DA8FC91A6ACD960033A1C5 /* Scene.swift */; };
 		19DC46FA1A7016B5004DB578 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DC46F91A7016B5004DB578 /* MainViewController.swift */; };
 		19E4F7AF1A3281F3002DE579 /* Dummy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 19E4F7AE1A3281F3002DE579 /* Dummy.cpp */; };
@@ -44,6 +45,7 @@
 /* Begin PBXFileReference section */
 		19063F521A70289400EE34AE /* ApplicationContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationContext.swift; sourceTree = "<group>"; };
 		190DE7201A6C7B7700754757 /* LlamaKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LlamaKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		191698D21AD2D69D000757E7 /* ApplicationState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationState.swift; sourceTree = "<group>"; };
 		192F521B1A73BE460072DEF7 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsViewController.swift; path = src/SettingsViewController.swift; sourceTree = "<group>"; };
 		193539F91A6C712E00D08D3B /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ReactiveCocoa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		193EEB631A50368E0035C59F /* OSCService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OSCService.swift; path = src/OSCService.swift; sourceTree = "<group>"; };
@@ -63,7 +65,7 @@
 		19B6B5991A2F9B4000DEA4B2 /* SceneLauncherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SceneLauncherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B6B59E1A2F9B4000DEA4B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19B6B59F1A2F9B4000DEA4B2 /* SceneLauncherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneLauncherTests.swift; sourceTree = "<group>"; };
-		19C692CB1ACB203F002D8762 /* SettingsRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsRepository.swift; sourceTree = "<group>"; };
+		19C692CB1ACB203F002D8762 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		19DA8FC91A6ACD960033A1C5 /* Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Scene.swift; path = src/Scene.swift; sourceTree = "<group>"; };
 		19DC46F91A7016B5004DB578 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = src/MainViewController.swift; sourceTree = "<group>"; };
 		19E4F7AB1A327F66002DE579 /* SceneLauncher-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "SceneLauncher-Bridging-Header.h"; path = "src/SceneLauncher-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
@@ -171,14 +173,15 @@
 			isa = PBXGroup;
 			children = (
 				19E4F7AB1A327F66002DE579 /* SceneLauncher-Bridging-Header.h */,
-				19B6B5891A2F9B4000DEA4B2 /* AppDelegate.swift */,
 				19B6B5901A2F9B4000DEA4B2 /* Images.xcassets */,
 				19B6B5921A2F9B4000DEA4B2 /* LaunchScreen.xib */,
 				19B6B5871A2F9B4000DEA4B2 /* Supporting Files */,
 				19E4F7AE1A3281F3002DE579 /* Dummy.cpp */,
+				19B6B5891A2F9B4000DEA4B2 /* AppDelegate.swift */,
 				19063F521A70289400EE34AE /* ApplicationContext.swift */,
+				191698D21AD2D69D000757E7 /* ApplicationState.swift */,
+				19C692CB1ACB203F002D8762 /* Settings.swift */,
 				19A17ECA1ABB58F0004160F0 /* UIConstants.swift */,
-				19C692CB1ACB203F002D8762 /* SettingsRepository.swift */,
 			);
 			name = Common;
 			path = src;
@@ -400,12 +403,13 @@
 				19063F531A70289400EE34AE /* ApplicationContext.swift in Sources */,
 				19DA8FCA1A6ACD960033A1C5 /* Scene.swift in Sources */,
 				19FB71D41A3F78C300D77F1E /* SceneService.swift in Sources */,
+				191698D31AD2D69D000757E7 /* ApplicationState.swift in Sources */,
 				19A5C7851A359A7600DF5D6B /* SceneCell.swift in Sources */,
 				1947F4CF1AC0C7970011C9BC /* ControlsViewController.swift in Sources */,
 				19E4F7AF1A3281F3002DE579 /* Dummy.cpp in Sources */,
 				19DC46FA1A7016B5004DB578 /* MainViewController.swift in Sources */,
 				192F521C1A73BE460072DEF7 /* SettingsViewController.swift in Sources */,
-				19C692CC1ACB203F002D8762 /* SettingsRepository.swift in Sources */,
+				19C692CC1ACB203F002D8762 /* Settings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

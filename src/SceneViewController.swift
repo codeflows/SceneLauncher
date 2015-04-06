@@ -86,19 +86,7 @@ class SceneViewController: UICollectionViewController, UICollectionViewDelegate,
   }
   
   func refreshScenesManually() {
-    // TODO jari: inelegant "error handling" here
-    //
-    // Messages are lost due to UDP dropouts etc, so make sure
-    // LiveOSC knows our address whenever the user manually refreshes the list
-    //
-    // A much more robust way would be to e.g.
-    // 1) broadcast our new address to LiveOSC
-    // 2) ping for a response from the server, wait for an answer
-    // 3) possibly retry a couple of times
-    // 4) only then proceed with sending any other messages
-    if let serverAddress = SettingsRepository.getServerAddress() {
-      osc.reconfigureServerAddress(serverAddress)
-    }
+    osc.ensureConnected()
     refreshScenes()
   }
   

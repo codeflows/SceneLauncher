@@ -1,16 +1,15 @@
 import UIKit
 import Cartography
-
-typealias ServerAddressChangedCallback = (String?) -> ()
+import ReactiveCocoa
 
 class SettingsViewController: UIViewController, UITextFieldDelegate {
-  let settingsSavedCallback: ServerAddressChangedCallback
-  let serverAddressTextField: UITextField
+  private let serverAddressProperty: MutableProperty<String?>
+  private let serverAddressTextField: UITextField
   
-  init(currentServerAddress: String?, settingsSavedCallback: ServerAddressChangedCallback) {
-    self.settingsSavedCallback = settingsSavedCallback
+  init(serverAddressProperty: MutableProperty<String?>) {
+    self.serverAddressProperty = serverAddressProperty
     self.serverAddressTextField = UITextField()
-    self.serverAddressTextField.text = currentServerAddress
+    self.serverAddressTextField.text = serverAddressProperty.value
     super.init(nibName: nil, bundle: nil)
   }
   
@@ -75,7 +74,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
   
   override func viewWillDisappear(animated: Bool) {
     super.viewWillDisappear(animated)
-    settingsSavedCallback(serverAddressTextField.text)
+    serverAddressProperty.put(serverAddressTextField.text.isEmpty ? nil : serverAddressTextField.text)
   }
   
   func textFieldShouldReturn(textField: UITextField) -> Bool {
