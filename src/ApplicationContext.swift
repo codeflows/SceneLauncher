@@ -1,9 +1,9 @@
 class ApplicationContext {
-  let systemSignals: SystemSignals
+  let applicationState: ApplicationState
   let oscService: OSCService
   
   init() {
-    systemSignals = SystemSignals()
-    oscService = OSCService(systemSignals: systemSignals)
+    applicationState = ApplicationState()
+    oscService = OSCService(applicationState: applicationState)
   }
 }

@@ -9,7 +9,7 @@ class OSCService : NSObject, OSCServerDelegate {
 
   let incomingMessagesSignal: Signal<OSCMessage, NoError>
   
-  init(systemSignals: SystemSignals) {
+  init(applicationState: ApplicationState) {
     let (signal, sink) = Signal<OSCMessage, NoError>.pipe()
     incomingMessagesSignal = signal
     incomingMessagesSink = sink
@@ -23,15 +23,18 @@ class OSCService : NSObject, OSCServerDelegate {
       |> map { $0! }
       |> skipRepeats
 
+    let applicationBecameActive = applicationState.active.producer |> filter { $0 }
+    let applicationResigned = applicationState.active.producer |> filter { !$0 }
+    
     serverAddressSignal
-      |> combineLatestWith(systemSignals.applicationDidBecomeActiveSignal)
+      |> combineLatestWith(applicationBecameActive)
       |> map { $0.0 }
       |> start(
         next: ensureConnected,
-        error: { error in () }
+        error: { _ in () }
       )
     
-    systemSignals.applicationWillResignSignal.observe(next: { self.localServer.stop() })
+    applicationResigned |> start(next: { _ in self.stopLocalServer() }, error: { _ in () })
   }
   
   func sendMessage(message: OSCMessage) {
@@ -67,6 +70,10 @@ class OSCService : NSObject, OSCServerDelegate {
     } else {
       NSLog("[OSCService] Local server already running at port \(localServer.getPort())")
     }
+  }
+  
+  private func stopLocalServer() {
+    localServer.stop()
   }
   
   private func registerWithLiveOSC() {

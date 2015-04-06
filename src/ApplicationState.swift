@@ -2,16 +2,13 @@ import Foundation
 import ReactiveCocoa
 import LlamaKit
 
-class SystemSignals: NSObject {
-  let applicationWillResignSignal: Signal<(), NoError>
-  let applicationDidBecomeActiveSignal: Signal<(), NoError>
-
-  private let resignSink: SinkOf<Event<(), NoError>>
-  private let activeSink: SinkOf<Event<(), NoError>>
-
+class ApplicationState: NSObject {
+  let active: PropertyOf<Bool>
+  
+  private let mutableActive = MutableProperty<Bool>(false)
+  
   override init() {
-    (applicationWillResignSignal, resignSink) = Signal<(), NoError>.pipe()
-    (applicationDidBecomeActiveSignal, activeSink) = Signal<(), NoError>.pipe()
+    active = PropertyOf(mutableActive)
     
     super.init()
     
@@ -21,10 +18,11 @@ class SystemSignals: NSObject {
   
   func _applicationDidBecomeActive() {
     NSLog("[SystemSignals] Application became active")
-    activeSink.put(Event.Next(Box(())))
+    mutableActive.put(true)
   }
   
   func _applicationWillResign() {
     NSLog("[SystemSignals] Application will resign")
-    resignSink.put(Event.Next(Box(())))  }
+    mutableActive.put(false)
+  }
 }
