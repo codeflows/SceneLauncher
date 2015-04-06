@@ -17,12 +17,12 @@ class ApplicationState: NSObject {
   }
   
   func _applicationDidBecomeActive() {
-    NSLog("[SystemSignals] Application became active")
+    NSLog("[ApplicationState] Application became active")
     mutableActive.put(true)
   }
   
   func _applicationWillResign() {
-    NSLog("[SystemSignals] Application will resign")
+    NSLog("[ApplicationState] Application will resign")
     mutableActive.put(false)
   }
 }
