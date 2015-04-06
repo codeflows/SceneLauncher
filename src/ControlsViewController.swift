@@ -49,11 +49,6 @@ class ControlsViewController: UIViewController {
   
   init(applicationContext: ApplicationContext) {
     self.applicationContext = applicationContext
-    
-    if let serverAddress = Settings.serverAddress.value {
-      NSLog("Got server address from preferences: \(serverAddress)")
-      applicationContext.oscService.reconfigureServerAddress(serverAddress)
-    }
     super.init(nibName: nil, bundle: nil)
   }
   
@@ -79,7 +74,7 @@ class ControlsViewController: UIViewController {
     if let newAddress = serverAddress {
       NSLog("Received new server address", newAddress)
       Settings.serverAddress.put(newAddress)
-      applicationContext.oscService.reconfigureServerAddress(newAddress)
+      applicationContext.oscService.reconfigureServerAddress()
     }
   }
   

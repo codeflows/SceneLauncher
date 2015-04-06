@@ -97,7 +97,7 @@ class SceneViewController: UICollectionViewController, UICollectionViewDelegate,
     // 3) possibly retry a couple of times
     // 4) only then proceed with sending any other messages
     if let serverAddress = Settings.serverAddress.value {
-      osc.reconfigureServerAddress(serverAddress)
+      osc.reconfigureServerAddress()
     }
     refreshScenes()
   }

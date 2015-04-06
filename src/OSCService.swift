@@ -16,7 +16,9 @@ class OSCService : NSObject, OSCServerDelegate {
 
     super.init()
     server.delegate = self
+
     startListeningOnAnyFreeLocalPort()
+    reconfigureServerAddress()
   }
   
   func sendMessage(message: OSCMessage) {
@@ -41,7 +43,7 @@ class OSCService : NSObject, OSCServerDelegate {
     registerWithLiveOSC()
   }
   
-  func reconfigureServerAddress(address: String) {
+  func reconfigureServerAddress() {
     registerWithLiveOSC()
   }
   
