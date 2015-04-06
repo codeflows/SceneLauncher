@@ -19,11 +19,18 @@ class OSCService : NSObject, OSCServerDelegate {
 
     startListeningOnAnyFreeLocalPort()
     
-    // TODO ignoreNil would be nice
-    Settings.serverAddress.producer |> filter { $0 != nil } |> map { $0! } |> start(next: { address in
-      NSLog("[OSCService] Server address is now \(address), registering with LiveOSC")
-      self.registerWithLiveOSC()
-    }, error: { error in () })
+    Settings.serverAddress.producer
+      // TODO ignoreNil would be nice
+      |> filter { $0 != nil }
+      |> map { $0! }
+      |> skipRepeats
+      |> start(
+        next: { address in
+          NSLog("[OSCService] Server address is now \(address), registering with LiveOSC")
+          self.registerWithLiveOSC()
+        },
+        error: { error in () }
+      )
   }
   
   func sendMessage(message: OSCMessage) {
