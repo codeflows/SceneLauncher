@@ -53,11 +53,8 @@ class OSCService : NSObject, OSCServerDelegate {
     }
   }
 
-  // TODO rewrite
   func handleDisconnect(error: NSError!) {
-    NSLog("[OSCService] UDP socket was disconnected, attempting to reconnect")
-    //startListeningOnAnyFreeLocalPort()
-    //registerWithLiveOSC()
+    NSLog("[OSCService] Local UDP server socket was disconnected: Error: \(error)")
   }
   
   private func startLocalServerIfNecessary() {
