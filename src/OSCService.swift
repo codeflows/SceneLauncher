@@ -47,9 +47,16 @@ class OSCService : NSObject, OSCServerDelegate {
   
   func handleMessage(incomingMessage: OSCMessage!) {
     if let message = incomingMessage {
-      NSLog("[OSCService] Received message \(message)")
+      if shouldLog(message) {
+        NSLog("[OSCService] Received message \(message)")
+      }
       incomingMessagesSink.put(Event.Next(Box(message)))
     }
+  }
+  
+  // Try not to flood the device log
+  private func shouldLog(message: OSCMessage) -> Bool {
+    return message.address != "/live/track/meter" && message.address != "/live/device/param"
   }
 
   func handleDisconnect(error: NSError!) {
