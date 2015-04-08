@@ -36,23 +36,20 @@ class AbletonSceneService : NSObject, SceneService {
         |> take(1)
         |> map { $0.arguments[0] as! Int }
 
-    numberOfScenes |> start(
-      next: { n in println("Got scenes \(n)") },
-      error: { _ in () }
-    )
+    let scenes = numberOfScenes |> joinMap(.Merge, handleSceneListResponse)
 
-    // TODO really, we'd like to flatMap the Signal(numberOfScenes) to Signal([Scene]) and timeout in one place
-    /*numberOfScenes.observe(next: { expectedNumberOfScenes in
-      self.handleSceneListResponse(callback, expectedNumberOfScenes: expectedNumberOfScenes)
-      self.osc.sendMessage(OSCMessage(address: "/live/name/scene", arguments: []))
-    }, error: { err in
-      callback(failure(err))
-    })*/
+    scenes |> start(
+      next: { scenes in callback(success(scenes)) },
+      error: { err in callback(failure(err)) },
+      completed: { println("Completed combined signal") }
+    )
   }
   
-  /*private func handleSceneListResponse(callback: ScenesCallback, expectedNumberOfScenes: Int) {
-    let scenesSignal : Signal<[Scene], SceneLoadingError> =
-      incomingMessages(timeout: 3)
+  private func handleSceneListResponse(expectedNumberOfScenes: Int) -> SignalProducer<[Scene], SceneLoadingError> {
+    let replies = send(OSCMessage(address: "/live/name/scene", arguments: []))
+    
+    let scenesSignal : SignalProducer<[Scene], SceneLoadingError> =
+      incomingMessages(replies, timeout: 3)
         |> filter { $0.address == "/live/name/scene" }
         |> take(expectedNumberOfScenes)
         |> map { Scene(order: $0.arguments[0] as! Int, name: self.trim($0.arguments[1] as! String)) }
@@ -63,12 +60,10 @@ class AbletonSceneService : NSObject, SceneService {
     }
     
     // TODO handle UI thread stuff in the view controller
-    let tempSignal = sortedScenesSignal |> observeOn(UIScheduler())
-    tempSignal.observe(
-      next: { scenes in callback(success(scenes)) },
-      error: { err in callback(failure(err)) }
-    )
-  }*/
+    return sortedScenesSignal
+      // TODO crashes
+      // |> observeOn(UIScheduler())
+  }
   
   private func incomingMessages(replies: SignalProducer<OSCMessage, NoError>, timeout: NSTimeInterval) -> SignalProducer<OSCMessage, SceneLoadingError> {
     return replies
