@@ -30,31 +30,27 @@ class AbletonSceneService : NSObject, SceneService {
     
     let reply = send(OSCMessage(address: "/live/scenes", arguments: []))
     
-    reply |> start(
-      next: { reply in println("Got reply \(reply)") },
-      error: { _ in () }
-    )
-    
-    if(1===1){return}
-    
-    let numberOfScenes : Signal<Int, SceneLoadingError> =
-      incomingMessages(timeout: 2)
+    let numberOfScenes : SignalProducer<Int, SceneLoadingError> =
+      incomingMessages(reply, timeout: 2)
         |> filter { $0.address == "/live/scenes" }
         |> take(1)
         |> map { $0.arguments[0] as! Int }
 
+    numberOfScenes |> start(
+      next: { n in println("Got scenes \(n)") },
+      error: { _ in () }
+    )
+
     // TODO really, we'd like to flatMap the Signal(numberOfScenes) to Signal([Scene]) and timeout in one place
-    numberOfScenes.observe(next: { expectedNumberOfScenes in
+    /*numberOfScenes.observe(next: { expectedNumberOfScenes in
       self.handleSceneListResponse(callback, expectedNumberOfScenes: expectedNumberOfScenes)
       self.osc.sendMessage(OSCMessage(address: "/live/name/scene", arguments: []))
     }, error: { err in
       callback(failure(err))
-    })
-
-    osc.sendMessage(OSCMessage(address: "/live/scenes", arguments: []))
+    })*/
   }
   
-  private func handleSceneListResponse(callback: ScenesCallback, expectedNumberOfScenes: Int) {
+  /*private func handleSceneListResponse(callback: ScenesCallback, expectedNumberOfScenes: Int) {
     let scenesSignal : Signal<[Scene], SceneLoadingError> =
       incomingMessages(timeout: 3)
         |> filter { $0.address == "/live/name/scene" }
@@ -72,10 +68,10 @@ class AbletonSceneService : NSObject, SceneService {
       next: { scenes in callback(success(scenes)) },
       error: { err in callback(failure(err)) }
     )
-  }
+  }*/
   
-  private func incomingMessages(#timeout: NSTimeInterval) -> Signal<OSCMessage, SceneLoadingError> {
-    return osc.incomingMessagesSignal
+  private func incomingMessages(replies: SignalProducer<OSCMessage, NoError>, timeout: NSTimeInterval) -> SignalProducer<OSCMessage, SceneLoadingError> {
+    return replies
       |> mapError { _ in .Unknown }
       |> try { message in
         if(message.address == "/remix/error") {
@@ -83,7 +79,8 @@ class AbletonSceneService : NSObject, SceneService {
         }
         return success()
       }
-      |> timeoutWithError(.Timeout, afterInterval: timeout, onScheduler: QueueScheduler.mainQueueScheduler)
+      // FIXME this crashes!
+      //|> timeoutWithError(.Timeout, afterInterval: timeout, onScheduler: QueueScheduler.mainQueueScheduler)
   }
   
   private func parseLiveOSCErrorReason(message: OSCMessage) -> String {
