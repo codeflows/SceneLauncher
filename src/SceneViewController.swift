@@ -98,8 +98,8 @@ class SceneViewController: UICollectionViewController, UICollectionViewDelegate,
   }
 
   private func refreshScenes() {
-    dataSource.reloadData() { result in
-      if let error = result.error {
+    dataSource.reloadData() { maybeError in
+      if let error = maybeError {
         self.handleError(error)
       } else {
         self.helpMessageView.hidden = true

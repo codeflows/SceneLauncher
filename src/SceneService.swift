@@ -2,10 +2,8 @@ import LlamaKit
 import ReactiveCocoa
 
 protocol SceneService {
-  func listScenes(callback: ScenesCallback)
+  func listScenes() -> SignalProducer<[Scene], SceneLoadingError>
 }
-
-typealias ScenesCallback = (Result<[Scene], SceneLoadingError>) -> ()
 
 public enum SceneLoadingError {
   case Unknown

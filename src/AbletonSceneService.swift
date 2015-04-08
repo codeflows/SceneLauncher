@@ -18,14 +18,12 @@ class AbletonSceneService : NSObject, SceneService {
     }
   }
   
-  func listScenes(callback: ScenesCallback) {
+  func listScenes() -> SignalProducer<[Scene], SceneLoadingError> {
     // TODO currently many requests might be waiting at the same time
     // TODO reliable mechanism for pinging if the server is still reachable
-    // TODO refactor: abstraction for sending and receiving message of the same address (e.g. both cases below)
 
     if Settings.serverAddress.value == nil {
-      callback(failure(.NoAddressConfigured))
-      return
+      return SignalProducer(error: .NoAddressConfigured)
     }
     
     let reply = send(OSCMessage(address: "/live/scenes", arguments: []))
@@ -36,13 +34,7 @@ class AbletonSceneService : NSObject, SceneService {
         |> take(1)
         |> map { $0.arguments[0] as! Int }
 
-    let scenes = numberOfScenes |> joinMap(.Merge, handleSceneListResponse)
-
-    scenes |> start(
-      next: { scenes in callback(success(scenes)) },
-      error: { err in callback(failure(err)) },
-      completed: { println("Completed combined signal") }
-    )
+    return numberOfScenes |> joinMap(.Merge, handleSceneListResponse)
   }
   
   private func handleSceneListResponse(expectedNumberOfScenes: Int) -> SignalProducer<[Scene], SceneLoadingError> {
