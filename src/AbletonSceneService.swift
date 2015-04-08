@@ -8,6 +8,16 @@ class AbletonSceneService : NSObject, SceneService {
     self.osc = osc
   }
   
+  private func send(message: OSCMessage) -> SignalProducer<OSCMessage, NoError> {
+    println("Creating signal producer");
+    return SignalProducer { observer, _ in
+      println("Starting producer!")
+      self.osc.incomingMessagesSignal.observe(observer)
+      println("Sending message...")
+      self.osc.sendMessage(message)
+    }
+  }
+  
   func listScenes(callback: ScenesCallback) {
     // TODO currently many requests might be waiting at the same time
     // TODO reliable mechanism for pinging if the server is still reachable
@@ -17,6 +27,15 @@ class AbletonSceneService : NSObject, SceneService {
       callback(failure(.NoAddressConfigured))
       return
     }
+    
+    let reply = send(OSCMessage(address: "/live/scenes", arguments: []))
+    
+    reply |> start(
+      next: { reply in println("Got reply \(reply)") },
+      error: { _ in () }
+    )
+    
+    if(1===1){return}
     
     let numberOfScenes : Signal<Int, SceneLoadingError> =
       incomingMessages(timeout: 2)
