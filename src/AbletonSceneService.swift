@@ -53,8 +53,7 @@ class AbletonSceneService : NSObject, SceneService {
     
     // TODO handle UI thread stuff in the view controller
     return sortedScenesSignal
-      // TODO crashes
-      // |> observeOn(UIScheduler())
+      |> observeOn(UIScheduler())
   }
   
   private func incomingMessages(replies: SignalProducer<OSCMessage, NoError>, timeout: NSTimeInterval) -> SignalProducer<OSCMessage, SceneLoadingError> {
@@ -66,8 +65,7 @@ class AbletonSceneService : NSObject, SceneService {
         }
         return success()
       }
-      // FIXME this crashes!
-      //|> timeoutWithError(.Timeout, afterInterval: timeout, onScheduler: QueueScheduler.mainQueueScheduler)
+      |> timeoutWithError(.Timeout, afterInterval: timeout, onScheduler: QueueScheduler.mainQueueScheduler)
   }
   
   private func parseLiveOSCErrorReason(message: OSCMessage) -> String {
