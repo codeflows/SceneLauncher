@@ -1,2 +1,2 @@
-github "robb/Cartography"
-github "ReactiveCocoa/ReactiveCocoa" "daab3c7ade3cd4dd190a1015a050882134cd4bec"
+github "robb/Cartography" "xcode6-3"
+github "ReactiveCocoa/ReactiveCocoa" "swift-development"

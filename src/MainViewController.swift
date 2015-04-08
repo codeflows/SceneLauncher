@@ -4,7 +4,7 @@ import Cartography
 class MainViewController: UIViewController {
   let applicationContext: ApplicationContext
   
-  override init() {
+  init() {
     applicationContext = ApplicationContext()
     super.init(nibName: nil, bundle: nil);
   }

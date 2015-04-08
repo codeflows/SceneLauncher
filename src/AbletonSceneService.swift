@@ -22,7 +22,7 @@ class AbletonSceneService : NSObject, SceneService {
       incomingMessages(timeout: 2)
         |> filter { $0.address == "/live/scenes" }
         |> take(1)
-        |> map { $0.arguments[0] as Int }
+        |> map { $0.arguments[0] as! Int }
 
     // TODO really, we'd like to flatMap the Signal(numberOfScenes) to Signal([Scene]) and timeout in one place
     numberOfScenes.observe(next: { expectedNumberOfScenes in
@@ -40,7 +40,7 @@ class AbletonSceneService : NSObject, SceneService {
       incomingMessages(timeout: 3)
         |> filter { $0.address == "/live/name/scene" }
         |> take(expectedNumberOfScenes)
-        |> map { Scene(order: $0.arguments[0] as Int, name: self.trim($0.arguments[1] as String)) }
+        |> map { Scene(order: $0.arguments[0] as! Int, name: self.trim($0.arguments[1] as! String)) }
         |> collect
     
     let sortedScenesSignal = scenesSignal |> map { scenes in
@@ -69,7 +69,7 @@ class AbletonSceneService : NSObject, SceneService {
   
   private func parseLiveOSCErrorReason(message: OSCMessage) -> String {
     if(message.arguments.count == 1 && message.arguments[0] is String) {
-      let errorMessage = message.arguments[0] as String
+      let errorMessage = message.arguments[0] as! String
       
       if errorMessage.rangeOfString("UnicodeEncodeError") != nil {
         return "Unicode error: LiveOSC doesn't support special unicode characters, please check your scene names."

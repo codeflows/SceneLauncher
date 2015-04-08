@@ -2,7 +2,7 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-  let window = UIWindow(frame: UIScreen.mainScreen().bounds)
+  let appWindow = UIWindow(frame: UIScreen.mainScreen().bounds)
   
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
    
@@ -14,10 +14,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName : font], forState: UIControlState.Normal)
     }
     
-    window.rootViewController = navigationController
+    appWindow.rootViewController = navigationController
     
-    window.backgroundColor = UIColor.whiteColor()
-    window.makeKeyAndVisible()
+    appWindow.backgroundColor = UIColor.whiteColor()
+    appWindow.makeKeyAndVisible()
     return true
   }
 }
