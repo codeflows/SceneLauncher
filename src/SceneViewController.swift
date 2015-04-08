@@ -35,7 +35,7 @@ class SceneViewController: UICollectionViewController, UICollectionViewDelegate,
 
   private let sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: UIConstants.controlsHeight, right: 0)
   
-  func collectionView(collectionView: UICollectionView!, layout collectionViewLayout: UICollectionViewLayout!, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+  func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
     return sectionInsets
   }
 
@@ -68,7 +68,7 @@ class SceneViewController: UICollectionViewController, UICollectionViewDelegate,
       osc.incomingMessagesSignal
         |> filter { $0.address == "/live/scene" }
         // This seems to be off-by-one??!
-        |> map { ($0.arguments[0] as Int) - 1 }
+        |> map { ($0.arguments[0] as! Int) - 1 }
         |> observeOn(UIScheduler())
 
     sceneNumberChanges.observe(next: { sceneNumber in

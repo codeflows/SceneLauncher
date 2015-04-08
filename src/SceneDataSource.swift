@@ -19,7 +19,7 @@ class SceneDataSource: NSObject, UICollectionViewDataSource {
   }
   
   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellId, forIndexPath: indexPath) as SceneCell
+    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellId, forIndexPath: indexPath) as! SceneCell
     cell.titleLabel.text = String(scenes[indexPath.row].name)
     return cell
   }
