@@ -45,6 +45,7 @@ class AbletonSceneService : NSObject, SceneService {
         |> filter { $0.address == "/live/name/scene" }
         |> take(expectedNumberOfScenes)
         |> map { Scene(order: $0.arguments[0] as! Int, name: self.trim($0.arguments[1] as! String)) }
+        // FIXME this seems to crash now - but usually on 2nd run. Are we leaking something?
         |> collect
     
     let sortedScenesSignal = scenesSignal |> map { scenes in
