@@ -4,10 +4,20 @@ PODS:
     - CocoaAsyncSocket (~> 7.3)
 
 DEPENDENCIES:
-  - OSCKit (~> 0.3.2)
+  - OSCKit (from `https://github.com/codeflows/OSCKit.git`, commit `11b695b8ac57de731f4c6e0a77eb69989a4fdf27`)
+
+EXTERNAL SOURCES:
+  OSCKit:
+    :commit: 11b695b8ac57de731f4c6e0a77eb69989a4fdf27
+    :git: https://github.com/codeflows/OSCKit.git
+
+CHECKOUT OPTIONS:
+  OSCKit:
+    :commit: 11b695b8ac57de731f4c6e0a77eb69989a4fdf27
+    :git: https://github.com/codeflows/OSCKit.git
 
 SPEC CHECKSUMS:
-  CocoaAsyncSocket: b0a1a89e7ea4c1c0ea4ec83f57d55117d3cdae06
-  OSCKit: 74bef0884113115ec798b6d90f5083b7c4d70256
+  CocoaAsyncSocket: 7cbf214b27f8e7f7574db6a3fd96352ffaed433d
+  OSCKit: 60460f9ff8765ea6ddbf0a2528f0371745702728
 
-COCOAPODS: 0.35.0
+COCOAPODS: 0.36.3
