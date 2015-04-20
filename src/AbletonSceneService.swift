@@ -34,7 +34,7 @@ class AbletonSceneService : NSObject, SceneService {
         |> take(1)
         |> map { $0.arguments[0] as! Int }
 
-    return numberOfScenes |> joinMap(.Merge, handleSceneListResponse)
+    return numberOfScenes |> flatMap(.Merge, handleSceneListResponse)
   }
   
   private func handleSceneListResponse(expectedNumberOfScenes: Int) -> SignalProducer<[Scene], SceneLoadingError> {
