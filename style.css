@@ -37,9 +37,12 @@ img.logo, section, footer {
   margin-bottom: 30px;
 }
 
+.introduction p {
+  line-height: 1.2em;
+}
+
 h1 {
-  font-weight: 600;
-  letter-spacing: 1px;
+  font-weight: 500;
 }
 
 h2 {
