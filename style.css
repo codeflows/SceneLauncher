@@ -3,7 +3,6 @@ body {
   background-color: #1a1a1a;
   color: #ccc;
   font-family: Avenir, arial, sans-serif;
-  line-height: 1.4em;
 }
 
 a {
@@ -28,7 +27,7 @@ section, footer {
 
 .introduction {
   position: relative;
-  padding: 40px 0 1px 0;
+  padding: 40px 0 0;
   text-align: center;
   font-size: 1.7em;
   font-family: Avenir;
@@ -37,16 +36,20 @@ section, footer {
 
 .introduction img {
   display: block;
-  margin-bottom: 50px;
   margin-left: auto;
   margin-right: auto;
 }
 
-.introduction p {
-  line-height: 1.2em;
+.introduction-tagline-container {
+  padding: 40px 0;
 }
 
-.introduction h1 {
+.introduction-tagline {
+  padding: 3px 6px;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.introduction-title {
   letter-spacing: 1px;
   font-weight: 500;
 }
@@ -54,6 +57,10 @@ section, footer {
 h2 {
   font-size: 1.3em;
   font-weight: 400;
+}
+
+div.app-store {
+  padding-bottom: 30px;
 }
 
 div.app-store a {
@@ -83,9 +90,6 @@ section.help img {
 }
 
 section.help p.intro {
-  font-size: 1.5em;
-  font-style: italic;
-  text-align: center;
   margin-bottom: 30px;
 }
 
@@ -113,7 +117,7 @@ header {
 }
 
 .player-overlay {
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0,0,0,0.1);
 }
 
 #player {
