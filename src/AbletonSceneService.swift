@@ -8,55 +8,45 @@ class AbletonSceneService : NSObject, SceneService {
     self.osc = osc
   }
   
-  func listScenes(callback: ScenesCallback) {
-    // TODO currently many requests might be waiting at the same time
-    // TODO reliable mechanism for pinging if the server is still reachable
-    // TODO refactor: abstraction for sending and receiving message of the same address (e.g. both cases below)
-
+  func listScenes() -> SignalProducer<[Scene], SceneLoadingError> {
     if Settings.serverAddress.value == nil {
-      callback(failure(.NoAddressConfigured))
-      return
+      return SignalProducer(error: .NoAddressConfigured)
     }
     
-    let numberOfScenes : Signal<Int, SceneLoadingError> =
-      incomingMessages(timeout: 2)
-        |> filter { $0.address == "/live/scenes" }
-        |> take(1)
-        |> map { $0.arguments[0] as! Int }
-
-    // TODO really, we'd like to flatMap the Signal(numberOfScenes) to Signal([Scene]) and timeout in one place
-    numberOfScenes.observe(next: { expectedNumberOfScenes in
-      self.handleSceneListResponse(callback, expectedNumberOfScenes: expectedNumberOfScenes)
-      self.osc.sendMessage(OSCMessage(address: "/live/name/scene", arguments: []))
-    }, error: { err in
-      callback(failure(err))
-    })
-
-    osc.sendMessage(OSCMessage(address: "/live/scenes", arguments: []))
+    let numberOfScenes = send(OSCMessage(address: "/live/scenes", arguments: []))
+      |> handleOSCErrors(timeout: 2)
+      |> filter { $0.address == "/live/scenes" }
+      |> take(1)
+      |> map { $0.arguments[0] as! Int }
+    
+    return numberOfScenes |> flatMap(.Merge, collectScenes)
   }
   
-  private func handleSceneListResponse(callback: ScenesCallback, expectedNumberOfScenes: Int) {
-    let scenesSignal : Signal<[Scene], SceneLoadingError> =
-      incomingMessages(timeout: 3)
-        |> filter { $0.address == "/live/name/scene" }
-        |> take(expectedNumberOfScenes)
-        |> map { Scene(order: $0.arguments[0] as! Int, name: self.trim($0.arguments[1] as! String)) }
-        |> collect
-    
-    let sortedScenesSignal = scenesSignal |> map { scenes in
-      scenes.sorted({$0.order < $1.order})
+  private func collectScenes(expectedNumberOfScenes: Int) -> SignalProducer<[Scene], SceneLoadingError> {
+    return send(OSCMessage(address: "/live/name/scene", arguments: []))
+      |> handleOSCErrors(timeout: 3)
+      |> filter { $0.address == "/live/name/scene" }
+      |> take(expectedNumberOfScenes)
+      |> map(parseSceneFromMessage)
+      |> collect
+      |> map(sortedByOrder)
+  }
+  
+  private func send(message: OSCMessage) -> SignalProducer<OSCMessage, NoError> {
+    return SignalProducer { observer, producerDisposed in
+      // Start listening to replies right away, before sending request
+      let replyDisposable = self.osc.incomingMessagesSignal.observe(observer)
+      
+      // Stop listening to replies when this producer is disposed
+      producerDisposed.addDisposable(replyDisposable)
+      
+      // Send request
+      self.osc.sendMessage(message)
     }
-    
-    // TODO handle UI thread stuff in the view controller
-    let tempSignal = sortedScenesSignal |> observeOn(UIScheduler())
-    tempSignal.observe(
-      next: { scenes in callback(success(scenes)) },
-      error: { err in callback(failure(err)) }
-    )
   }
   
-  private func incomingMessages(#timeout: NSTimeInterval) -> Signal<OSCMessage, SceneLoadingError> {
-    return osc.incomingMessagesSignal
+  private func handleOSCErrors(#timeout: NSTimeInterval)(producer: ReactiveCocoa.SignalProducer<OSCMessage, NoError>) -> ReactiveCocoa.SignalProducer<OSCMessage, SceneLoadingError> {
+    return producer
       |> mapError { _ in .Unknown }
       |> try { message in
         if(message.address == "/remix/error") {
@@ -76,6 +66,17 @@ class AbletonSceneService : NSObject, SceneService {
       }
     }
     return "Unknown error from LiveOSC"
+  }
+  
+  private func parseSceneFromMessage(message: OSCMessage) -> Scene {
+    return Scene(
+      order: message.arguments[0] as! Int,
+      name: trim(message.arguments[1] as! String)
+    )
+  }
+  
+  private func sortedByOrder(scenes: [Scene]) -> [Scene] {
+    return scenes.sorted({$0.order < $1.order})
   }
   
   // Scenes are named " 1" etc by default

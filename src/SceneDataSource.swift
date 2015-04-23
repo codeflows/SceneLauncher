@@ -1,4 +1,5 @@
 import UIKit
+import ReactiveCocoa
 
 class SceneDataSource: NSObject, UICollectionViewDataSource {
   let sceneService: SceneService
@@ -8,14 +9,16 @@ class SceneDataSource: NSObject, UICollectionViewDataSource {
     sceneService = AbletonSceneService(osc: osc)
   }
 
-  func reloadData(callback: ScenesCallback) {
-    sceneService.listScenes { result in
-      switch result {
-        case let .Success(scenes): self.scenes = scenes.unbox
-        case let .Failure(error): ()
-      }
-      callback(result)
-    }
+  func reloadData(callback: (SceneLoadingError?) -> ()) {
+    sceneService.listScenes()
+      |> observeOn(UIScheduler())
+      |> start(
+        next: { scenes in
+          self.scenes = scenes
+          callback(nil)
+        },
+        error: { error in callback(error) }
+      )
   }
   
   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
