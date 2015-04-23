@@ -9,46 +9,44 @@ class AbletonSceneService : NSObject, SceneService {
   }
   
   func listScenes() -> SignalProducer<[Scene], SceneLoadingError> {
-    // TODO currently many requests might be waiting at the same time
-    // TODO reliable mechanism for pinging if the server is still reachable
-
     if Settings.serverAddress.value == nil {
       return SignalProducer(error: .NoAddressConfigured)
     }
     
-    let reply = send(OSCMessage(address: "/live/scenes", arguments: []))
+    let numberOfScenes = send(OSCMessage(address: "/live/scenes", arguments: []))
+      |> handleOSCErrors(timeout: 2)
+      |> filter { $0.address == "/live/scenes" }
+      |> take(1)
+      |> map { $0.arguments[0] as! Int }
     
-    let numberOfScenes : SignalProducer<Int, SceneLoadingError> =
-      incomingMessages(reply, timeout: 2)
-        |> filter { $0.address == "/live/scenes" }
-        |> take(1)
-        |> map { $0.arguments[0] as! Int }
-
-    return numberOfScenes |> flatMap(.Merge, handleSceneListResponse)
+    return numberOfScenes |> flatMap(.Merge, collectScenes)
   }
   
-  private func handleSceneListResponse(expectedNumberOfScenes: Int) -> SignalProducer<[Scene], SceneLoadingError> {
-    let replies = send(OSCMessage(address: "/live/name/scene", arguments: []))
-    
-    let scenesSignal : SignalProducer<[Scene], SceneLoadingError> =
-      incomingMessages(replies, timeout: 3)
-        |> filter { $0.address == "/live/name/scene" }
-        |> take(expectedNumberOfScenes)
-        |> map { Scene(order: $0.arguments[0] as! Int, name: self.trim($0.arguments[1] as! String)) }
-        // FIXME this seems to crash now - but usually on 2nd run. Are we leaking something?
-        |> collect
-    
-    let sortedScenesSignal = scenesSignal |> map { scenes in
-      scenes.sorted({$0.order < $1.order})
+  private func collectScenes(expectedNumberOfScenes: Int) -> SignalProducer<[Scene], SceneLoadingError> {
+    return send(OSCMessage(address: "/live/name/scene", arguments: []))
+      |> handleOSCErrors(timeout: 3)
+      |> filter { $0.address == "/live/name/scene" }
+      |> take(expectedNumberOfScenes)
+      |> map(parseSceneFromMessage)
+      |> collect
+      |> map(sortedByOrder)
+  }
+  
+  private func send(message: OSCMessage) -> SignalProducer<OSCMessage, NoError> {
+    return SignalProducer { observer, producerDisposed in
+      // Start listening to replies right away, before sending request
+      let replyDisposable = self.osc.incomingMessagesSignal.observe(observer)
+      
+      // Stop listening to replies when this producer is disposed
+      producerDisposed.addDisposable(replyDisposable)
+      
+      // Send request
+      self.osc.sendMessage(message)
     }
-    
-    // TODO handle UI thread stuff in the view controller
-    return sortedScenesSignal
-      |> observeOn(UIScheduler())
   }
   
-  private func incomingMessages(replies: SignalProducer<OSCMessage, NoError>, timeout: NSTimeInterval) -> SignalProducer<OSCMessage, SceneLoadingError> {
-    return replies
+  private func handleOSCErrors(#timeout: NSTimeInterval)(producer: ReactiveCocoa.SignalProducer<OSCMessage, NoError>) -> ReactiveCocoa.SignalProducer<OSCMessage, SceneLoadingError> {
+    return producer
       |> mapError { _ in .Unknown }
       |> try { message in
         if(message.address == "/remix/error") {
@@ -70,22 +68,20 @@ class AbletonSceneService : NSObject, SceneService {
     return "Unknown error from LiveOSC"
   }
   
+  private func parseSceneFromMessage(message: OSCMessage) -> Scene {
+    return Scene(
+      order: message.arguments[0] as! Int,
+      name: trim(message.arguments[1] as! String)
+    )
+  }
+  
+  private func sortedByOrder(scenes: [Scene]) -> [Scene] {
+    return scenes.sorted({$0.order < $1.order})
+  }
+  
   // Scenes are named " 1" etc by default
   private func trim(str: String) -> String {
     return str.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-  }
-  
-  private func send(message: OSCMessage) -> SignalProducer<OSCMessage, NoError> {
-    return SignalProducer { observer, producerDisposed in
-      // Start listening to replies right away, before sending request
-      let replyDisposable = self.osc.incomingMessagesSignal.observe(observer)
-      
-      // Stop listening to replies when this producer is disposed
-      producerDisposed.addDisposable(replyDisposable)
-      
-      // Send request
-      self.osc.sendMessage(message)
-    }
   }
 }
 

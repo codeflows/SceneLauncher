@@ -10,13 +10,15 @@ class SceneDataSource: NSObject, UICollectionViewDataSource {
   }
 
   func reloadData(callback: (SceneLoadingError?) -> ()) {
-    sceneService.listScenes() |> start(
-      next: { scenes in
-        self.scenes = scenes
-        callback(nil)
-      },
-      error: { error in callback(error) }
-    )
+    sceneService.listScenes()
+      |> observeOn(UIScheduler())
+      |> start(
+        next: { scenes in
+          self.scenes = scenes
+          callback(nil)
+        },
+        error: { error in callback(error) }
+      )
   }
   
   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
