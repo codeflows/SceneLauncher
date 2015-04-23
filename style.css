@@ -86,3 +86,25 @@ footer {
 a.author {
   color: #666;
 }
+
+.player-container-layout {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+.player-container {
+  height: 400px;
+}
+
+.player-overlay {
+  background-color: rgba(0,0,0,0.4);
+  height: 100%;
+}
+
+#player {
+  width: 100%;
+  height: 100%;
+}
