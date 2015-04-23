@@ -1,4 +1,5 @@
 body {
+  margin: 0;
   background-color: #1a1a1a;
   color: #ccc;
   font-family: Avenir, arial, sans-serif;
@@ -19,29 +20,34 @@ em {
   background-color: #333;
 }
 
-img.logo {
-  margin: 50px;
-}
-
-img.logo, section, footer {
+section, footer {
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
 
 .introduction {
+  position: relative;
+  padding: 40px 0 1px 0;
   text-align: center;
   font-size: 1.7em;
   font-family: Avenir;
   font-weight: 300;
-  margin-bottom: 30px;
+}
+
+.introduction img {
+  display: block;
+  margin-bottom: 50px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .introduction p {
   line-height: 1.2em;
 }
 
-h1 {
+.introduction h1 {
+  letter-spacing: 1px;
   font-weight: 500;
 }
 
@@ -50,19 +56,15 @@ h2 {
   font-weight: 400;
 }
 
-section.app-store a {
+div.app-store a {
   display: block;
   width: 200px;
   margin: auto;
   border: 0;
 }
 
-section.app-store img {
+div.app-store img {
   width: 100%;
-}
-
-section.app-store {
-  margin-bottom: 40px;
 }
 
 section, footer {
@@ -71,12 +73,20 @@ section, footer {
 }
 
 section.help {
+  margin-top: 30px;
   line-height: 1.6em;
 }
 
 section.help img {
   max-width: 100%;
   margin: 10px;
+}
+
+section.help p.intro {
+  font-size: 1.5em;
+  font-style: italic;
+  text-align: center;
+  margin-bottom: 30px;
 }
 
 footer {
@@ -87,21 +97,23 @@ a.author {
   color: #666;
 }
 
+header {
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
 .player-container-layout {
   position: absolute;
   left: 0;
   top: 0;
   width: 100%;
+  height: 100%;
   overflow: hidden;
-}
-
-.player-container {
-  height: 400px;
 }
 
 .player-overlay {
   background-color: rgba(0,0,0,0.4);
-  height: 100%;
 }
 
 #player {
