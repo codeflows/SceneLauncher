@@ -8,16 +8,6 @@ class AbletonSceneService : NSObject, SceneService {
     self.osc = osc
   }
   
-  private func send(message: OSCMessage) -> SignalProducer<OSCMessage, NoError> {
-    println("Creating signal producer");
-    return SignalProducer { observer, _ in
-      println("Starting producer!")
-      self.osc.incomingMessagesSignal.observe(observer)
-      println("Sending message...")
-      self.osc.sendMessage(message)
-    }
-  }
-  
   func listScenes() -> SignalProducer<[Scene], SceneLoadingError> {
     // TODO currently many requests might be waiting at the same time
     // TODO reliable mechanism for pinging if the server is still reachable
@@ -83,6 +73,19 @@ class AbletonSceneService : NSObject, SceneService {
   // Scenes are named " 1" etc by default
   private func trim(str: String) -> String {
     return str.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+  }
+  
+  private func send(message: OSCMessage) -> SignalProducer<OSCMessage, NoError> {
+    return SignalProducer { observer, producerDisposed in
+      // Start listening to replies right away, before sending request
+      let replyDisposable = self.osc.incomingMessagesSignal.observe(observer)
+      
+      // Stop listening to replies when this producer is disposed
+      producerDisposed.addDisposable(replyDisposable)
+      
+      // Send request
+      self.osc.sendMessage(message)
+    }
   }
 }
 
