@@ -19,9 +19,7 @@ class OSCService : NSObject, OSCServerDelegate {
 
     let serverAddressChanges = Settings.serverAddress.producer
       |> skip(1)
-      // TODO ignoreNil would be nice
-      |> filter { $0 != nil }
-      |> map { $0! }
+      |> ignoreNil
       |> skipRepeats
     
     serverAddressChanges
