@@ -34,6 +34,10 @@ section, footer {
   font-weight: 300;
 }
 
+.introduction .logo {
+  height: 180px;
+}
+
 .introduction img {
   display: block;
   margin-left: auto;
